@@ -48,4 +48,6 @@ class JobPost < ApplicationRecord
     in: ['Arabic', 'English', 'Spanish', 'Mandarin', 'French', 'Portuguese', 'Hindi'],
     message: "'%{value}' is not a valid job language."
   }, allow_nil: true
+
+  belongs_to :category
 end
