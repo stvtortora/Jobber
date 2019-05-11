@@ -1,11 +1,14 @@
 import React from 'react'
 import Navigation from './navigation'
+import Content from './content'
 
 export default () => {
   return (
-    <header>
+    <div className='header'>
       <Navigation/>
-    </header>
+      <Content/>
+    </div>
+
   )
 }
 // <JobSearch/>

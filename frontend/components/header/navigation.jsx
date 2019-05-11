@@ -1,7 +1,11 @@
 import React from 'react'
+import Logo from './logo'
+import PrimaryNavigation from './primaryNavigation'
+import CreateNavigation from './createNavigation'
+import UserNavigation from './userNavigation'
 import { withRouter } from 'react-router'
 
-class Navigation extends React.Componet {
+class Navigation extends React.Component {
   constructor(props) {
     super(props)
     this.navigateTo = this.navigateTo.bind(this)
@@ -12,12 +16,14 @@ class Navigation extends React.Componet {
   }
 
   render () {
-    <ul>
-      <li onClick={'/'}>Home</li>
-      <li>Jobs</li>
-      <li>Companies</li>
-      <li>About</li>
-    </ul>
+    return (
+      <div className='top-bar'>
+        <Logo/>
+        <PrimaryNavigation navigateTo={this.navigateTo}/>
+        <CreateNavigation navigateTo={this.navigateTo}/>
+        <UserNavigation navigateTo={this.navigateTo}/>
+      </div>
+    )
   }
 }
 

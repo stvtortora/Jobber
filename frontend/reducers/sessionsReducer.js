@@ -1,4 +1,4 @@
-export default sessionReducer = (state = {}, action) {
+export default (state = {}, action) => {
   // switch (action.type) {
   //   case OPEN_MODAL:
   //     return action.data;
