@@ -1,4 +1,4 @@
-export const queryParser = queryData => {
+export const buildQuery = queryData => {
   let query = '?'
 
   Object.keys(queryData).forEach(key => {

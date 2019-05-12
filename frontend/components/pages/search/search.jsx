@@ -5,9 +5,12 @@ class Search extends React.Component {
     super(props)
   }
 
-  // componentDidMount() {
-  //
-  // }
+  componentDidMount() {
+    this.props.search(parseQuery(this.props.currentRoute))
+  }
+
+  
+
   render() {
     return(
       <div>Hello</div>

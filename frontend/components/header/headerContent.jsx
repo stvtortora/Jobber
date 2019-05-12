@@ -1,5 +1,5 @@
 import React from 'react'
-import { queryParser } from '../../util/queryUtil'
+import { buildQuery } from '../../util/queryUtil'
 import { updateRoute } from '../../actions/routeActions'
 import { connect } from 'react-redux'
 
@@ -18,7 +18,7 @@ class HeaderContent extends React.Component {
 
   parseQueryAndUpdateRoute() {
     console.log(this.state)
-    this.props.updateRoute(`/jobs/${queryParser(this.state)}`)
+    this.props.updateRoute(`/jobs/${buildQuery(this.state)}`)
   }
 
   sectionHeader() {

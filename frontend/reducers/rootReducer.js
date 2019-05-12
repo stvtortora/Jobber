@@ -1,7 +1,6 @@
 import { combineReducers } from 'redux';
 import session from './sessionsReducer';
 import currentRoute from './currentRouteReducer';
+import records from './recordsReducer';
 
-const rootReducer = combineReducers({ session, currentRoute });
-
-export default rootReducer;
+export default combineReducers({ session, currentRoute, records })
