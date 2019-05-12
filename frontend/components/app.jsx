@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux'
 import Header from './header/header';
+import JobsSearchContainer from './pages/search/jobsSearchContainer'
 
 class App extends React.Component {
   constructor (props) {
@@ -19,7 +20,7 @@ class App extends React.Component {
     return (
       <content className='all-content'>
           <Header/>
-          <Route path='/jobs' exact component={Dum} />
+          <Route path='/jobs' component={JobsSearchContainer} />
           <div className='under-header'></div>
       </content>
     )

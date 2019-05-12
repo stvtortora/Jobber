@@ -1,12 +1,12 @@
 import React from 'react'
 import Navigation from './navigation'
-import Content from './content'
+import HeaderContent from './headerContent'
 
 export default () => {
   return (
     <div className='header'>
       <Navigation/>
-      <Content/>
+      <HeaderContent/>
     </div>
 
   )

@@ -1,11 +1,11 @@
 class Company < ApplicationRecord
-  validates :title, :website, :tagline, :description, :city, :employer_id, presence: true
+  validates :title, :website, :tagline, :description, :city, :user_id, presence: true
 
-  validate :phone_number, length { is: 7, allow_nil: true }
+  validates :phone_number, length: { is: 10, allow_nil: true }
 
   validates :industry,
   inclusion: {
-    in: ['AdTech', 'Agriculture', 'Arts', 'FinTech', 'eCommerce', 'Digital Media', 'Internet of Things', 'Sales', 'Software', 'GreenTech', 'Payments', 'Professional Services', 'Machine Learning', 'HR Tech'],
+    in: ['AdTech', 'Agriculture', 'Arts', 'FinTech', 'eCommerce', 'Digital_Media', 'Sales', 'Software', 'GreenTech', 'Payments', 'Professional_Services', 'Machine_Learning', 'HR_Tech'],
     message: "'%{value}' is not a valid job industry."
   }, allow_nil: true
 
@@ -15,13 +15,7 @@ class Company < ApplicationRecord
     message: "'%{value}' is not a valid job team size."
   }, allow_nil: true
 
-  belongs_to(
-    :employer,
-    class_name: 'User',
-    foreign_key: :employer_id,
-    primary_key: :id,
-    optional: true
-  )
-  
+
+  belongs_to :user
   has_many :job_posts
 end

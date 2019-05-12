@@ -1,9 +1,9 @@
 class JobPost < ApplicationRecord
-  validates :title, :city, :description, :category, :type, :company, presence: true
-  
-  validates :type,
+  validates :title, :city, :description, :job_category, :job_type, :company, presence: true
+
+  validates :job_type,
   inclusion: {
-    in: ['Full Time', 'Part Time', 'Contract', 'Internship'],
+    in: ['Full_Time', 'Part_Time', 'Contract', 'Internship'],
     message: "'%{value}' is not a valid job type."
   }
 
@@ -15,25 +15,25 @@ class JobPost < ApplicationRecord
 
   validates :career_level,
   inclusion: {
-    in: ['Junior', 'Mid', 'Senior', 'Lead', 'Assistant Manage', 'Manager', 'Department Head', 'Eecutive'],
+    in: ['Junior', 'Mid', 'Senior', 'Lead', 'Assistant_Manager', 'Manager', 'Department_Head', 'Executive'],
     message: "'%{value}' is not a valid job career level."
   }, allow_nil: true
 
   validates :experience,
   inclusion: {
-    in: ['0-2 Years', '2-3 Years', '3-5 Years', '6-7 Years', '6-7 Years', '8-9 Years', '9-10 Years', '10+ Years'],
+    in: ['0-2_Years', '2-3_Years', '3-5_Years', '6-7_Years', '6-7_Years', '8-9_Years', '9-10_Years', '10+_Years'],
     message: "'%{value}' is not a valid job type."
   }, allow_nil: true
 
   validates :industry,
   inclusion: {
-    in: ['AdTech', 'Agriculture', 'Arts', 'FinTech', 'eCommerce', 'Digital Media', 'Internet of Things', 'Sales', 'Software', 'GreenTech', 'Payments', 'Professional Services', 'Machine Learning', 'HR Tech'],
+    in: ['AdTech', 'Agriculture', 'Arts', 'FinTech', 'eCommerce', 'Digital_Media', 'Sales', 'Software', 'GreenTech', 'Payments', 'Professional_Services', 'Machine_Learning', 'HR_Tech'],
     message: "'%{value}' is not a valid job industry."
   }, allow_nil: true
 
   validates :qualification,
   inclusion: {
-    in: ['Associate Degree', 'Bachelor Degree', 'Master Degree', 'Doctorate Degree'],
+    in: ['Associate_Degree', 'Bachelor_Degree', 'Master_Degree', 'Doctorate_Degree'],
     message: "'%{value}' is not a valid job qualification."
   }, allow_nil: true
 
@@ -44,5 +44,16 @@ class JobPost < ApplicationRecord
   }, allow_nil: true
 
   belongs_to :company
-  belongs_to :category
+  belongs_to :job_category
+
+  include PgSearch
+  pg_search_scope :search_by_query,
+  against: [:city, :team_size, :job_type],
+  associated_against: {
+    job_category: [:name],
+    company: [:title]
+  },
+  using: {
+    tsearch: { any_word: true }
+  }
 end
