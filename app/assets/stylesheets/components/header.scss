@@ -1,5 +1,44 @@
 @import "variables.scss";
 
+@mixin keyframes($animation-name) {
+  @-webkit-keyframes #{$animation-name} {
+    @content;
+  }
+  @-moz-keyframes #{$animation-name} {
+    @content;
+  }
+  @-ms-keyframes #{$animation-name} {
+    @content;
+  }
+  @-o-keyframes #{$animation-name} {
+    @content;
+  }
+  @keyframes #{$animation-name} {
+    @content;
+  }
+}
+
+@mixin animation($str) {
+  -webkit-animation: #{$str};
+  -moz-animation: #{$str};
+  -ms-animation: #{$str};
+  -o-animation: #{$str};
+  animation: #{$str};
+}
+
+@include keyframes(fadeIn) {
+  0% {
+  opacity: 0;
+  -webkit-transform: translate3d(0,-100%,0);
+  transform: translate3d(0,-100%,0);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
 .header {
   background-image: url(https://demo2.madrasthemes.com/jobhunt/wp-content/uploads/2018/09/home-bg.jpg);
   // background-size: cover;
@@ -18,6 +57,7 @@
   }
 
   .stick-bar-container {
+    @include animation('fadeIn 1.5s 1');
     background: white;
     z-index: 500;
     background: white;

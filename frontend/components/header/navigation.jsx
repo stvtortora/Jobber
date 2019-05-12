@@ -25,10 +25,14 @@ class Navigation extends React.Component {
   }
 
   handleScroll(e) {
-    this.setState({
-      klassName: window.scrollY > 50 ? 'stick-bar-container' : 'non-stick-bar-container',
-      fontColor: window.scrollY > 50 ? 'gray' : 'white'
-    })
+    const newKlassName = window.scrollY > 50 ? 'stick-bar-container' : 'non-stick-bar-container';
+    if (newKlassName !== this.state.klassName) {
+      console.log(newKlassName, this.state.klassName)
+      this.setState({
+        klassName: window.scrollY > 50 ? 'stick-bar-container' : 'non-stick-bar-container',
+        fontColor: window.scrollY > 50 ? 'gray' : 'white'
+      })
+    }
   }
 
   navigateTo (path) {
@@ -36,6 +40,7 @@ class Navigation extends React.Component {
   }
 
   render () {
+    console.log('rendering')
     return (
       <div className={this.state.klassName}>
         <div className='center-bar'>
