@@ -17,14 +17,14 @@ export default () => {
         <form>
           <div className='search-keywords'>
             <input id='keyword-input' placeholder='Job title, keyword, or company name'></input>
-            <i class="fa fa-keyboard-o"></i>
+            <i className="fa fa-keyboard-o"></i>
           </div>
           <div className='search-location'>
             <input id='location-input' placeholder='Choose your city'></input>
-            <i class="fa fa-map-marker" aria-hidden="true"></i>
+            <i className="fa fa-map-marker" aria-hidden="true"></i>
           </div>
           <div className='search-submit'>
-            <button><i class="fa fa-search" aria-hidden="true"></i></button>
+            <button><i className="fa fa-search" aria-hidden="true"></i></button>
           </div>
         </form>
       </section>

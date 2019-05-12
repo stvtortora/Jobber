@@ -8,7 +8,27 @@ import { withRouter } from 'react-router'
 class Navigation extends React.Component {
   constructor(props) {
     super(props)
+    this.state = {
+      klassName: 'non-stick-bar-container',
+      fontColor: 'white'
+    }
     this.navigateTo = this.navigateTo.bind(this)
+    this.handleScroll = this.handleScroll.bind(this)
+  }
+
+  componentDidMount() {
+    window.addEventListener('scroll', this.handleScroll);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleScroll);
+  }
+
+  handleScroll(e) {
+    this.setState({
+      klassName: window.scrollY > 50 ? 'stick-bar-container' : 'non-stick-bar-container',
+      fontColor: window.scrollY > 50 ? 'gray' : 'white'
+    })
   }
 
   navigateTo (path) {
@@ -17,11 +37,15 @@ class Navigation extends React.Component {
 
   render () {
     return (
-      <div className='top-bar'>
-        <Logo/>
-        <PrimaryNavigation navigateTo={this.navigateTo}/>
-        <CreateNavigation navigateTo={this.navigateTo}/>
-        <UserNavigation navigateTo={this.navigateTo}/>
+      <div className={this.state.klassName}>
+        <div className='center-bar'>
+          <div className='top-bar'>
+            <Logo logoColor={this.state.fontColor}/>
+            <PrimaryNavigation navigateTo={this.navigateTo} arrowColor={this.state.fontColor}/>
+            <CreateNavigation navigateTo={this.navigateTo}/>
+            <UserNavigation navigateTo={this.navigateTo} faColor={this.state.fontColor}/>
+          </div>
+        </div>
       </div>
     )
   }
