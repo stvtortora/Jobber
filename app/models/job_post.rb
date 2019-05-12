@@ -1,12 +1,6 @@
 class JobPost < ApplicationRecord
   validates :title, :city, :description, :category, :type, :company, presence: true
-
-  validates :category,
-  inclusion: {
-    in: ['Engineer + Dev', 'Marketing', 'Sales', 'Quality Assurance', 'Design + UX', 'Project Management', 'Finance', 'HR', 'Product', 'Content', 'Legal', 'Operations'],
-    message: "'%{value}' is not a valid job category."
-  }
-
+  
   validates :type,
   inclusion: {
     in: ['Full Time', 'Part Time', 'Contract', 'Internship'],
@@ -49,5 +43,6 @@ class JobPost < ApplicationRecord
     message: "'%{value}' is not a valid job language."
   }, allow_nil: true
 
+  belongs_to :company
   belongs_to :category
 end

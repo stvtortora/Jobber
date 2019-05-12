@@ -3,7 +3,8 @@ import Logo from './logo'
 import PrimaryNavigation from './primaryNavigation'
 import CreateNavigation from './createNavigation'
 import UserNavigation from './userNavigation'
-import { withRouter } from 'react-router'
+import { connect } from 'react-redux'
+import { updateRoute } from '../../actions/routeActions'
 
 class Navigation extends React.Component {
   constructor(props) {
@@ -36,11 +37,10 @@ class Navigation extends React.Component {
   }
 
   navigateTo (path) {
-    this.props.history.push(path)
+    this.props.updateRoute(path)
   }
 
   render () {
-    console.log('rendering')
     return (
       <div className={this.state.klassName}>
         <div className='center-bar'>
@@ -56,4 +56,10 @@ class Navigation extends React.Component {
   }
 }
 
-export default withRouter(Navigation)
+const mapDispatchToProps = dispatch => {
+  return {
+    updateRoute: path => dispatch(updateRoute(path))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Navigation)
