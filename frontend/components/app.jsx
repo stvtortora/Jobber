@@ -33,12 +33,6 @@ class App extends React.Component {
   }
 }
 
-const Dum = () => {
-  return (
-    <div>YO</div>
-  )
-
-}
 const mapStateToProps = state => {
   return {
     currentRoute: state.currentRoute
