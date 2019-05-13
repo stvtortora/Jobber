@@ -5,7 +5,7 @@ import { RECEIVE_JOB_POSTS } from '../actions/jobPostsActions'
 const info = (state = {}, action) => {
   switch (action.type) {
     case RECEIVE_JOB_POSTS:
-      return action.jobPosts;
+      return action.jobPosts.content;
     default:
       return state;
   }
@@ -14,11 +14,20 @@ const info = (state = {}, action) => {
 const ids = (state = [], action) => {
   switch (action.type) {
     case RECEIVE_JOB_POSTS:
-      return Object.keys(action.jobPosts);
+      return Object.keys(action.jobPosts.content);
+    default:
+      return state;
+  }
+}
+
+const count = (state = 0, action) => {
+  switch (action.type) {
+    case RECEIVE_JOB_POSTS:
+      return action.jobPosts.count;
     default:
       return state;
   }
 }
 
 
-export default combineReducers({ info, ids });
+export default combineReducers({ info, ids, count });

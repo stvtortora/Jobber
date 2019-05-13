@@ -1,5 +1,9 @@
-export const buildQuery = queryData => {
-  let query = '?'
+export const buildQuery = (queryData, query='?', limit=10, setNewLimit=false) => {
+  if (query.length > 1) {
+    queryParts = query.split('&');
+    query = queryParts.slice(0, queryParts.length - 1)
+    limit = setNewLimit ? limit : queryParts[queryParts.length - 1].split('=')[1]
+  }
 
   Object.keys(queryData).forEach(key => {
     if (query.length > 1) {
@@ -10,20 +14,28 @@ export const buildQuery = queryData => {
     query += `${dataType}=${dataVal}`
   })
 
-  return query
+  return `${query}&limit=${limit}`
 }
 
 export const parseQuery = query => {
-  let parsedQuery = ''
-  const filters = query.slice(1).split('&')
-
-  filters.forEach(filter => {
+  let filters = ''
+  let limit = ''
+  const queryArray = query.slice(1).split('&')
+  // console.log(query, 'query')
+  queryArray.forEach((filter, i) => {
     const filterValue = filter.split('=')[1]
-    if (parsedQuery.length) {
-      parsedQuery += ' '
+    if (filters.length) {
+      filters += ' '
     }
-    parsedQuery += filterValue
+    if (i < queryArray.length - 1) {
+      filters += filterValue
+    } else {
+      limit = filterValue
+    }
   })
 
-  return parsedQuery
+  return {
+    filters,
+    limit
+  }
 }

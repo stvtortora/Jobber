@@ -11,13 +11,12 @@ class SearchForm extends React.Component {
       'keyword': '',
       'city': ''
     }
-    this.parseQueryAndUpdateRoute = this.parseQueryAndUpdateRoute.bind(this)
+    this.buildQueryAndUpdateRoute = this.buildQueryAndUpdateRoute.bind(this)
     this.updateQuery = this.updateQuery.bind(this)
   }
 
-  parseQueryAndUpdateRoute() {
-    console.log(this.state)
-    this.props.updateRoute(`/jobs/${buildQuery(this.state)}`)
+  buildQueryAndUpdateRoute() {
+    this.props.updateRoute(`/jobs/${buildQuery(this.state)}`, this.props.currentQuery)
   }
 
   updateQuery(field) {
@@ -30,7 +29,7 @@ class SearchForm extends React.Component {
     const { searchBoxClass, keyWordsClass, submitButtonClass } = this.props;
     return (
       <section className={searchBoxClass}>
-        <form onSubmit={this.parseQueryAndUpdateRoute}>
+        <form onSubmit={this.buildQueryAndUpdateRoute}>
           <div className={keyWordsClass}>
             <input
             type='text'

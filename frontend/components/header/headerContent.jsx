@@ -18,6 +18,7 @@ export default () => {
           searchBoxClass='home-search-box'
           keyWordsClass='search-keywords'
           submitButtonClass='search-submit'
+          currentQuery={null}
           />
         </div>
     </content>

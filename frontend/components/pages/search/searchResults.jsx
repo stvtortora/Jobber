@@ -20,17 +20,24 @@ class SearchResults extends React.Component {
   results() {
     const { searchResults, searchResultOptions } = this.props
     const { stylingId, mainTitleKey, subTitleKey, buttonContentKey } = searchResultOptions
-
     return searchResults.ids.map(id => {
       const searchResult = searchResults.info[id]
+
       return (
         <li id={stylingId} className='search-result'>
-          <div className='search-result-left'>
-            <h3 className='search-result-title'>{searchResult[mainTitleKey]}</h3>
-            <p className='search-result-subtitle'>{searchResult[subTitleKey]}</p>
-          </div>
-          <div className='search-result-right'>
-            <p className='search-result-button'>{searchResult[buttonContentKey]}</p>
+          <img src={searchResult.picture_url} />
+          <div className='search-result-details'>
+            <div className='search-result-details-left'>
+              <p className='search-result-title'>{searchResult[mainTitleKey]}</p>
+              <p className='search-result-subtitle'>{searchResult[subTitleKey]}</p>
+              <p className='search-result-city'>
+                <i className="fa fa-map-marker" aria-hidden="true"></i>
+                {searchResult.city.split('_').join(' ')}
+              </p>
+            </div>
+            <div className='search-result-details-right'>
+              <p className='search-result-button'>{searchResult[buttonContentKey].split('_').join(' ')}</p>
+            </div>
           </div>
         </li>
       )

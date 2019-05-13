@@ -6,3 +6,4 @@ json.extract! job_post,
 :language, :keyword_a, :keyword_b, :keyword_c
 json.company_title job_post.company.title
 json.categorytitle job_post.job_category.name
+json.picture_url url_for(job_post.picture)
