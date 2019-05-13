@@ -1,8 +1,9 @@
-export const buildQuery = (queryData, query='?', limit=10, setNewLimit=false) => {
+export const buildQuery = (queryData, query='?', limit=10, offset=1, setNewLimit=false, setNewOffset=false) => {
   if (query.length > 1) {
     queryParts = query.split('&');
-    query = queryParts.slice(0, queryParts.length - 1)
-    limit = setNewLimit ? limit : queryParts[queryParts.length - 1].split('=')[1]
+    query = queryParts.slice(0, queryParts.length - 2).join('')
+    limit = setNewLimit ? limit : queryParts[queryParts.length - 2].split('=')[1]
+    offset = setNewOffset ? offset : queryParts[queryParts.length - 1].split('=')[1]
   }
 
   Object.keys(queryData).forEach(key => {
@@ -14,28 +15,47 @@ export const buildQuery = (queryData, query='?', limit=10, setNewLimit=false) =>
     query += `${dataType}=${dataVal}`
   })
 
-  return `${query}&limit=${limit}`
+  return `${query}&limit=${limit}&offset=${offset}`
 }
 
 export const parseQuery = query => {
   let filters = ''
   let limit = ''
+  let offset = ''
   const queryArray = query.slice(1).split('&')
-  // console.log(query, 'query')
+
   queryArray.forEach((filter, i) => {
     const filterValue = filter.split('=')[1]
-    if (filters.length) {
-      filters += ' '
-    }
-    if (i < queryArray.length - 1) {
+
+    if (i < queryArray.length - 2) {
+      if (filters.length) {
+        filters += ' '
+      }
       filters += filterValue
-    } else {
+    }
+
+    else if (i === queryArray.length - 2) {
       limit = filterValue
+    }
+
+    else {
+      offset = filterValue
     }
   })
 
   return {
     filters,
-    limit
+    limit,
+    offset
   }
+}
+
+export const getLimit = query => {
+  const queryParts = query.split("&")
+  return Number(queryParts[queryParts.length - 2].split('=')[1])
+}
+
+export const getOffset = query => {
+  const queryParts = query.split("&")
+  return Number(queryParts[queryParts.length - 1].split('=')[1])
 }

@@ -1,6 +1,7 @@
 import SearchContent from './searchContent'
 import { connect } from 'react-redux'
 import { searchJobPosts } from '../../../actions/jobPostsActions'
+import { updateRoute } from '../../../actions/routeActions'
 
 const mapStateToProps = state => {
 console.log(state.currentRoute)
@@ -20,7 +21,8 @@ console.log(state.currentRoute)
 
 const mapDispatchToProps = dispatch => {
   return {
-    search: (query) => dispatch(searchJobPosts(query))
+    search: (query) => dispatch(searchJobPosts(query)),
+    updateRoute: newRoute => dispatch(updateRoute(newRoute))
   }
 }
 

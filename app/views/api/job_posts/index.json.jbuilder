@@ -6,5 +6,4 @@ json.content do
     end
   end
 end
-
 json.count @count
