@@ -1,4 +1,5 @@
 export const RECEIVE_JOB_POSTS = "RECEIVE_JOB_POSTS"
+import * as APIUtil from '../util/apiUtil'
 
 export const searchJobPosts = query => {
   return dispatch => {

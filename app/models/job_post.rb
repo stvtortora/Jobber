@@ -48,7 +48,14 @@ class JobPost < ApplicationRecord
 
   include PgSearch
   pg_search_scope :search_by_query,
-  against: [:city, :team_size, :job_type],
+  against: [
+    :city,
+    :job_type,
+    :title,
+    :keyword_a,
+    :keyword_b,
+    :keyword_c
+  ],
   associated_against: {
     job_category: [:name],
     company: [:title]

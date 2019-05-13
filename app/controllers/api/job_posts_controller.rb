@@ -13,7 +13,7 @@ class Api::JobPostsController < ApplicationController
   end
 
   def index
-    @job_posts = JobPost.search_by_query(params[:query]).includes(:category, :company)
+    @job_posts = JobPost.search_by_query(params[:query]).includes(:job_category, :company)
     render :index
   end
 
@@ -26,8 +26,8 @@ class Api::JobPostsController < ApplicationController
   def job_post_params
     params.require(:job_post).permit(
       :title, :city, :description,
-      :company_id, :category_id,
-      :type, :salary, :career_level,
+      :company_id, :job_category_id,
+      :job_type, :salary, :career_level,
       :experience, :industry, :qualification,
       :language, :keyword_a, :keyword_b, :keyword_c
     )

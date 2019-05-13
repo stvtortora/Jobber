@@ -3,7 +3,7 @@ import { combineReducers } from 'redux';
 
 
 const info = (state = {}, action) => {
-  switch (action.type) {
+  // switch (action.type) {
     // case RECEIVE_COMPANIES:
     //   return action.companies;
     // default:

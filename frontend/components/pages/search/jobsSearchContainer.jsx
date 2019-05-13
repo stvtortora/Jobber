@@ -1,13 +1,20 @@
-import Search from './search'
+import SearchContent from './searchContent'
 import { connect } from 'react-redux'
 import { searchJobPosts } from '../../../actions/jobPostsActions'
 
 const mapStateToProps = state => {
-
+console.log(state.currentRoute)
 
   return {
-    path: state.currentRoute,
-
+    currentRoute: state.currentRoute,
+    isThisComponentsRoute: state.currentRoute.slice(0, 5) === '/jobs',
+    searchResults: state.records.jobPosts,
+    searchResultOptions: {
+      stylingId: 'job-post-result',
+      mainTitleKey: 'title',
+      subTitleKey: 'company_title',
+      buttonContentKey: 'job_type'
+    }
   }
 }
 
@@ -17,4 +24,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Search)
+export default connect(mapStateToProps, mapDispatchToProps)(SearchContent)
