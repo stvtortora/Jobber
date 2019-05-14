@@ -1,17 +1,23 @@
 import React from 'react'
 import SearchResults from './searchResults'
 import SearchForm from './searchForm'
-import { parseQuery, getLimit, getOffset } from '../../../util/queryUtil'
+import { parseQuery, buildQuery, getLimit, getOffset } from '../../../util/queryUtil'
 
 export default (props) => {
+  const updateLimit = (e) => {
+    buildQueryAndUpdateRoute(e.target.value, true, null, null)
+  }
+
   const buildQueryAndUpdateRoute = (limit, setNewLimit, offset, setNewOffset) => {
     props.updateRoute(
-      `/jobs/${buildQuery(this.state)}`,
-      currentQuery.slice(5),
-      limit,
-      setNewLimit,
-      offset,
-      setNewOffset
+      `/jobs/${buildQuery(
+        {},
+        props.currentQuery,
+        limit,
+        offset,
+        setNewLimit,
+        setNewOffset
+      )}`
     )
   }
 
@@ -29,10 +35,22 @@ export default (props) => {
   }
 
   const sortAndLimitOptions = () => {
-
+    const totalJobCount = props.searchResults.count
+    const firstPost = totalJobCount > 0 ? postByNumber(1) : 0
+    const lastPost = Math.min(postByNumber(limit()), totalJobCount)
+    console.log(limit(), 'limit')
     return (
       <div className='sort-and-limit-options'>
-
+        <p className='showing-text'>{`Showing ${firstPost}-${lastPost} of ${totalJobCount} jobs`}</p>
+        <div className='sorting'>
+          <form>
+            <select onChange={updateLimit}>
+              <option selected={limit() === 10} value="10">Show 10</option>
+              <option selected={limit() === 20} value="20">Show 20</option>
+              <option selected={limit() === 50} value="50">Show 50</option>
+            </select>
+          </form>
+        </div>
       </div>
     )
   }
@@ -43,22 +61,40 @@ export default (props) => {
     )
   }
 
-  const totalPages = () => {
-    return Math.ceil(getOffset(props.currentRoute) / getLimit(props.currentRoute))
+  const postByNumber = n => {
+    return limit() * (offset() - 1) + n
   }
 
-  return(
-    <content className='page-content'>
-      <div className='content-container'>
-        <div className='content-flex'>
-          {filters()}
-          {sortAndLimitOptions()}
-          <SearchResults {...props}/>
-          {paginationButtons()}
+  const offset = () => {
+    return getOffset(props.currentRoute)
+  }
+
+  const limit = () => {
+    return getLimit(props.currentRoute)
+  }
+
+  const totalPages = () => {
+    return Math.ceil(offset() / limit())
+  }
+
+  if (props.currentRoute !== '/') {
+    return(
+      <content className='page-content'>
+        <div className='content-container'>
+          <div className='content-flex'>
+            {filters()}
+            <section className='main-content'>
+              {sortAndLimitOptions()}
+              <SearchResults {...props}/>
+            </section>
+            {paginationButtons()}
+          </div>
         </div>
-      </div>
-    </content>
-  )
+      </content>
+    )
+  }
+
+  return []
 }
 //filters need to know limit
 //sorters needs to know limit and set limit

@@ -1,6 +1,7 @@
 export const buildQuery = (queryData, query='?', limit=10, offset=1, setNewLimit=false, setNewOffset=false) => {
   if (query.length > 1) {
-    queryParts = query.split('&');
+    const queryParts = query.slice(2).split('&');
+
     query = queryParts.slice(0, queryParts.length - 2).join('')
     limit = setNewLimit ? limit : queryParts[queryParts.length - 2].split('=')[1]
     offset = setNewOffset ? offset : queryParts[queryParts.length - 1].split('=')[1]
@@ -14,7 +15,7 @@ export const buildQuery = (queryData, query='?', limit=10, offset=1, setNewLimit
     const dataVal = queryData[key].split(' ').join('_').toLowerCase()
     query += `${dataType}=${dataVal}`
   })
-
+  
   return `${query}&limit=${limit}&offset=${offset}`
 }
 
