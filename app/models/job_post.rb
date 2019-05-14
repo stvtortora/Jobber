@@ -47,21 +47,35 @@ class JobPost < ApplicationRecord
   belongs_to :job_category
   has_one_attached :picture
 
+  def self.search_by_query(query_params)
+    filters = query_params[:filters]
+    order = query_params[:sort].split(':').join(" ")
+    limit = query_params[:limit].to_i
+    offset = query_params[:offset].to_i * limit - limit
+    
+    search_by_filters_and_order(filters, order).includes(:job_category, :company).limit(limit).offset(offset)
+  end
+
   include PgSearch
-  pg_search_scope :search_by_query,
-  against: [
-    :city,
-    :job_type,
-    :title,
-    :keyword_a,
-    :keyword_b,
-    :keyword_c
-  ],
-  associated_against: {
-    job_category: [:name],
-    company: [:title]
-  },
-  using: {
-    tsearch: { any_word: true }
+  pg_search_scope :search_by_filters_and_order,
+    lambda { |filters, order| {
+      against: [
+        :city,
+        :job_type,
+        :title,
+        :keyword_a,
+        :keyword_b,
+        :keyword_c
+      ],
+      associated_against: {
+        job_category: [:name],
+        company: [:title]
+      },
+      using: {
+        tsearch: { any_word: true }
+      },
+      order_within_rank: order,
+      query: filters
+    }
   }
 end

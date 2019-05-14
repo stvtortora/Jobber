@@ -24,6 +24,7 @@ export const parseQuery = query => {
   let filters = ''
   let limit = ''
   let offset = ''
+  let sort = ''
   const queryArray = query.slice(1).split('&')
 
   queryArray.forEach((filter, i) => {
@@ -44,12 +45,17 @@ export const parseQuery = query => {
     else if (i === queryArray.length - 2) {
       offset = filterValue
     }
+
+    else {
+      sort = filterValue
+    }
   })
 
   return {
     filters,
     limit,
-    offset
+    offset,
+    sort
   }
 }
 

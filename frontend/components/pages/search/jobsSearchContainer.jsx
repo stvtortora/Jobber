@@ -9,7 +9,6 @@ console.log(state.currentRoute)
   return {
     currentRoute: state.currentRoute,
     currentQuery: state.currentRoute.slice(5),
-    isThisComponentsRoute: state.currentRoute.slice(0, 5) === '/jobs',
     searchResults: state.records.jobPosts,
     searchResultOptions: {
       stylingId: 'job-post-result',

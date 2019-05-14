@@ -13,14 +13,13 @@ export default () => {
   return (
     <content className='content'>
       <div className='home-page-content'>
-          {sectionHeader()}
-          <SearchForm
-          searchBoxClass='home-search-box'
-          keyWordsClass='search-keywords'
-          submitButtonClass='search-submit'
-          currentQuery={null}
-          />
-        </div>
+        {sectionHeader()}
+        <SearchForm
+        searchBoxClass='home-search-box'
+        keyWordsClass='search-keywords'
+        submitButtonClass='search-submit'
+        currentQuery={null}/>
+      </div>
     </content>
   )
 }

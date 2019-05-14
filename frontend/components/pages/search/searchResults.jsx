@@ -12,34 +12,11 @@ class SearchResults extends React.Component {
     this.props.search(parseQuery(this.props.currentRoute))
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.currentRoute !== this.props.currentRoute && this.props.isThisComponentsRoute) {
-      this.props.search(parseQuery(this.props.currentRoute))
-    }
-  }
-
-  sortedIds() {
-    const { searchResults } = this.props
-    const sortType = getSort(this.props.currentQuery)
-
-    switch (sortType) {
-      case 'title:asc':
-        return searchResults.ids.sort((a, b) => searchResults.info[a].title < searchResults.info[b].title ? -1 : 1)
-      case 'title:desc':
-        return searchResults.ids.sort((a, b) => searchResults.info[a].title > searchResults.info[b].title ? -1 : 1)
-      case 'created_at:desc':
-        return searchResults.ids.revers()
-      default:
-        return searchResults.ids
-    }
-  }
-
   results() {
     const { searchResults, searchResultOptions } = this.props
     const { stylingId, mainTitleKey, subTitleKey, buttonContentKey } = searchResultOptions
 
-    return this.sortedIds().map(id => {
-      console.log(searchResults, 'results')
+    return searchResults.ids.map(id => {
       const searchResult = searchResults.info[id]
 
       return (

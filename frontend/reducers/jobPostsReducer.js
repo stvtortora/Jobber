@@ -15,7 +15,7 @@ const ids = (state = [], action) => {
   switch (action.type) {
     case RECEIVE_JOB_POSTS:
     console.log(action, 'action')
-      return Object.keys(action.jobPosts.content);
+      return action.jobPosts.ids;
     default:
       return state;
   }
