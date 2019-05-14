@@ -179,8 +179,7 @@ JobPost.create!({
   keyword_b: 'Design',
   keyword_c: 'Creative',
   company_id: tenfold.id,
-  job_category_id: design_ux.id,
-  picture: "https://s3.amazonaws.com/job-boardapp-dev/job+post+pictures/flannel+picture.jpg"
+  job_category_id: design_ux.id
 })
 
 JobPost.create!({
@@ -229,6 +228,5 @@ JobPost.create!({
   keyword_b: 'Data_Analysis',
   keyword_c: 'Big_Data',
   company_id: tenfold.id,
-  job_category_id: finance.id,
-  picture: "https://s3.amazonaws.com/job-boardapp-dev/job+post+pictures/flannel+picture.jpg"
+  job_category_id: finance.id
 })

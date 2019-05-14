@@ -1,10 +1,11 @@
 import React from 'react'
-import { parseQuery } from '../../../util/queryUtil'
+import { parseQuery, getSort } from '../../../util/queryUtil'
 
 class SearchResults extends React.Component {
   constructor(props) {
     super(props)
     this.results = this.results.bind(this)
+    this.sortedIds = this.sortedIds.bind(this)
   }
 
   componentDidMount() {
@@ -17,10 +18,28 @@ class SearchResults extends React.Component {
     }
   }
 
+  sortedIds() {
+    const { searchResults } = this.props
+    const sortType = getSort(this.props.currentQuery)
+
+    switch (sortType) {
+      case 'title:asc':
+        return searchResults.ids.sort((a, b) => searchResults.info[a].title < searchResults.info[b].title ? -1 : 1)
+      case 'title:desc':
+        return searchResults.ids.sort((a, b) => searchResults.info[a].title > searchResults.info[b].title ? -1 : 1)
+      case 'created_at:desc':
+        return searchResults.ids.revers()
+      default:
+        return searchResults.ids
+    }
+  }
+
   results() {
     const { searchResults, searchResultOptions } = this.props
     const { stylingId, mainTitleKey, subTitleKey, buttonContentKey } = searchResultOptions
-    return searchResults.ids.map(id => {
+
+    return this.sortedIds().map(id => {
+      console.log(searchResults, 'results')
       const searchResult = searchResults.info[id]
 
       return (

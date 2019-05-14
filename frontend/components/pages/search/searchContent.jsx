@@ -5,18 +5,20 @@ import { parseQuery, buildQuery, getLimit, getOffset } from '../../../util/query
 
 export default (props) => {
   const updateLimit = (e) => {
-    buildQueryAndUpdateRoute(e.target.value, true, null, null)
+    buildQueryAndUpdateRoute(e.target.value, null, null, true, null)
   }
 
-  const buildQueryAndUpdateRoute = (limit, setNewLimit, offset, setNewOffset) => {
+  const buildQueryAndUpdateRoute = (limit, offset, sort, setNewLimit, setNewOffset, setNewSort) => {
     props.updateRoute(
       `/jobs/${buildQuery(
         {},
         props.currentQuery,
         limit,
         offset,
+        sort,
         setNewLimit,
-        setNewOffset
+        setNewOffset,
+        setNewSort
       )}`
     )
   }
@@ -38,7 +40,7 @@ export default (props) => {
     const totalJobCount = props.searchResults.count
     const firstPost = totalJobCount > 0 ? postByNumber(1) : 0
     const lastPost = Math.min(postByNumber(limit()), totalJobCount)
-    console.log(limit(), 'limit')
+    
     return (
       <div className='sort-and-limit-options'>
         <p className='showing-text'>{`Showing ${firstPost}-${lastPost} of ${totalJobCount} jobs`}</p>
