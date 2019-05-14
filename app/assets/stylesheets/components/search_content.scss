@@ -9,6 +9,28 @@
     .side-bar {
       width: 33.333333%;
       padding: 32px 45px 60px 15px;
+
+      .filter {
+        margin-bottom: 1rem;
+
+        span {
+          font-size: 14px;
+          color: #202020;
+          font-weight: 500;
+          text-transform: capitalize;
+          margin-bottom: 16px;
+        }
+        li {
+          list-style: none;
+          margin: 10px;
+          p {
+            font-size: 13px;
+            color: #888;
+            font-family: 'Varela Round', sans-serif;
+          }
+        }
+      }
+
       .side-bar-search-box {
         width: 100%;
         display: flex;

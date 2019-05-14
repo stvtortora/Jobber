@@ -35,19 +35,22 @@ export default (props) => {
 
   const filters = () => {
     const groupTypes = props.searchResults.group_counts
+
     return Object.keys(groupTypes).map(groupType => {
       const groupTypeTitle = groupType.split('_').join(' ')
       const optionCounts = groupTypes[groupType]
-      console.log(groupTypeTitle, 'gtt')
+
       return (
-        <div>
-          <span>{groupTypeTitle}</span>
+        <div className='filter'>
+          <span className='filter-title'>{groupTypeTitle}</span>
           {
             Object.keys(optionCounts).map(option => {
               const optionTitle = option.split('_').join(' ')
 
               return (
-                <li onClick={updateFilter({[groupTypeTitle]: optionTitle})}>
+                <li
+                className='filter-option'
+                onClick={updateFilter({[groupTypeTitle]: optionTitle})}>
                   <p>{`${optionTitle} (${optionCounts[option]})`}</p>
                 </li>
               )
