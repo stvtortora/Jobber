@@ -13,10 +13,17 @@ class SearchForm extends React.Component {
     }
     this.buildQueryAndUpdateRoute = this.buildQueryAndUpdateRoute.bind(this)
     this.updateQuery = this.updateQuery.bind(this)
+    this.handleKeyPress = this.handleKeyPress.bind(this)
   }
 
   buildQueryAndUpdateRoute() {
     this.props.updateRoute(`/jobs/${buildQuery(this.state)}`, this.props.currentQuery)
+  }
+
+  handleKeyPress (e) {
+    if (e.key === 'Enter') {
+      this.buildQueryAndUpdateRoute()
+    }
   }
 
   updateQuery(field) {
@@ -36,6 +43,7 @@ class SearchForm extends React.Component {
             value={this.state.keyword}
             id='keyword-input'
             placeholder='Job title, keyword, or company name'
+            onKeyPress={this.handleKeyPress}
             onChange={this.updateQuery('keyword')}></input>
             <i className="fa fa-keyboard-o"></i>
           </div>
@@ -44,6 +52,7 @@ class SearchForm extends React.Component {
             type='text'
             id='location-input'
             placeholder='Choose your city'
+            onKeyPress={this.handleKeyPress}
             onChange={this.updateQuery('city')}
             ></input>
             <i className="fa fa-map-marker" aria-hidden="true"></i>

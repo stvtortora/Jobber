@@ -3,6 +3,7 @@ import { RECEIVE_JOB_POSTS } from '../actions/jobPostsActions'
 
 
 const info = (state = {}, action) => {
+  console.log(action)
   switch (action.type) {
     case RECEIVE_JOB_POSTS:
       return action.jobPosts.content;
@@ -14,21 +15,20 @@ const info = (state = {}, action) => {
 const ids = (state = [], action) => {
   switch (action.type) {
     case RECEIVE_JOB_POSTS:
-    console.log(action, 'action')
       return action.jobPosts.ids;
     default:
       return state;
   }
 }
 
-const count = (state = 0, action) => {
+const group_counts = (state = {}, action) => {
   switch (action.type) {
     case RECEIVE_JOB_POSTS:
-      return action.jobPosts.count;
+      return action.jobPosts.group_counts;
     default:
       return state;
   }
 }
 
 
-export default combineReducers({ info, ids, count });
+export default combineReducers({ info, ids, group_counts });

@@ -28,7 +28,6 @@ class Navigation extends React.Component {
   handleScroll(e) {
     const newKlassName = window.scrollY > 50 ? 'stick-bar-container' : 'non-stick-bar-container';
     if (newKlassName !== this.state.klassName) {
-      console.log(newKlassName, this.state.klassName)
       this.setState({
         klassName: window.scrollY > 50 ? 'stick-bar-container' : 'non-stick-bar-container',
         fontColor: window.scrollY > 50 ? 'gray' : 'white'

@@ -5,11 +5,16 @@ class SearchResults extends React.Component {
   constructor(props) {
     super(props)
     this.results = this.results.bind(this)
-    this.sortedIds = this.sortedIds.bind(this)
   }
 
   componentDidMount() {
     this.props.search(parseQuery(this.props.currentRoute))
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.currentRoute !== prevProps.currentRoute && this.props.isThisComponentsRoute) {
+      this.props.search(parseQuery(this.props.currentRoute))
+    }
   }
 
   results() {

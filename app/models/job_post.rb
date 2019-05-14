@@ -47,12 +47,30 @@ class JobPost < ApplicationRecord
   belongs_to :job_category
   has_one_attached :picture
 
+  def self.count_by_groups
+    job_posts = JobPost.all.includes(:job_category)
+    category_counts = Hash.new(0)
+    job_type_counts = Hash.new(0)
+
+    job_posts.each do |job_post|
+      category_counts[job_post.job_category.name] += 1
+      job_type_counts[job_post.job_type] +=1
+    end
+
+    {
+      category: category_counts,
+      job_type: job_type_counts
+    }
+  end
+
   def self.search_by_query(query_params)
     filters = query_params[:filters]
     order = query_params[:sort].split(':').join(" ")
     limit = query_params[:limit].to_i
+    puts 'limit:'
+    puts query_params[:limit]
     offset = query_params[:offset].to_i * limit - limit
-    
+
     search_by_filters_and_order(filters, order).includes(:job_category, :company).limit(limit).offset(offset)
   end
 
