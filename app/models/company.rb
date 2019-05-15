@@ -5,7 +5,7 @@ class Company < ApplicationRecord
 
   validates :industry,
   inclusion: {
-    in: ['AdTech', 'Agriculture', 'Arts', 'FinTech', 'eCommerce', 'Digital_Media', 'Sales', 'Software', 'GreenTech', 'Payments', 'Professional_Services', 'Machine_Learning', 'HR_Tech'],
+    in: ['Ad Tech', 'Agriculture', 'Arts', 'FinTech', 'eCommerce', 'Digital Media', 'Sales', 'Software', 'GreenTech', 'Payments', 'Professional Services', 'Machine Learning'],
     message: "'%{value}' is not a valid job industry."
   }, allow_nil: true
 

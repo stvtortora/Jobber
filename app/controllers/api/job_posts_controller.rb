@@ -15,6 +15,7 @@ class Api::JobPostsController < ApplicationController
   def index
     @job_posts = JobPost.search_by_query(query_params)
     @group_counts = JobPost.count_by_groups
+
     render :index
   end
 
@@ -34,6 +35,10 @@ class Api::JobPostsController < ApplicationController
     )
   end
 
+  # def query_params
+  #   puts params
+  #   params.require(:query).permit(:filters, :limit, :offset, :sort)
+  # end
   def query_params
     params.require(:query).permit(:keyword, :city, :job_type, :job_category, :order, :limit, :offset)
   end

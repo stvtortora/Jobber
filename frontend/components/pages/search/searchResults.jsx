@@ -8,13 +8,13 @@ class SearchResults extends React.Component {
   }
 
   componentDidMount() {
-    this.props.search(parseQuery(this.props.currentRoute))
+    this.props.search(parseQuery(this.props.currentQuery))
   }
 
   componentDidUpdate(prevProps) {
-    console.log('updating', this.props)
+
     if (this.props.currentRoute !== prevProps.currentRoute && this.props.isThisComponentsRoute) {
-      this.props.search(parseQuery(this.props.currentRoute))
+      this.props.search(parseQuery(this.props.currentQuery))
     }
   }
 

@@ -8,7 +8,7 @@ export default (props) => {
     buildQueryAndUpdateRoute({}, e.target.value, 1, null, true, true, false)
   }
 
-  const updateSort = e => {
+  const updateOrder = e => {
     buildQueryAndUpdateRoute({}, null, 1, e.target.value, false, true, true)
   }
 
@@ -18,17 +18,17 @@ export default (props) => {
     }
   }
 
-  const buildQueryAndUpdateRoute = (queryData, limit, offset, sort, setNewLimit, setNewOffset, setNewSort) => {
+  const buildQueryAndUpdateRoute = (queryData, limit, offset, order, setNewLimit, setNewOffset, setNewOrder) => {
     props.updateRoute(
       `/jobs/${buildQuery(
         queryData,
         props.currentQuery,
         limit,
         offset,
-        sort,
+        order,
         setNewLimit,
         setNewOffset,
-        setNewSort
+        setNewOrder
       )}`
     )
   }
@@ -102,7 +102,7 @@ export default (props) => {
         <div className='showing-text'>{`Showing ${firstPost}-${lastPost} of ${totalJobCount} jobs`}</div>
         <div className='sort-and-limit-forms'>
           <form>
-            <select onChange={updateSort}>
+            <select onChange={updateOrder}>
               <option selected={sort() === 'created_at:desc'} value='created_at:desc'>Sort By: Newest</option>
               <option selected={sort() === 'title:asc'} value='title:asc'>Sort By: Name Ascending</option>
               <option selected={sort() === 'title:desc'} value='title:desc'>Sort By: Name Decending</option>

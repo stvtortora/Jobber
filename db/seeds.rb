@@ -30,7 +30,7 @@ tenfold = Company.create!({
   website: 'tenfold.com',
   tagline: 'We fold ten times',
   description: 'Tenfold merges technology with the number ten in ways you never thought possible',
-  city: 'New_York',
+  city: 'New York',
   user_id: steven_tortora.id,
   twitter: 'twitter.com',
   linked_in: 'linkedin.com',
@@ -86,7 +86,7 @@ operations = JobCategory.create!({
 
 JobPost.create!({
   title: 'Software Engineer',
-  city: 'New_York',
+  city: 'New York',
   description: 'Job Description
   We are looking for a smart Frontend Engineer who can participate in building our next generation interface. You will get a chance to get your hands dirty with our core product working directly with the Leadership and Business. You will also participate in web security, compatibility and experience design.
 
@@ -119,23 +119,23 @@ JobPost.create!({
   Creative Workplace and open work culture. Creativity and out of the box thinking is nurtured.
 
   Some perks: Excellent Filter Coffee, Free lunches, PS4 and Fooseball breaks, stocked kitchen topped up with a nice set of people to work with!',
-  job_type: 'Full_Time',
+  job_type: 'Full Time',
   salary: '$90000-$100000',
   career_level: 'Mid',
-  experience: '2-3_Years',
+  experience: '2-3 Years',
   industry: 'Software',
-  qualification: 'Bachelor_Degree',
+  qualification: 'Bachelor Degree',
   language: 'English',
   keyword_a: 'GreenTech',
   keyword_b: 'Development',
-  keyword_c: 'Front_End',
+  keyword_c: 'Front End',
   company_id: tenfold.id,
   job_category_id: engineer_developer.id
 })
 
 JobPost.create!({
   title: 'UX Designer',
-  city: 'New_York',
+  city: 'New York',
   description: 'Job Description
   We are looking for a smart Frontend Engineer who can participate in building our next generation interface. You will get a chance to get your hands dirty with our core product working directly with the Leadership and Business. You will also participate in web security, compatibility and experience design.
 
@@ -168,12 +168,12 @@ JobPost.create!({
   Creative Workplace and open work culture. Creativity and out of the box thinking is nurtured.
 
   Some perks: Excellent Filter Coffee, Free lunches, PS4 and Fooseball breaks, stocked kitchen topped up with a nice set of people to work with!',
-  job_type: 'Full_Time',
+  job_type: 'Full Time',
   salary: '$80000-$90000',
   career_level: 'Mid',
-  experience: '2-3_Years',
+  experience: '2-3 Years',
   industry: 'GreenTech',
-  qualification: 'Bachelor_Degree',
+  qualification: 'Bachelor Degree',
   language: 'English',
   keyword_a: 'UX',
   keyword_b: 'Design',
@@ -184,7 +184,7 @@ JobPost.create!({
 
 JobPost.create!({
   title: 'Financial Analyst',
-  city: 'New_York',
+  city: 'New York',
   description: 'Job Description
   We are looking for a smart Frontend Engineer who can participate in building our next generation interface. You will get a chance to get your hands dirty with our core product working directly with the Leadership and Business. You will also participate in web security, compatibility and experience design.
 
@@ -217,16 +217,16 @@ JobPost.create!({
   Creative Workplace and open work culture. Creativity and out of the box thinking is nurtured.
 
   Some perks: Excellent Filter Coffee, Free lunches, PS4 and Fooseball breaks, stocked kitchen topped up with a nice set of people to work with!',
-  job_type: 'Full_Time',
+  job_type: 'Full Time',
   salary: '$90000-$100000',
   career_level: 'Mid',
-  experience: '2-3_Years',
+  experience: '2-3 Years',
   industry: 'GreenTech',
-  qualification: 'Bachelor_Degree',
+  qualification: 'Bachelor Degree',
   language: 'English',
   keyword_a: 'Finance',
-  keyword_b: 'Data_Analysis',
-  keyword_c: 'Big_Data',
+  keyword_b: 'Data Analysis',
+  keyword_c: 'Big Data',
   company_id: tenfold.id,
   job_category_id: finance.id
 })
