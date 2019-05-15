@@ -47,6 +47,29 @@ class JobPost < ApplicationRecord
   belongs_to :job_category
   has_one_attached :picture
 
+  # first, we use pg search to filter out based on keyWords
+  # then, we use scopes to filter out the rest of the query
+  # finally, we apply order, limit, and offset
+
+  include Filterable
+  include PgSearch
+
+  pg_search_scope :search_by_keyword,
+  against: [:keyword_a, :keyword_b, :keyword_c, :title],
+  using: tsearch: { any_word: true }
+
+  scope :city, -> (status) { where city: city }
+  scope :job_type, -> (job_type) { where job_type: job_type }
+  scope :job_category -> (job_category) { where joins(:job_category).where('job_category.name = ?', job_category) }
+
+  def self.search_by_query (query_params)
+    keyword_matches = search_by_keyword(query_params[:keyword]).includes(:job_category, :job_type)
+    filter(query_params.slice(:city, :job_type, :job_category), keyword_matches)
+    .order(query_params[:order].split(':').join(' '))
+    .limit(query_params[:limit].to_i)
+    .offset(query_params[:offset].to_i * limit - limit)
+  end
+
   def self.count_by_groups
     job_posts = JobPost.all.includes(:job_category)
     category_counts = Hash.new(0)
@@ -62,38 +85,39 @@ class JobPost < ApplicationRecord
       job_type: job_type_counts
     }
   end
-
-  def self.search_by_query(query_params)
-    filters = query_params[:filters]
-    order = query_params[:sort].split(':').join(" ")
-    limit = query_params[:limit].to_i
-    puts 'limit:'
-    puts query_params[:limit]
-    offset = query_params[:offset].to_i * limit - limit
-
-    search_by_filters_and_order(filters, order).includes(:job_category, :company).limit(limit).offset(offset)
-  end
-
-  include PgSearch
-  pg_search_scope :search_by_filters_and_order,
-    lambda { |filters, order| {
-      against: [
-        :city,
-        :job_type,
-        :title,
-        :keyword_a,
-        :keyword_b,
-        :keyword_c
-      ],
-      associated_against: {
-        job_category: [:name],
-        company: [:title]
-      },
-      using: {
-        tsearch: { any_word: true }
-      },
-      order_within_rank: order,
-      query: filters
-    }
-  }
 end
+
+
+# def self.search_by_query(query_params)
+#   filters = query_params[:filters]
+#   order = query_params[:sort].split(':').join(" ")
+#   limit = query_params[:limit].to_i
+#   puts 'limit:'
+#   puts query_params[:limit]
+#   offset = query_params[:offset].to_i * limit - limit
+#
+#   search_by_filters_and_order(filters, order).includes(:job_category, :company).limit(limit).offset(offset)
+# end
+
+# include PgSearch
+# pg_search_scope :search_by_filters_and_order,
+#   lambda { |filters, order| {
+#     against: [
+#       :city,
+#       :job_type,
+#       :title,
+#       :keyword_a,
+#       :keyword_b,
+#       :keyword_c
+#     ],
+#     associated_against: {
+#       job_category: [:name],
+#       company: [:title]
+#     },
+#     using: {
+#       tsearch: { any_word: true }
+#     },
+#     order_within_rank: order,
+#     query: filters
+#   }
+# }

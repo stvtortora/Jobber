@@ -5,23 +5,23 @@ import { parseQuery, buildQuery, getLimit, getOffset, getSort } from '../../../u
 
 export default (props) => {
   const updateLimit = (e) => {
-    buildQueryAndUpdateRoute(e.target.value, 1, null, true, true, false)
+    buildQueryAndUpdateRoute({}, e.target.value, 1, null, true, true, false)
   }
 
   const updateSort = e => {
-    buildQueryAndUpdateRoute(null, 1, e.target.value, false, true, true)
+    buildQueryAndUpdateRoute({}, null, 1, e.target.value, false, true, true)
   }
 
   const updateFilter = filterData => {
     return () => {
-      buildQueryAndUpdateRoute(null, 1, null, null, true, false)
+      buildQueryAndUpdateRoute(filterData, null, 1, null, null, true, false)
     }
   }
 
-  const buildQueryAndUpdateRoute = (limit, offset, sort, setNewLimit, setNewOffset, setNewSort) => {
+  const buildQueryAndUpdateRoute = (queryData, limit, offset, sort, setNewLimit, setNewOffset, setNewSort) => {
     props.updateRoute(
       `/jobs/${buildQuery(
-        {},
+        queryData,
         props.currentQuery,
         limit,
         offset,

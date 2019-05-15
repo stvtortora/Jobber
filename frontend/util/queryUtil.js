@@ -1,5 +1,5 @@
 export const buildQuery = (queryData, query='?', limit=10, offset=1, sort='created_at:desc', setNewLimit=false, setNewOffset=false, setNewSort=false) => {
-  const existingDataType = (dataType) => {
+  const existingQueryByType = (dataType) => {
     const existingQuery = queryParts.filter(queryPart => {
       return queryPart[0] === 'dataType'
     })

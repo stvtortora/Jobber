@@ -35,6 +35,6 @@ class Api::JobPostsController < ApplicationController
   end
 
   def query_params
-    params.require(:query).permit(:filters, :limit, :offset, :sort)
+    params.require(:query).permit(:keyword, :city, :job_type, :job_category, :order, :limit, :offset)
   end
 end

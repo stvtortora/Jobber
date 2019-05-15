@@ -23,6 +23,13 @@
         li {
           list-style: none;
           margin: 10px;
+          &:hover {
+            cursor: pointer;
+            p {
+              color: #2c7dfa;
+            }
+          }
+
           p {
             font-size: 13px;
             color: #888;
