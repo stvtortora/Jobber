@@ -47,10 +47,6 @@ class JobPost < ApplicationRecord
   belongs_to :job_category
   has_one_attached :picture
 
-  # first, we use pg search to filter out based on keyWords
-  # then, we use scopes to filter out the rest of the query
-  # finally, we apply order, limit, and offset
-
   include Filterable
   include PgSearch
 
@@ -58,7 +54,6 @@ class JobPost < ApplicationRecord
   lambda { |keyword, order| {
     against: [:keyword_a, :keyword_b, :keyword_c, :title],
     associated_against: {
-      job_category: [:name],
       company: [:title]
     },
     order_within_rank: order,
@@ -68,7 +63,7 @@ class JobPost < ApplicationRecord
 
   scope :city, -> (city) { where("lower(city) = ?", city) }
   scope :job_type, -> (job_type) { where("lower(job_type) = ?", job_type.downcase) }
-  scope :job_category, -> (job_category) { where joins(:job_category).where("lower(job_category.name) = ?", job_category.downcase) }
+  scope :job_category, -> (job_category) { joins(:job_category).where('job_categories.name = ?', job_category) }
 
   def self.search_by_query (query_params)
     keyword_matches = search_by_keyword(query_params[:keyword], query_params[:order]).includes(:job_category, :company)
@@ -79,55 +74,17 @@ class JobPost < ApplicationRecord
 
   def self.count_by_groups
     job_posts = JobPost.all.includes(:job_category)
-    category_counts = Hash.new(0)
+    job_category_counts = Hash.new(0)
     job_type_counts = Hash.new(0)
 
     job_posts.each do |job_post|
-      category_counts[job_post.job_category.name] += 1
+      job_category_counts[job_post.job_category.name] += 1
       job_type_counts[job_post.job_type] +=1
     end
 
     {
-      category: category_counts,
+      job_category: job_category_counts,
       job_type: job_type_counts
     }
   end
 end
-
-
-
-
-
-# def self.search_by_query(query_params)
-#   filters = query_params[:filters]
-#   order = query_params[:sort].split(':').join(" ")
-#   limit = query_params[:limit].to_i
-#   puts 'limit:'
-#   puts query_params[:limit]
-#   offset = query_params[:offset].to_i * limit - limit
-#
-#   search_by_filters_and_order(filters, order).includes(:job_category, :company).limit(limit).offset(offset)
-# end
-#
-# include PgSearch
-# pg_search_scope :search_by_filters_and_order,
-#   lambda { |filters, order| {
-#     against: [
-#       :city,
-#       :job_type,
-#       :title,
-#       :keyword_a,
-#       :keyword_b,
-#       :keyword_c
-#     ],
-#     associated_against: {
-#       job_category: [:name],
-#       company: [:title]
-#     },
-#     using: {
-#       tsearch: { any_word: true }
-#     },
-#     order_within_rank: order,
-#     query: filters
-#   }
-# }

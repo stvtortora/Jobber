@@ -1,8 +1,8 @@
 import React from 'react'
-import { buildQuery } from '../../../util/queryUtil'
+import { buildQuery, parseQuery } from '../../../util/queryUtil'
 import { updateRoute } from '../../../actions/routeActions'
 import { connect } from 'react-redux'
-
+import merge from 'lodash/merge'
 
 class SearchForm extends React.Component {
   constructor(props) {
@@ -17,7 +17,8 @@ class SearchForm extends React.Component {
   }
 
   buildQueryAndUpdateRoute() {
-    this.props.updateRoute(`/jobs/${buildQuery(this.state)}`, this.props.currentQuery)
+    const queryOptions = merge({}, this.state, parseQuery(this.props.currentQuery))
+    this.props.updateRoute(`/jobs/${buildQuery(queryOptions)}`)
   }
 
   handleKeyPress (e) {
