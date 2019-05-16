@@ -65,26 +65,18 @@ class JobPost < ApplicationRecord
   scope :job_type, -> (job_type) { where("lower(job_type) = ?", job_type.downcase) }
   scope :job_category, -> (job_category) { joins(:job_category).where('job_categories.name = ?', job_category) }
 
-  def self.search_by_query (query_params)
+  def self.search_by_query(query_params)
     keyword_matches = search_by_keyword(query_params[:keyword], query_params[:order]).includes(:job_category, :company)
     filter(query_params.slice(:city, :job_type, :job_category), keyword_matches)
+  end
+
+  def self.retrieve_by_query(query_params)
+    search_by_query(query_params)
     .limit(query_params[:limit].to_i)
     .offset(query_params[:offset].to_i * query_params[:limit].to_i - query_params[:limit].to_i)
   end
 
-  def self.count_by_groups
-    job_posts = JobPost.all.includes(:job_category)
-    job_category_counts = Hash.new(0)
-    job_type_counts = Hash.new(0)
-
-    job_posts.each do |job_post|
-      job_category_counts[job_post.job_category.name] += 1
-      job_type_counts[job_post.job_type] +=1
-    end
-
-    {
-      job_category: job_category_counts,
-      job_type: job_type_counts
-    }
+  def self.total_count_by_query(query_params)
+    search_by_query(query_params).count
   end
 end

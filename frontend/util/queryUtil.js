@@ -6,13 +6,6 @@ const defaultOptions = {
   order: 'created_at:desc'
 }
 
-// export const seelectedOptionByType = (dataType) => {
-//   const existingQuery = queryParts.filter(queryPart => {
-//     return queryPart.split('=')[0] === dataType
-//   })
-//   return existingQuery.length ? existingQuery[0] : null
-// }
-
 export const buildQuery = (queryOptions) => {
   const options = merge({}, defaultOptions, queryOptions)
   let query = '?'
@@ -25,8 +18,10 @@ export const buildQuery = (queryOptions) => {
     const optionType = key.split(' ').join('_')
     let optionVal
 
-    if (['limit', 'offset', 'order'].includes(optionType)) {
+    if (['limit', 'offset'].includes(optionType)) {
       optionVal = options[key]
+    }  else if (optionType === 'order'){
+      optionVal = options[key].split(' ').join(':')
     } else {
       optionVal = options[key].split(' ').join('_')
     }
@@ -55,19 +50,4 @@ export const parseQuery = query => {
     parsedQuery[filterKey] = filterValue
     return parsedQuery
   }, {})
-}
-
-export const getLimit = query => {
-  const queryParts = query.split("&")
-  return Number(queryParts[queryParts.length - 3].split('=')[1])
-}
-
-export const getOffset = query => {
-  const queryParts = query.split("&")
-  return Number(queryParts[queryParts.length - 2].split('=')[1])
-}
-
-export const getSort = query => {
-  const queryParts = query.split("&")
-  return queryParts[queryParts.length - 1].split('=')[1]
 }

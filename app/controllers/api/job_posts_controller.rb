@@ -13,9 +13,8 @@ class Api::JobPostsController < ApplicationController
   end
 
   def index
-    @job_posts = JobPost.search_by_query(query_params)
-@group_counts = JobPost.count_by_groups
-
+    @job_posts = JobPost.retrieve_by_query(query_params)
+    @total_count = JobPost.total_count_by_query(query_params)
     render :index
   end
 

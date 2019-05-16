@@ -21,14 +21,14 @@ const ids = (state = [], action) => {
   }
 }
 
-const group_counts = (state = {}, action) => {
+const totalCount = (state = {}, action) => {
   switch (action.type) {
     case RECEIVE_JOB_POSTS:
-      return action.jobPosts.group_counts;
+      return action.jobPosts.total_count;
     default:
       return state;
   }
 }
 
 
-export default combineReducers({ info, ids, group_counts });
+export default combineReducers({ info, ids, totalCount });

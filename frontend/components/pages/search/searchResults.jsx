@@ -7,16 +7,15 @@ class SearchResults extends React.Component {
     this.results = this.results.bind(this)
   }
 
-  componentDidMount() {
-    this.props.search(parseQuery(this.props.currentQuery))
-  }
-
-  componentDidUpdate(prevProps) {
-
-    if (this.props.currentRoute !== prevProps.currentRoute && this.props.isThisComponentsRoute) {
-      this.props.search(parseQuery(this.props.currentQuery))
-    }
-  }
+  // componentDidMount() {
+  //   this.props.search(parseQuery(this.props.currentQuery))
+  // }
+  //
+  // componentDidUpdate(prevProps) {
+  //   if (this.props.currentRoute !== prevProps.currentRoute && this.props.isThisComponentsRoute) {
+  //     this.props.search(parseQuery(this.props.currentQuery))
+  //   }
+  // }
 
   results() {
     const { searchResults, searchResultOptions } = this.props

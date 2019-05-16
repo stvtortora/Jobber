@@ -1,40 +1,84 @@
 import React from 'react'
 import SearchResults from './searchResults'
 import SearchForm from './searchForm'
-import { parseQuery, buildQuery, getLimit, getOffset, getSort } from '../../../util/queryUtil'
+import { buildQuery, getLimit, getOffset, getSort } from '../../../util/queryUtil'
 import merge from 'lodash/merge'
 
-export default (props) => {
-  const updateRoute = (optionType) => {
-    return e => {
-      const queryOptions = merge(
-        {},
-        parseQuery(props.currentQuery),
-        { [optionType]: typeof e === 'string' ? e : e.target.value }
-      )
-      console.log(queryOptions, 'qo')
-      props.updateRoute(`/jobs/${buildQuery(queryOptions)}`)
+class SearchContent extends React.Component {
+  constructor(props) {
+    super(props)
+    this.updateSearch = this.updateSearch.bind(this)
+    this.filters = this.filters.bind(this)
+    this.sortAndLimitOptions = this.sortAndLimitOptions.bind(this)
+    this.paginationButtons = this.paginationButtons.bind(this)
+    this.postByNumber = this.postByNumber.bind(this)
+  }
+
+  componentDidMount() {
+    this.props.search(this.props.searchSpecifications)
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.currentQuery !== prevProps.currentQuery && this.props.isThisComponentsRoute) {
+      this.props.search(this.props.searchSpecifications)
     }
   }
 
-  const filters = () => {
-    const groupTypes = props.searchResults.group_counts
+  updateSearch(optionType) {
+    return e => {
+      let queryOptions = merge({}, this.props.searchSpecifications)
 
-    return Object.keys(groupTypes).map(groupType => {
-      const groupTypeTitle = groupType.split('_').join(' ')
-      const optionCounts = groupTypes[groupType]
+      if (e) {
+        queryOptions = merge(
+          {},
+          queryOptions,
+          { [optionType]: typeof e === 'string' ? e : e.target.value }
+        )
+      } else {
+        delete queryOptions[optionType]
+      }
+
+
+      this.props.updateRoute(`/jobs/${buildQuery(queryOptions)}`)
+    }
+  }
+
+  filters () {
+    const getOptionCounts = (filterType) => {
+      return Object.keys(this.props.searchResults.info).reduce((optionCounts, resultId) => {
+        const filterValue = this.props.searchResults.info[resultId][filterType]
+        if (optionCounts[filterValue]) {
+          optionCounts[filterValue]++
+        } else {
+          optionCounts[filterValue] = 1
+        }
+        return optionCounts
+      }, {})
+    }
+
+    const { searchSpecifications } = this.props
+    return this.props.filterTypes.map(filterType => {
+      const filterTypeTitle = filterType.split('_').join(' ')
+      const optionCounts = getOptionCounts(filterType)
 
       return (
         <div className='filter'>
-          <span className='filter-title'>{groupTypeTitle}</span>
+          <span className='filter-title'>
+            <p>{filterTypeTitle}</p>
+            <i class="fa fa-minus" aria-hidden="true"></i>
+          </span>
           {
+            searchSpecifications[filterType] ?
+
+            <p className='selected-filter-option' onClick={() => this.updateSearch(filterType)(undefined)}>{`${searchSpecifications[filterType]}`}</p> :
+
             Object.keys(optionCounts).map(option => {
               const optionTitle = option.split('_').join(' ')
 
               return (
                 <li
                 className='filter-option'
-                onClick={() => updateRoute(groupTypeTitle)(option)}>
+                onClick={() => this.updateSearch(filterTypeTitle)(option)}>
                   <p>{`${optionTitle} (${optionCounts[option]})`}</p>
                 </li>
               )
@@ -45,58 +89,41 @@ export default (props) => {
     })
   }
 
-  const sideBar = () => {
+  sideBar() {
     return (
       <section className='side-bar'>
         <SearchForm
         searchBoxClass='side-bar-search-box'
         keyWordsClass='side-bar-search-keywords'
         submitButtonClass='side-bar-search-submit'
-        currentQuery={props.currentQuery}/>
-        {filters()}
+        currentQuery={this.props.currentQuery}/>
+        {this.filters()}
       </section>
     )
   }
 
-  const sortAndLimitOptions = () => {
-    const getTotalCount = () => {
-      const group_counts = props.searchResults.group_counts
-      const group_types = Object.keys(group_counts)
-
-      if (group_types.length) {
-        const groups = group_counts[group_types[0]]
-        let totalCount = 0
-
-        Object.keys(groups).forEach(key => {
-          totalCount += groups[key]
-        })
-
-        return totalCount
-      }
-
-      return 0
-    }
-
-    const totalJobCount = getTotalCount()
-    const firstPost = totalJobCount > 0 ? postByNumber(1) : 0
-    const lastPost = Math.min(postByNumber(limit()), totalJobCount)
+  sortAndLimitOptions() {
+    const { totalCount, info } = this.props.searchResults
+    const { limit, order } = this.props.searchSpecifications
+    const firstPost = totalCount > 0 ? this.postByNumber(1) : 0
+    const lastPost = firstPost + Math.min(Object.keys(info).length, limit) - 1
 
     return (
       <div className='sort-and-limit-options'>
-        <div className='showing-text'>{`Showing ${firstPost}-${lastPost} of ${totalJobCount} jobs`}</div>
+        <div className='showing-text'>{`Showing ${firstPost}-${lastPost} of ${totalCount} jobs`}</div>
         <div className='sort-and-limit-forms'>
           <form>
-            <select onChange={updateRoute('order')}>
-              <option selected={sort() === 'created_at:desc'} value='created_at:desc'>Sort By: Newest</option>
-              <option selected={sort() === 'title:asc'} value='title:asc'>Sort By: Name Ascending</option>
-              <option selected={sort() === 'title:desc'} value='title:desc'>Sort By: Name Decending</option>
+            <select onChange={this.updateSearch('order')}>
+              <option selected={order === 'created_at:desc'} value='created_at:desc'>Sort By: Newest</option>
+              <option selected={order === 'title:asc'} value='title:asc'>Sort By: Name Ascending</option>
+              <option selected={order === 'title:desc'} value='title:desc'>Sort By: Name Decending</option>
             </select>
           </form>
           <form>
-            <select onChange={updateRoute('limit')}>
-              <option selected={limit() === 10} value="10">Show: 10</option>
-              <option selected={limit() === 20} value="20">Show: 20</option>
-              <option selected={limit() === 50} value="50">Show: 50</option>
+            <select onChange={this.updateSearch('limit')}>
+              <option selected={limit === 10} value="10">Show: 10</option>
+              <option selected={limit === 20} value="20">Show: 20</option>
+              <option selected={limit === 50} value="50">Show: 50</option>
             </select>
           </form>
         </div>
@@ -104,52 +131,37 @@ export default (props) => {
     )
   }
 
-  const paginationButtons = () => {
+  paginationButtons() {
     return (
       <div></div>
     )
   }
 
-  const postByNumber = n => {
-    return limit() * (offset() - 1) + n
+  postByNumber(n) {
+    const { limit, offset } = this.props.searchSpecifications
+    return limit * (offset - 1) + n
   }
 
-  const offset = () => {
-    return getOffset(props.currentRoute)
-  }
-
-  const limit = () => {
-    return getLimit(props.currentRoute)
-  }
-
-  const sort = () => {
-    return getSort(props.currentRoute)
-  }
-
-  const totalPages = () => {
-    return Math.ceil(offset() / limit())
-  }
-
-  if (props.currentRoute !== '/') {
-    return(
-      <content className='page-content'>
-        <div className='content-container'>
-          <div className='content-flex'>
-            {sideBar()}
-            <section className='main-content'>
-              {sortAndLimitOptions()}
-              <SearchResults {...props}/>
-            </section>
-            {paginationButtons()}
+  render() {
+    if (this.props.currentRoute !== '/') {
+      return(
+        <content className='page-content'>
+          <div className='content-container'>
+            <div className='content-flex'>
+              {this.sideBar()}
+              <section className='main-content'>
+                {this.sortAndLimitOptions()}
+                <SearchResults {...this.props}/>
+              </section>
+              {this.paginationButtons()}
+            </div>
           </div>
-        </div>
-      </content>
-    )
-  }
+        </content>
+      )
+    }
 
-  return []
+    return []
+  }
 }
-//filters need to know limit
-//sorters needs to know limit and set limit
-//this is the only place where limit matters
-// <Sorters currentRoute={props.currentRoute}/>
+
+export default SearchContent

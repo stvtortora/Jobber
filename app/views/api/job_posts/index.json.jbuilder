@@ -7,5 +7,5 @@ json.content do
     end
   end
 end
-json.group_counts @group_counts
+json.total_count @total_count
 json.ids ids
