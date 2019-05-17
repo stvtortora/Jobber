@@ -19,6 +19,11 @@
           flex-direction: row;
           justify-content: space-between;
           width: 90%;
+
+          &:hover {
+            cursor: pointer;
+          }
+
           p {
             font-size: 14px;
             color: #202020;

@@ -54,7 +54,7 @@ class Filter extends React.Component {
       <div className='filter'>
         <span className='filter-title' onClick={this.toggleShowOptions}>
           <p>{this.props.filterTypeTitle}</p>
-          <i className="fa fa-minus" aria-hidden="true"></i>
+          { this.state.showOptions ? <i className="fa fa-minus" aria-hidden="true"></i> : <i class="fa fa-plus" aria-hidden="true"></i> }
         </span>
         {
           this.state.showOptions ?
