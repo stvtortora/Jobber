@@ -1,6 +1,7 @@
 import React from 'react'
 import SearchResults from './searchResults'
 import SearchForm from './searchForm'
+import Filters from './filters'
 import { buildQuery, getLimit, getOffset, getSort } from '../../../util/queryUtil'
 import merge from 'lodash/merge'
 
@@ -8,7 +9,7 @@ class SearchContent extends React.Component {
   constructor(props) {
     super(props)
     this.updateSearch = this.updateSearch.bind(this)
-    this.filters = this.filters.bind(this)
+    // this.filters = this.filters.bind(this)
     this.sortAndLimitOptions = this.sortAndLimitOptions.bind(this)
     this.paginationButtons = this.paginationButtons.bind(this)
     this.postByNumber = this.postByNumber.bind(this)
@@ -43,61 +44,67 @@ class SearchContent extends React.Component {
     }
   }
 
-  filters () {
-    const getOptionCounts = (filterType) => {
-      return Object.keys(this.props.searchResults.info).reduce((optionCounts, resultId) => {
-        const filterValue = this.props.searchResults.info[resultId][filterType]
-        if (optionCounts[filterValue]) {
-          optionCounts[filterValue]++
-        } else {
-          optionCounts[filterValue] = 1
-        }
-        return optionCounts
-      }, {})
-    }
-
-    const { searchSpecifications } = this.props
-    return this.props.filterTypes.map(filterType => {
-      const filterTypeTitle = filterType.split('_').join(' ')
-      const optionCounts = getOptionCounts(filterType)
-
-      return (
-        <div className='filter'>
-          <span className='filter-title'>
-            <p>{filterTypeTitle}</p>
-            <i class="fa fa-minus" aria-hidden="true"></i>
-          </span>
-          {
-            searchSpecifications[filterType] ?
-
-            <p className='selected-filter-option' onClick={() => this.updateSearch(filterType)(undefined)}>{`${searchSpecifications[filterType]}`}</p> :
-
-            Object.keys(optionCounts).map(option => {
-              const optionTitle = option.split('_').join(' ')
-
-              return (
-                <li
-                className='filter-option'
-                onClick={() => this.updateSearch(filterTypeTitle)(option)}>
-                  <p>{`${optionTitle} (${optionCounts[option]})`}</p>
-                </li>
-              )
-            })
-          }
-        </div>
-      )
-    })
-  }
+  // filters () {
+  //   const getOptionCounts = (filterType) => {
+  //     return Object.keys(this.props.searchResults.info).reduce((optionCounts, resultId) => {
+  //       const filterValue = this.props.searchResults.info[resultId][filterType]
+  //       if (optionCounts[filterValue]) {
+  //         optionCounts[filterValue]++
+  //       } else {
+  //         optionCounts[filterValue] = 1
+  //       }
+  //       return optionCounts
+  //     }, {})
+  //   }
+  //
+  //   const { searchSpecifications } = this.props
+  //   return this.props.filterTypes.map(filterType => {
+  //     const filterTypeTitle = filterType.split('_').join(' ')
+  //     const optionCounts = getOptionCounts(filterType)
+  //
+  //     return (
+  //       <div className='filter'>
+  //         <span className='filter-title'>
+  //           <p>{filterTypeTitle}</p>
+  //           <i class="fa fa-minus" aria-hidden="true"></i>
+  //         </span>
+  //         {
+  //           searchSpecifications[filterType] ?
+  //
+  //           <p className='selected-filter-option' onClick={() => this.updateSearch(filterType)(undefined)}>{`${searchSpecifications[filterType]}`}</p> :
+  //
+  //           Object.keys(optionCounts).map(option => {
+  //             const optionTitle = option.split('_').join(' ')
+  //
+  //             return (
+  //               <li
+  //               className='filter-option'
+  //               onClick={() => this.updateSearch(filterTypeTitle)(option)}>
+  //                 <p>{`${optionTitle} (${optionCounts[option]})`}</p>
+  //               </li>
+  //             )
+  //           })
+  //         }
+  //       </div>
+  //     )
+  //   })
+  // }
 
   sideBar() {
+    const { currentQuery, filterTypes, searchSpecifications, searchResults } = this.props
     return (
       <section className='side-bar'>
         <SearchForm
         searchBoxClass='side-bar-search-box'
         keyWordsClass='side-bar-search-keywords'
         submitButtonClass='side-bar-search-submit'
-        currentQuery={this.props.currentQuery}/>
-        {this.filters()}
+        currentQuery={currentQuery}/>
+        <Filters
+        filterTypes={filterTypes}
+        searchSpecifications={searchSpecifications}
+        searchResults={searchResults.info}
+        updateSearch={this.updateSearch}
+        />
       </section>
     )
   }
