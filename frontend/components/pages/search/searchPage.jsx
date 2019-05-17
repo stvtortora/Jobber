@@ -37,8 +37,8 @@ class SearchPage extends React.Component {
       else {
         delete queryOptions[optionType]
       }
-
-      this.props.updateRoute(`/jobs/${buildQuery(queryOptions)}`)
+      const { routePrefix } = this.props
+      this.props.updateRoute(`${routePrefix}${buildQuery(queryOptions)}`)
     }
   }
 

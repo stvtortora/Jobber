@@ -19,7 +19,7 @@ class Api::JobPostsController < ApplicationController
   end
 
   def show
-    @job_post = JobPost.find_by(id: params[:id])
+    @job_post = JobPost.find_by(id: params[:id]).includes(:company, :job_category)
     render :show
   end
 
@@ -33,7 +33,7 @@ class Api::JobPostsController < ApplicationController
       :language, :keyword_a, :keyword_b, :keyword_c
     )
   end
-  
+
   def query_params
     params.require(:query).permit(:keyword, :city, :job_type, :job_category, :order, :limit, :offset)
   end

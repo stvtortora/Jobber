@@ -8,3 +8,11 @@ export const searchJobPosts = query => {
     })
   }
 }
+
+export const fetchJobPost = postId => {
+  return dispatch => {
+    return APIUtil.fetchJobPost(postId).then(jobPost => {
+      return dispatch({ type: RECEIVE_JOB_POST, jobPost })
+    })
+  }
+}

@@ -8,8 +8,9 @@ const mapStateToProps = state => {
   const currentQuery = state.currentRoute.slice(5)
   return {
     currentQuery,
+    routePrefix: '/jobs',
     currentRoute: state.currentRoute,
-    isThisComponentsRoute: state.currentRoute.slice(0, 5) == '/jobs',
+    isThisComponentsRoute: state.currentRoute.slice(0, 7) == '/jobs/?',
     searchResults: state.records.jobPosts,
     searchSpecifications: parseQuery(currentQuery),
     filterTypes: ['job_type', 'job_category'],

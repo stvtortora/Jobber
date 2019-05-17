@@ -1,7 +1,7 @@
 import React from 'react'
 import { parseQuery, getSort } from '../../../util/queryUtil'
 
-export default ({ searchResults, searchResultOptions }) => {
+export default ({ searchResults, searchResultOptions, updateRoute, routePrefix }) => {
   const { stylingId, mainTitleKey, subTitleKey, buttonContentKey } = searchResultOptions
 
   return(
@@ -11,7 +11,7 @@ export default ({ searchResults, searchResultOptions }) => {
           const searchResult = searchResults.info[id]
 
           return (
-            <li id={stylingId} className='search-result'>
+            <li id={stylingId} className='search-result' onClick={() => updateRoute`${routePrefix}${searchResult.id}`}>
               <img src={searchResult.picture_url} />
               <div className='search-result-details'>
                 <div className='search-result-details-left'>
