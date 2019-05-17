@@ -20,6 +20,11 @@ class App extends React.Component {
     if (prevProps.currentRoute !== this.props.currentRoute) {
       this.props.history.push(this.props.currentRoute)
     }
+    const { pathname, search } = this.props.history.location
+    const { prevPathname, prevSearch } = prevProps.history.location
+    if (prevPathname !== pathname && prevSearch !== search) {
+      this.props.updateRoute(pathname + search)
+    }
   }
 
   render() {
