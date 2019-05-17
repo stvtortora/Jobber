@@ -33,11 +33,7 @@ class Api::JobPostsController < ApplicationController
       :language, :keyword_a, :keyword_b, :keyword_c
     )
   end
-
-  # def query_params
-  #   puts params
-  #   params.require(:query).permit(:filters, :limit, :offset, :sort)
-  # end
+  
   def query_params
     params.require(:query).permit(:keyword, :city, :job_type, :job_category, :order, :limit, :offset)
   end

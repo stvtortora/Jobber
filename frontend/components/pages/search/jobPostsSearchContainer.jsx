@@ -1,4 +1,4 @@
-import SearchContent from './searchContent'
+import SearchPage from './searchPage'
 import { connect } from 'react-redux'
 import { searchJobPosts } from '../../../actions/jobPostsActions'
 import { updateRoute } from '../../../actions/routeActions'
@@ -29,4 +29,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchContent)
+export default connect(mapStateToProps, mapDispatchToProps)(SearchPage)

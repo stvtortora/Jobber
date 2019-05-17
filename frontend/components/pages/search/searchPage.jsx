@@ -6,11 +6,10 @@ import SortAndLimitOptions from './sortAndLimitOptions'
 import { buildQuery, getLimit, getOffset, getSort } from '../../../util/queryUtil'
 import merge from 'lodash/merge'
 
-class SearchContent extends React.Component {
+class SearchPage extends React.Component {
   constructor(props) {
     super(props)
     this.updateSearch = this.updateSearch.bind(this)
-    this.paginationButtons = this.paginationButtons.bind(this)
   }
 
   componentDidMount() {
@@ -33,7 +32,9 @@ class SearchContent extends React.Component {
           queryOptions,
           { [optionType]: typeof e === 'string' ? e : e.target.value }
         )
-      } else {
+      }
+
+      else {
         delete queryOptions[optionType]
       }
 
@@ -65,7 +66,6 @@ class SearchContent extends React.Component {
     const { totalCount, info } = searchResults
     const { limit, order, offset } = searchSpecifications
 
-    // {this.sortAndLimitOptions()}
     return (
       <section className='main-content'>
         <SortAndLimitOptions
@@ -78,11 +78,6 @@ class SearchContent extends React.Component {
         />
         <SearchResults {...this.props}/>
       </section>
-    )
-  }
-  paginationButtons() {
-    return (
-      <div></div>
     )
   }
 
@@ -104,4 +99,4 @@ class SearchContent extends React.Component {
   }
 }
 
-export default SearchContent
+export default SearchPage

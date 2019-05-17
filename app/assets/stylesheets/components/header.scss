@@ -56,6 +56,14 @@
     z-index: 1;
   }
 
+  .non-stick-bar-container {
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+  }
+
   .stick-bar-container {
     @include animation('fadeIn 1.5s 1');
     background: white;
@@ -173,7 +181,7 @@
       margin-left: auto;
       margin-right: auto;
       display: block;
-      padding-top: 200px;
+      padding-top: 270px;
       padding-bottom: 270px;
       text-align: center;
       color: white;
