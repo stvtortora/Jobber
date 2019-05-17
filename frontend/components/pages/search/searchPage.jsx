@@ -55,8 +55,7 @@ class SearchPage extends React.Component {
         filterTypes={filterTypes}
         searchSpecifications={searchSpecifications}
         searchResults={searchResults.info}
-        updateSearch={this.updateSearch}
-        />
+        updateSearch={this.updateSearch}/>
       </section>
     )
   }
@@ -74,8 +73,7 @@ class SearchPage extends React.Component {
         limit={limit}
         order={order}
         offset={offset}
-        updateSearch={this.updateSearch}
-        />
+        updateSearch={this.updateSearch}/>
         <SearchResults {...this.props}/>
       </section>
     )
