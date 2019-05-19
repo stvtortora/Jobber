@@ -1,7 +1,8 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import SearchForm from '../pages/search/searchForm'
 
-export default () => {
+const HeaderContent = ({ currentRoute }) => {
   const sectionHeader = () => {
     return (
       <div className='home-section-header'>
@@ -10,16 +11,29 @@ export default () => {
       </div>
     )
   }
-  return (
-    <content className='content'>
+
+  if (currentRoute !== '/login') {
+    return (
+      <content className='content'>
       <div className='home-page-content'>
-        {sectionHeader()}
-        <SearchForm
-        searchBoxClass='home-search-box'
-        keyWordsClass='search-keywords'
-        submitButtonClass='search-submit'
-        currentQuery={''}/>
+      {sectionHeader()}
+      <SearchForm
+      searchBoxClass='home-search-box'
+      keyWordsClass='search-keywords'
+      submitButtonClass='search-submit'
+      currentQuery={''}/>
       </div>
-    </content>
-  )
+      </content>
+    )
+  }
+
+  return []
 }
+
+const mapStateToProps = state => {
+  return {
+    currentRoute: state.currentRoute
+  }
+}
+
+export default connect(mapStateToProps)(HeaderContent)

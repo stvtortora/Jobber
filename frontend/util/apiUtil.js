@@ -35,3 +35,10 @@ export const logout = () => {
     url: `api/session`
   })
 }
+
+export const fetchJobCategories = () => {
+  return $.ajax({
+    method: 'GET',
+    url: 'api/job_categories'
+  })
+}

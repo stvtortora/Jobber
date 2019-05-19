@@ -97,8 +97,13 @@
       }
     }
     .create-navigation {
-      p {
-        color: white;
+      div {
+        &:hover {
+          cursor: pointer;
+        }
+        p {
+          color: white;
+        }
       }
     }
   }
