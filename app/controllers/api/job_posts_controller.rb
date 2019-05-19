@@ -4,7 +4,7 @@ class Api::JobPostsController < ApplicationController
 
     if @job_post.save
       login(@job_post)
-      render "api/job_posts/current_job_post"
+      render :show
     else
       render json: @job_post.errors.full_messages, status: 422
     end

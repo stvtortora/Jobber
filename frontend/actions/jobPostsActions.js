@@ -17,3 +17,11 @@ export const fetchJobPost = postId => {
     })
   }
 }
+
+export const createJobPost = job_post => {
+  return dispatch => {
+    return APIUtil.createJobPost(postId).then(jobPost => {
+      return dispatch({ type: RECEIVE_JOB_POST, jobPost })
+    })
+  }
+}

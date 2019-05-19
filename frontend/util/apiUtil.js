@@ -13,6 +13,14 @@ export const fetchJobPost = postId => {
   })
 }
 
+export const createJobPost = job_post => {
+  return $.ajax({
+    method: 'POST',
+    url: `api/job_posts`,
+    data: { job_post }
+  })
+}
+
 export const createUser = user => {
   return $.ajax({
     method: 'POST',

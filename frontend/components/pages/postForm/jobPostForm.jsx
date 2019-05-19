@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { fetchJobCategories } from '../../../actions/jobCategoriesActions'
+import { createJobPost } from '../../../actions/jobPostsActions'
 
 const fieldMap = {
   'salary': ['$20000-$30000', '$30000-$40000','$40000-$50000','$50000-$60000','$60000-$70000','$70000-$80000','$80000-$90000','$90000-$100000','$100000-$1100000', '$110000-$1200000','$120000-$1300000','$130000-$1400000','$140000-$1500000','$150000-$1600000','$160000-$1700000','$170000-$1800000','$180000-$1900000','$190000-$2000000','$200000+'],
@@ -27,7 +28,7 @@ class JobPostForm extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.jobCategories.ids.length) {
+    if (!this.props.jobCategories.ids.length) {
       this.props.fetchJobCategories()
     }
   }
@@ -38,10 +39,17 @@ class JobPostForm extends React.Component {
     });
   }
 
+  handleSubmit(e) {
+    e.preventDefault();
+    this.props.createJobPost(this.state).then(() => {
+      this.props.updateRoute('/')
+    })
+  }
+
   jobCategorySelector () {
     return this.props.jobCategories.ids.map(jobCategoryId => {
       const jobCategory = this.props.jobCategories.info[jobCategoryId]
-      const title = `${option.title}`
+      const title = `${jobCategory.name}`
       return <option selected={this.state.job_type === title} value={title}>{title}</option>
     })
   }
@@ -55,7 +63,7 @@ class JobPostForm extends React.Component {
   render() {
     return (
       <section className='jos-post-form'>
-        <form>
+        <form onSubmit={this.handleSubmit}>
           <span className='title-field'>
             <label>Job Title</label>
             <input type="text" value={this.state.title} onChange={this.update('title')}/>
@@ -110,7 +118,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchJobCategories: () => dispatch(fetchJobCategories)
+    fetchJobCategories: () => dispatch(fetchJobCategories()),
+    createJobPost: (job_post) => dispatch(createJobPost(job_post))
   }
 }
 
