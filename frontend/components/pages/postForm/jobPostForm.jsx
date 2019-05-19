@@ -62,47 +62,73 @@ class JobPostForm extends React.Component {
 
   render() {
     return (
-      <section className='jos-post-form'>
+      <section className='job-post-form'>
         <form onSubmit={this.handleSubmit}>
-          <span className='title-field'>
-            <label>Job Title</label>
-            <input type="text" value={this.state.title} onChange={this.update('title')}/>
+          <span className='field-row'>
+            <div className='title-field form-field'>
+              <label>Job Title</label>
+              <input type="text" value={this.state.title} onChange={this.update('title')}/>
+            </div>
           </span>
-          <span className='feild-row'>
-            <div className='form-field'>
+          <span className='field-row'>
+            <div className='non-title-field form-field'>
               <label>City</label>
               <input placeholder='e.g New York' type="password" value={this.state.password} onChange={this.update('password')}/>
             </div>
-            <select onChange={this.update('job_type')}>
-              <option selected={this.state.job_type === "Full Time"} value="Full Time">Full Time</option>
-              <option selected={this.state.job_type === "Part Time"} value="Part Time">Part Time</option>
-              <option selected={this.state.job_type === "Freelance"} value="Freelance">Freelance</option>
-            </select>
-            <select onChange={this.update('job_category_id')}>
+            <div className='non-title-field form-field'>
+              <label>Job Type</label>
+              <select onChange={this.update('job_type')}>
+                <option selected={this.state.job_type === "Full Time"} value="Full Time">Full Time</option>
+                <option selected={this.state.job_type === "Part Time"} value="Part Time">Part Time</option>
+                <option selected={this.state.job_type === "Freelance"} value="Freelance">Freelance</option>
+              </select>
+            </div>
+            <div className='non-title-field form-field'>
+              <label>Job Category</label>
+              <select onChange={this.update('job_category_id')}>
               {this.jobCategorySelector()}
-            </select>
+              </select>
+            </div>
           </span>
-          <span className='feild-row'>
-            <select onChange={this.update('salary')}>
-              {this.constructFields('salary')}
-            </select>
-            <select onChange={this.update('career_level')}>
-              {this.constructFields('career_level')}
-            </select>
-            <select onChange={this.update('industry')}>
-              {this.constructFields('industry')}
-            </select>
+          <span className='field-row'>
+            <div className='non-title-field form-field'>
+              <label>Salary</label>
+              <select onChange={this.update('salary')}>
+                {this.constructFields('salary')}
+              </select>
+            </div>
+            <div className='non-title-field form-field'>
+              <label>Career Level</label>
+              <select onChange={this.update('career_level')}>
+                {this.constructFields('career_level')}
+              </select>
+            </div>
+            <div className='non-title-field form-field'>
+              <label>Industry</label>
+              <select onChange={this.update('industry')}>
+                {this.constructFields('industry')}
+              </select>
+            </div>
           </span>
-          <span className='feild-row'>
-            <select onChange={this.update('qualification')}>
-              {this.constructFields('qualification')}
-            </select>
-            <select onChange={this.update('experience')}>
-              {this.constructFields('experience')}
-            </select>
-            <select onChange={this.update('language')}>
-              {this.constructFields('language')}
-            </select>
+          <span className='field-row'>
+            <div className='non-title-field form-field'>
+              <label>Qualification</label>
+              <select onChange={this.update('qualification')}>
+                {this.constructFields('qualification')}
+              </select>
+            </div>
+            <div className='non-title-field form-field'>
+              <label>Experience</label>
+              <select onChange={this.update('experience')}>
+                {this.constructFields('experience')}
+              </select>
+            </div>
+            <div className='non-title-field form-field'>
+              <label>Language</label>
+              <select onChange={this.update('language')}>
+                {this.constructFields('language')}
+              </select>
+            </div>
           </span>
         </form>
       </section>
