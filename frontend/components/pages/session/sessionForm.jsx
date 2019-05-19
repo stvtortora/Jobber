@@ -36,9 +36,13 @@ class SessionForm extends React.Component {
   render () {
     return (
       <form className='session-form' onSubmit={this.handleSubmit}>
-        <div className='errors'>
+        {
+          this.props.errors.length ?
+          <div className='errors'>
           {this.renderErrors()}
-        </div>
+          </div> :
+          <div></div>
+        }
         <div className='form-field'>
           <label>Username</label>
           <input type="text" value={this.state.username} onChange={this.update('dname')}/>
