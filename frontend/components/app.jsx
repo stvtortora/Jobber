@@ -1,10 +1,11 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import { updateRoute } from '../actions/routeActions'
 import Header from './header/header'
 import JobPostsSearch from './pages/search/jobPostsSearchContainer'
+import JobPost from './pages/post/jobPostContainer'
 
 class App extends React.Component {
   constructor (props) {
@@ -31,7 +32,10 @@ class App extends React.Component {
     return (
       <content className='all-content'>
           <Header/>
-          <Route path='/jobs' component={JobPostsSearch} />
+          <Switch>
+            <Route path='/jobs/:postId' exact component={JobPost} />
+            <Route path='/jobs' component={JobPostsSearch} />
+          </Switch>
           <div className='under-header'></div>
       </content>
     )

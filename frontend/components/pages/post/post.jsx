@@ -1,5 +1,5 @@
 import React from 'react'
-import PostHeader from './postHeader'
+import SideBar from './sideBar'
 import MainPostContent from './MainPostContent'
 
 class Post extends React.Component {
@@ -12,21 +12,19 @@ class Post extends React.Component {
 
     if (post.description) {
       return (
+        <div className='full-post-container'>
         <div className='full-post'>
-        <PostHeader
-        postType={postType}
-        website={post}
-        linked_in={post.linked_in}
-        city={post.city}
-        title={post.title}
-        additionalInfo={additionalInfo}
-        />
-        <MainPostContent
-        post={post}
-        postType={postType}
-        overViewKeys={overViewKeys}
-        description={post.description}
-        />
+          <MainPostContent
+          post={post}
+          postType={postType}
+          additionalInfo={additionalInfo}
+          />
+          <SideBar
+          post={post}
+          postType={postType}
+          overViewKeys={overViewKeys}
+          />
+        </div>
         </div>
       )
     }
@@ -34,3 +32,5 @@ class Post extends React.Component {
     return []
   }
 }
+
+export default Post

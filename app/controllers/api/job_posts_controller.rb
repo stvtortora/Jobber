@@ -1,6 +1,4 @@
 class Api::JobPostsController < ApplicationController
-  before_action :ensure_current_job_post_is_authorized, only: :show
-
   def create
     @job_post = JobPost.new(job_post_params)
 
@@ -19,7 +17,7 @@ class Api::JobPostsController < ApplicationController
   end
 
   def show
-    @job_post = JobPost.find_by(id: params[:id]).includes(:company, :job_category)
+    @job_post = JobPost.where(id: params[:id]).includes(:company, :job_category).first
     render :show
   end
 

@@ -1,12 +1,16 @@
 import { combineReducers } from 'redux';
-import { RECEIVE_JOB_POSTS } from '../actions/jobPostsActions'
+import merge from 'lodash/merge'
+import { RECEIVE_JOB_POSTS, RECEIVE_JOB_POST } from '../actions/jobPostsActions'
 
 
 const info = (state = {}, action) => {
-  console.log(action)
   switch (action.type) {
     case RECEIVE_JOB_POSTS:
       return action.jobPosts.content;
+    case RECEIVE_JOB_POST:
+      const newState = merge({}, state)
+      newState[action.jobPost.id] = action.jobPost
+      return newState
     default:
       return state;
   }

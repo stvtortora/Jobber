@@ -1,37 +1,35 @@
 import React from 'react'
 
-export default = ({ post, postType, overViewKeys, description }) => {
-  const description = () => {
+export default ({ post, postType, additionalInfo }) => {
+  const descriptionBox = () => {
     return (
       <section className='post-description-container'>
         <p className='post-description-title'>{`${postType} Description`}</p>
-        <p className='post-description'>{description}</p>
+        <p className='post-description'>{post.description}</p>
       </section>
     )
   }
 
-  const infoBar = () => {
+  const header = () => {
     return (
-      <section className='info-bar-container'>
-        <p className='info-bar-title'>{`${postType} Information`}</p>
-        {
-          overViewKeys.map(key => {
-            return (
-              <li key={key} className='info-bar-item'>
-                <p className='info-type'>{key}</p>
-                <p className='info-value'>{post[key]}</p>
-              </li>
-            )
-          })
-        }
-      </section>
+      <header className='post-header'>
+        <p className='post-header-title'>{post.title}</p>
+        <div className='header-second-line'>
+          <p>{post.city}</p>
+          <p>{additionalInfo}</p>
+        </div>
+        <div className='header-links'>
+        <a className='header-link' href={post.website}>{post.website}</a>
+          <a className='header-link' href={post.linked_in}>{post.linked_in}</a>
+        </div>
+      </header>
     )
   }
 
   return (
     <div className='main-post-content'>
-      {description()}
-      {infoBar()}
+      {header()}
+      {descriptionBox()}
     </div>
   )
 }

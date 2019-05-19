@@ -1,21 +1,25 @@
 import { connect } from 'react-redux'
 import { fetchJobPost } from '../../../actions/jobPostsActions'
-import PostPage from './postPage'
+import Post from './post'
 
 const mapStateToProps = (state) => {
-  const postId = state.currentRoute.slice(5)
-  const post = state.jobPosts.content[ownProps.postId]
+  const postId = state.currentRoute.slice(6)
   
+  const post = state.records.jobPosts.info[postId]
+
   return {
     post,
+    postId,
     postType: 'Job',
-    overViewKeys: ['salary', 'career_level', 'industry', 'qualification', 'language', 'job_type', 'experience', 'job_category', 'company'],
+    overViewKeys: ['salary', 'career_level', 'industry', 'qualification', 'language', 'experience'],
     additionalInfo: post.job_type
   }
 }
 
 const mapDispatchToProps = dispatch => {
-  return fetchPost: (postId) => dispatch(fetchJobPost(postId))
+  return {
+    fetchPost: (postId) => dispatch(fetchJobPost(postId))
+  }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PostPage)
+export default connect(mapStateToProps, mapDispatchToProps)(Post)

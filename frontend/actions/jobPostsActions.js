@@ -1,4 +1,5 @@
 export const RECEIVE_JOB_POSTS = "RECEIVE_JOB_POSTS"
+export const RECEIVE_JOB_POST = "RECEIVE_JOB_POST"
 import * as APIUtil from '../util/apiUtil'
 
 export const searchJobPosts = query => {
