@@ -36,6 +36,7 @@ class Navigation extends React.Component {
   }
 
   navigateTo (path) {
+    console.log(path, 'navigating')
     this.props.updateRoute(path)
   }
 
@@ -47,11 +48,17 @@ class Navigation extends React.Component {
             <Logo logoColor={this.state.fontColor}/>
             <PrimaryNavigation navigateTo={this.navigateTo} arrowColor={this.state.fontColor}/>
             <CreateNavigation navigateTo={this.navigateTo}/>
-            <UserNavigation navigateTo={this.navigateTo} faColor={this.state.fontColor}/>
+            <UserNavigation navigateTo={this.navigateTo} faColor={this.state.fontColor} currentRoute={this.props.currentRoute}/>
           </div>
         </div>
       </div>
     )
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    currentRoute: state.currentRoute
   }
 }
 
@@ -61,4 +68,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(Navigation)
+export default connect(mapStateToProps, mapDispatchToProps)(Navigation)

@@ -6,6 +6,7 @@ import { updateRoute } from '../actions/routeActions'
 import Header from './header/header'
 import JobPostsSearch from './pages/search/jobPostsSearchContainer'
 import JobPost from './pages/post/jobPostContainer'
+import SessionPage from './pages/session/sessionPage'
 
 class App extends React.Component {
   constructor (props) {
@@ -33,6 +34,7 @@ class App extends React.Component {
       <content className='all-content'>
           <Header/>
           <Switch>
+            <Route path='/login' exact component={SessionPage} />
             <Route path='/jobs/:postId' exact component={JobPost} />
             <Route path='/jobs' component={JobPostsSearch} />
           </Switch>

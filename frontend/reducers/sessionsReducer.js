@@ -1,10 +1,12 @@
+import { LOG_IN, LOG_OUT } from '../actions/sessionActions'
+
 export default (state = {}, action) => {
-  // switch (action.type) {
-  //   case OPEN_MODAL:
-  //     return action.data;
-  //   case CLOSE_MODAL:
-  //     return null;
-  //   default:
+  switch (action.type) {
+    case LOG_IN:
+      return action.currentUser;
+    case LOG_OUT:
+      return {};
+    default:
       return state;
-  // }
+  }
 }
