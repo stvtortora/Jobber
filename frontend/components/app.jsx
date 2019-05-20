@@ -6,7 +6,7 @@ import { updateRoute } from '../actions/routeActions'
 import Header from './header/header'
 import JobPostsSearch from './pages/search/jobPostsSearchContainer'
 import JobPost from './pages/post/jobPostContainer'
-import JobPostForm from './pages/postForm/jobPostForm'
+import JobPostForm from './pages/postForm/jobPostFormContainer'
 import SessionPage from './pages/session/sessionPage'
 
 class App extends React.Component {
