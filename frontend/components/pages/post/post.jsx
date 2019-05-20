@@ -10,21 +10,22 @@ class Post extends React.Component {
   render() {
     const { postType, post, overViewKeys, additionalInfo } = this.props
 
-    if (post.description) {
+    if (post && post.description) {
+      console.log(post, 'post')
       return (
         <div className='full-post-container'>
-        <div className='full-post'>
-          <MainPostContent
-          post={post}
-          postType={postType}
-          additionalInfo={additionalInfo}
-          />
-          <SideBar
-          post={post}
-          postType={postType}
-          overViewKeys={overViewKeys}
-          />
-        </div>
+          <div className='full-post'>
+            <MainPostContent
+            post={post}
+            postType={postType}
+            additionalInfo={additionalInfo}
+            />
+            <SideBar
+            post={post}
+            postType={postType}
+            overViewKeys={overViewKeys}
+            />
+          </div>
         </div>
       )
     }

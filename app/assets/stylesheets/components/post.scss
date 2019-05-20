@@ -2,6 +2,7 @@
 .full-post-container {
   display: block;
   max-width: 1170px;
+  width: 100%;
   margin: auto;
   padding-right: 15px;
   padding-left: 15px;
@@ -13,6 +14,7 @@
 
     .main-post-content {
       max-width: 66.6666666667%;
+      width: 100%;
 
       .post-description-container {
         .post-description-title {
@@ -20,19 +22,52 @@
           font-size: 20px;
           color: #384047;
         }
+
+        #post-description {
+          h1 {
+            font-size: 20px;
+            color: #384047;
+          }
+
+          h2 {
+            font-size: 19px;
+            color: #384047;
+          }
+
+          h3 {
+            font-size: 18px;
+            color: #384047;
+          }
+
+          h4 {
+            font-size: 17px;
+            color: #384047;
+          }
+
+          h5 {
+            font-size: 16px;
+            color: #384047;
+          }
+        }
       }
 
       .post-header {
         margin-bottom: 20px;
         padding-bottom: 30px;
         border-bottom: 1px solid #e8ecec;
+        display: flex;
+        flex-direction: row;
+
+        img {
+          margin-right: 25px;
+        }
 
         .post-header-title {
           color: #384047;
           font-size: 16px;
           margin-bottom: 15px;
         }
-        div {
+        .header-line {
           display: flex;
           flex-direction: row;
           margin-bottom: 12px;
@@ -67,7 +102,8 @@
 
     .side-bar-container {
       padding: 0 15px;
-      width: 33.3333333%;
+      max-width: 33.3333333%;
+      width: 100%;
 
       .post-button {
         margin-bottom: 20px;
