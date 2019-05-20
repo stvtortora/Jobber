@@ -1,12 +1,14 @@
 import { combineReducers } from 'redux';
+import merge from 'lodash/merge'
 import { RECEIVE_COMPANIES, RECEIVE_COMPANY } from '../actions/companiesActions'
 
 
 const info = (state = {}, action) => {
   switch (action.type) {
     case RECEIVE_COMPANIES:
-      return action.companies;
+      return action.companies.content;
     case RECEIVE_COMPANY:
+    console.log(action)
       const newState = merge({}, state)
       newState[action.company.id] = action.company
       return newState
@@ -18,7 +20,7 @@ const info = (state = {}, action) => {
 const ids = (state = [], action) => {
   switch (action.type) {
     case RECEIVE_COMPANIES:
-      return Object.keys(action.companies);
+      return action.companies.ids;
     default:
       return state;
   }

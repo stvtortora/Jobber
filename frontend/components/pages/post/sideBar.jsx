@@ -5,8 +5,7 @@ const icons = {
   'career_level': 'bar-chart',
   'experience': 'sliders',
   'qualification': 'graduation-cap',
-  'industry': 'industry',
-  'language': 'language'
+  'industry': 'industry'
 }
 
 export default ({ postType, post, overViewKeys }) => {

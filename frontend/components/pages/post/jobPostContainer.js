@@ -4,14 +4,14 @@ import Post from './post'
 
 const mapStateToProps = (state) => {
   const postId = state.currentRoute.slice(6)
-  
+
   const post = state.records.jobPosts.info[postId]
 
   return {
     post,
     postId,
     postType: 'Job',
-    overViewKeys: ['salary', 'career_level', 'industry', 'qualification', 'language', 'experience'],
+    overViewKeys: ['salary', 'career_level', 'industry', 'qualification', 'experience'],
     additionalInfo: post.job_type
   }
 }

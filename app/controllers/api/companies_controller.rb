@@ -1,8 +1,12 @@
 class Api::CompaniesController < ApplicationController
   def create
-    @company = JobPost.new(company_params)
+    puts 'params:'
+    puts params
+    @company = Company.new(company_params)
     @company.user = current_user
-    
+
+    @company.user = current_user
+
     if @company.save
       render :show
     else
@@ -11,9 +15,17 @@ class Api::CompaniesController < ApplicationController
   end
 
   def index
-    # @companies = JobPost.retrieve_by_query(query_params)
-    # @total_count = JobPost.total_count_by_query(query_params)
-    # render :index
+    if (params[:current_user_id])
+      if params[:current_user_id] != current_user.id
+        render json: ['Not authorized']
+      else
+        @companies = Company.where(user: params[:current_user_id])
+        render :index
+      end
+    else
+      @companies = Company.all
+      render :index
+    end
   end
 
   def show
@@ -29,9 +41,5 @@ class Api::CompaniesController < ApplicationController
       :twitter, :team_size, :industry,
       :phone_number
     )
-  end
-
-  def query_params
-    params.require(:query).permit(:keyword, :city, :job_type, :job_category, :order, :limit, :offset)
   end
 end

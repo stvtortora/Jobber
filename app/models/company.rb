@@ -18,4 +18,5 @@ class Company < ApplicationRecord
 
   belongs_to :user
   has_many :job_posts
+  has_one_attached :picture
 end

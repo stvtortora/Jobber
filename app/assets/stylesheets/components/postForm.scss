@@ -27,6 +27,25 @@
         width: 100%;
       }
 
+      .file-field {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+        padding: 0 15px;
+        input {
+          color: #40484a;
+          padding-left: 1em;
+          font-size: 14px;
+          font-size: 14px;
+          color: #888;
+          background: #f9fafa;
+          border: 2px solid #d4d9dd;
+          border-radius: 4px;
+          padding: .75em 1em;
+        }
+      }
+
       .non-title-field {
         max-width: 33.3333333%;
         width: 100%;

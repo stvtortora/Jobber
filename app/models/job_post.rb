@@ -45,7 +45,6 @@ class JobPost < ApplicationRecord
 
   belongs_to :company
   belongs_to :job_category
-  has_one_attached :picture
 
   include Filterable
   include PgSearch

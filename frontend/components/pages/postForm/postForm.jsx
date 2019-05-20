@@ -3,7 +3,7 @@ import Quill from 'quill'
 import merge from 'lodash/merge'
 import quill from './quill'
 
-const textFields = ['city', 'website', 'linked_in', 'twitter', 'phone_number', 'tagline']
+const textFields = ['city', 'website', 'linked_in', 'twitter', 'phone_number', 'tagline', 'facebook']
 
 const textPlaceHolders = {
   'city': 'e.g New York', 'website': 'e.g www.compnaywebsite.com', 'linked_in': 'e.g linkedin.com/username', 'twitter': 'Enter your Twitter url...', 'phone_number': 'xxxxxxxxxx', 'tagline': 'e.g We get it done!'
@@ -28,13 +28,15 @@ export default class PostForm extends React.Component {
     this.constructIdFields = this.constructIdFields.bind(this)
     this.constructFields = this.constructFields.bind(this)
     this.update = this.update.bind(this)
+    this.updateFile = this.updateFile.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount() {
-    const { relatedRecords } = this.props
-    if (relatedRecords && !relatedRecords.ids.length) {
-      this.props.fetch()
+    const { relatedRecords, currentUser } = this.props
+
+    if (relatedRecords) {
+      this.props.fetch(currentUser)
     }
 
     const options = {
@@ -51,19 +53,35 @@ export default class PostForm extends React.Component {
     });
   }
 
+  updateFile(e) {
+    this.setState({
+      'picture': e.currentTarget.files[0]
+    })
+  }
+
   handleSubmit(e) {
     e.preventDefault();
-    const job_post = merge({}, this.state, { description: this.editor.root.innerHTML, job_category_id: Number(this.state.job_category_id) })
+    let post = merge({}, this.state, { description: this.editor.root.innerHTML, job_category_id: Number(this.state.job_category_id) })
+    let formData
+    console.log(this.state, this.state)
+    if (this.state.picture) {
+      formData = new FormData()
+      Object.keys(post).forEach(param => {
+        formData.append(`company[${param}]`, post[param])
+      })
+    }
 
-    this.props.create(job_post).then(() => {
-      this.props.updateRoute('/')
+    post = formData ? formData : post
+
+    this.props.create(post).then(post => {
+      this.props.updateRoute(`${this.props.redirectRoute + post[this.props.newRecordKey].id}`)
     })
   }
 
   constructIdFields (field) {
-    return this.props.relatedRecords.ids.map(recordId => {
-      const record = this.props.relatedRecords.info[recordId]
-      const title = `${record.name}`
+    return this.props.relatedRecords[field].ids.map(recordId => {
+      const record = this.props.relatedRecords[field].info[recordId]
+      const title = `${record.name ? record.name : record.title}`
       return <option selected={this.state.job_type === title} value={record.id}>{title}</option>
     })
   }
@@ -79,7 +97,7 @@ export default class PostForm extends React.Component {
               <label>{displayTitle}</label>
               {
                 textFields.includes(field) ?
-                <input placeholder={textPlaceHolders[field]} type='text' value={this.state.city} onChange={this.update(field)}/> :
+                <input placeholder={textPlaceHolders[field]} type='text' value={this.state[field]} onChange={this.update(field)}/> :
                 <select onChange={this.update(field)}>
                   <option value=''>{`Choose ${['a','e','i','o','u'].includes(displayTitle[0]) ? 'an' : 'a'} ${displayTitle}...`}</option>
                   {
@@ -110,18 +128,29 @@ export default class PostForm extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <span className='field-row'>
             <div className='title-field form-field'>
-              <label>Job Title</label>
+              <label>{`${this.props.formName} Title`}</label>
               <input type="text" value={this.state.title} onChange={this.update('title')}/>
             </div>
           </span>
           {this.constructRow(this.props.formFields.firstRow)}
           {this.constructRow(this.props.formFields.secondRow)}
           {this.constructRow(this.props.formFields.thirdRow)}
+          {
+            this.props.includeImageUpload ?
+            <span className='field-row'>
+              <div className='file-field'>
+                <label>Logo</label>
+                <input type='file' onChange={this.updateFile}/>
+              </div>
+            </span>
+            :
+            <div></div>
+          }
           <div className='quill-container'>
             <label>Description</label>
               <div id='editor'/>
           </div>
-          <button><p>Post Job</p></button>
+          <button><p>Post</p></button>
         </form>
       </section>
     )

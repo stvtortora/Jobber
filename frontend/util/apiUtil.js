@@ -52,9 +52,20 @@ export const fetchJobCategories = () => {
 }
 
 export const createCompany = company => {
+  console.log(company)
   return $.ajax({
     method: 'POST',
     url: `api/companies`,
-    data: { company }
+    data: company,
+    contentType: false,
+    processData: false
+  })
+}
+
+export const fetchCompanies = current_user_id => {
+  return $.ajax({
+    method: 'GET',
+    url: 'api/companies',
+    data: { current_user_id }
   })
 }

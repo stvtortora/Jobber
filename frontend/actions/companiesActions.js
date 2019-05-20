@@ -3,10 +3,21 @@ export const RECEIVE_COMPANIES = "RECEIVE_COMPANIES"
 import * as APIUtil from '../util/apiUtil'
 import { receiveErrors } from './errorsActions'
 
-export const createCompany = job_post => {
+export const createCompany = company => {
   return dispatch => {
-    return APIUtil.createCompany(job_post).then(jobPost => {
-      return dispatch({ type: RECEIVE_COMPANY, jobPost })
+    return APIUtil.createCompany(company).then(company => {
+      return dispatch({ type: RECEIVE_COMPANY, company })
+    },
+    errors => {
+      return dispatch(receiveErrors(errors))
+    })
+  }
+}
+
+export const fetchCompanies = currentUser => {
+  return dispatch => {
+    return APIUtil.fetchCompanies(currentUser).then(companies => {
+      return dispatch({ type: RECEIVE_COMPANIES, companies })
     },
     errors => {
       return dispatch(receiveErrors(errors))
