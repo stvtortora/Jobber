@@ -1,5 +1,8 @@
 import React from 'react'
+import Quill from 'quill'
+import merge from 'lodash/merge'
 import { connect } from 'react-redux'
+import quill from './quill'
 import { fetchJobCategories } from '../../../actions/jobCategoriesActions'
 import { createJobPost } from '../../../actions/jobPostsActions'
 
@@ -18,19 +21,26 @@ class JobPostForm extends React.Component {
     this.state = {
       'title': '',
       'city': '',
-      'description': '',
       'job_type': '',
       'job_category_id': ''
     }
     this.jobCategorySelector = this.jobCategorySelector.bind(this)
     this.constructFields = this.constructFields.bind(this)
     this.update = this.update.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount() {
     if (!this.props.jobCategories.ids.length) {
       this.props.fetchJobCategories()
     }
+
+    const options = {
+      placeholder: 'Describe this role',
+      theme: 'snow'
+    };
+
+    this.editor = new Quill(document.getElementById('editor'), options);
   }
 
   update (field) {
@@ -41,6 +51,8 @@ class JobPostForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    const postParams = merge({}, this.state, { description: this.editor.root.innerHTML })
+
     this.props.createJobPost(this.state).then(() => {
       this.props.updateRoute('/')
     })
@@ -130,6 +142,11 @@ class JobPostForm extends React.Component {
               </select>
             </div>
           </span>
+          <div className='quill-container'>
+            <label>Description</label>
+              <div id='editor'/>
+          </div>
+          <button><p>Post Job</p></button>
         </form>
       </section>
     )
