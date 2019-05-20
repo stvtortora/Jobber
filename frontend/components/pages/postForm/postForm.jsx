@@ -3,6 +3,12 @@ import Quill from 'quill'
 import merge from 'lodash/merge'
 import quill from './quill'
 
+const textFields = ['city', 'website', 'linked_in', 'twitter', 'phone_number', 'tagline']
+
+const textPlaceHolders = {
+  'city': 'e.g New York', 'website': 'e.g www.compnaywebsite.com', 'linked_in': 'e.g linkedin.com/username', 'twitter': 'Enter your Twitter url...', 'phone_number': 'xxxxxxxxxx', 'tagline': 'e.g We get it done!'
+}
+
 const fieldMap = {
   'job_type': ['Full Time', 'Part Time', 'Freelance'],
   'salary': ['$20000-$30000', '$30000-$40000','$40000-$50000','$50000-$60000','$60000-$70000','$70000-$80000','$80000-$90000','$90000-$100000','$100000-$1100000', '$110000-$1200000','$120000-$1300000','$130000-$1400000','$140000-$1500000','$150000-$1600000','$160000-$1700000','$170000-$1800000','$180000-$1900000','$190000-$2000000','$200000+'],
@@ -10,27 +16,24 @@ const fieldMap = {
   'industry': ['Ad Tech', 'Agriculture', 'Arts', 'FinTech', 'eCommerce', 'Digital Media', 'Sales', 'Software', 'GreenTech', 'Payments', 'Professional Services', 'Machine Learning'],
   'qualification': ['Associate Degree', 'Bachelor Degree', 'Master Degree', 'Doctorate Degree'],
   'experience': ['0-2 Years', '2-3 Years', '3-5 Years', '6-7 Years', '6-7 Years', '8-9 Years', '9-10 Years', '10+ Years'],
-  'language': ['Arabic', 'English', 'Spanish', 'Mandarin', 'French', 'Portuguese', 'Hindi']
+  'language': ['Arabic', 'English', 'Spanish', 'Mandarin', 'French', 'Portuguese', 'Hindi'],
+  'team_size': ['<10', '10-25', '25-50', '50-100', '100-200', '200-300', '300-500', '500+']
 }
 
 export default class PostForm extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      'title': '',
-      'city': '',
-      'job_type': '',
-      'job_category_id': ''
-    }
+    this.state = this.props.initialState
     this.constructRow = this.constructRow.bind(this)
-    this.constructJobCategoryFields = this.constructJobCategoryFields.bind(this)
+    this.constructIdFields = this.constructIdFields.bind(this)
     this.constructFields = this.constructFields.bind(this)
     this.update = this.update.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount() {
-    if (!this.props.jobCategories.ids.length) {
+    const { relatedRecords } = this.props
+    if (relatedRecords && !relatedRecords.ids.length) {
       this.props.fetch()
     }
 
@@ -57,11 +60,11 @@ export default class PostForm extends React.Component {
     })
   }
 
-  constructJobCategoryFields () {
-    return this.props.jobCategories.ids.map(jobCategoryId => {
-      const jobCategory = this.props.jobCategories.info[jobCategoryId]
-      const title = `${jobCategory.name}`
-      return <option selected={this.state.job_type === title} value={jobCategory.id}>{title}</option>
+  constructIdFields (field) {
+    return this.props.relatedRecords.ids.map(recordId => {
+      const record = this.props.relatedRecords.info[recordId]
+      const title = `${record.name}`
+      return <option selected={this.state.job_type === title} value={record.id}>{title}</option>
     })
   }
 
@@ -75,13 +78,13 @@ export default class PostForm extends React.Component {
             <div className='non-title-field form-field'>
               <label>{displayTitle}</label>
               {
-                field === 'city' ?
-                <input placeholder='e.g New York' type='text' value={this.state.city} onChange={this.update('city')}/> :
+                textFields.includes(field) ?
+                <input placeholder={textPlaceHolders[field]} type='text' value={this.state.city} onChange={this.update(field)}/> :
                 <select onChange={this.update(field)}>
                   <option value=''>{`Choose ${['a','e','i','o','u'].includes(displayTitle[0]) ? 'an' : 'a'} ${displayTitle}...`}</option>
                   {
-                    field === 'job_category_id' ?
-                    this.constructJobCategoryFields() :
+                    field.split('_').includes('id') ?
+                    this.constructIdFields(field) :
                     this.constructFields(field)
                   }
                 </select>

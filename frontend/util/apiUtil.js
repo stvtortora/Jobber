@@ -14,7 +14,6 @@ export const fetchJobPost = postId => {
 }
 
 export const createJobPost = job_post => {
-  console.log(job_post, 'jp')
   return $.ajax({
     method: 'POST',
     url: `api/job_posts`,
@@ -49,5 +48,13 @@ export const fetchJobCategories = () => {
   return $.ajax({
     method: 'GET',
     url: 'api/job_categories'
+  })
+}
+
+export const createCompany = company => {
+  return $.ajax({
+    method: 'POST',
+    url: `api/companies`,
+    data: { company }
   })
 }

@@ -7,6 +7,7 @@ import Header from './header/header'
 import JobPostsSearch from './pages/search/jobPostsSearchContainer'
 import JobPost from './pages/post/jobPostContainer'
 import JobPostForm from './pages/postForm/jobPostFormContainer'
+import CompanyPostForm from './pages/postForm/companyPostFormContainer'
 import SessionPage from './pages/session/sessionPage'
 
 class App extends React.Component {
@@ -39,6 +40,7 @@ class App extends React.Component {
             <Route path='/jobs/:postId' exact component={JobPost} />
             <Route path='/jobs' component={JobPostsSearch} />
             <Route path='/post-a-job' component={JobPostForm} />
+            <Route path='/post-a-company' component={CompanyPostForm} />
           </Switch>
           <div className='under-header'></div>
       </content>

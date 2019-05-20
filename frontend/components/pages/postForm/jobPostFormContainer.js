@@ -10,7 +10,13 @@ const mapStateToProps = state => {
       secondRow: ['salary', 'career_level', 'industry'],
       thirdRow: ['qualification', 'experience', 'language']
     },
-    jobCategories: state.records.jobCategories
+    relatedRecords: state.records.jobCategories,
+    initialState: {
+      'title': '',
+      'city': '',
+      'job_type': '',
+      'job_category_id': ''
+    }
   }
 }
 
