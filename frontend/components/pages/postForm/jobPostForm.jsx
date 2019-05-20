@@ -51,9 +51,9 @@ class JobPostForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const postParams = merge({}, this.state, { description: this.editor.root.innerHTML })
+    const job_post = merge({}, this.state, { description: this.editor.root.innerHTML, job_category_id: Number(this.state.job_category_id) })
 
-    this.props.createJobPost(this.state).then(() => {
+    this.props.createJobPost(job_post).then(() => {
       this.props.updateRoute('/')
     })
   }
@@ -62,7 +62,7 @@ class JobPostForm extends React.Component {
     return this.props.jobCategories.ids.map(jobCategoryId => {
       const jobCategory = this.props.jobCategories.info[jobCategoryId]
       const title = `${jobCategory.name}`
-      return <option selected={this.state.job_type === title} value={title}>{title}</option>
+      return <option selected={this.state.job_type === title} value={jobCategory.id}>{title}</option>
     })
   }
 
@@ -85,7 +85,7 @@ class JobPostForm extends React.Component {
           <span className='field-row'>
             <div className='non-title-field form-field'>
               <label>City</label>
-              <input placeholder='e.g New York' type="password" value={this.state.password} onChange={this.update('password')}/>
+              <input placeholder='e.g New York' type='text' value={this.state.password} onChange={this.update('city')}/>
             </div>
             <div className='non-title-field form-field'>
               <label>Job Type</label>

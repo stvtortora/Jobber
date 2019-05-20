@@ -14,6 +14,7 @@ export const fetchJobPost = postId => {
 }
 
 export const createJobPost = job_post => {
+  console.log(job_post, 'jp')
   return $.ajax({
     method: 'POST',
     url: `api/job_posts`,

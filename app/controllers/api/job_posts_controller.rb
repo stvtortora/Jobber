@@ -3,7 +3,6 @@ class Api::JobPostsController < ApplicationController
     @job_post = JobPost.new(job_post_params)
 
     if @job_post.save
-      login(@job_post)
       render :show
     else
       render json: @job_post.errors.full_messages, status: 422

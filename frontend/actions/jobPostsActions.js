@@ -1,6 +1,7 @@
 export const RECEIVE_JOB_POSTS = "RECEIVE_JOB_POSTS"
 export const RECEIVE_JOB_POST = "RECEIVE_JOB_POST"
 import * as APIUtil from '../util/apiUtil'
+import { receiveErrors } from './errorsActions'
 
 export const searchJobPosts = query => {
   return dispatch => {
@@ -20,8 +21,11 @@ export const fetchJobPost = postId => {
 
 export const createJobPost = job_post => {
   return dispatch => {
-    return APIUtil.createJobPost(postId).then(jobPost => {
+    return APIUtil.createJobPost(job_post).then(jobPost => {
       return dispatch({ type: RECEIVE_JOB_POST, jobPost })
+    },
+    errors => {
+      return dispatch(receiveErrors(errors))
     })
   }
 }
