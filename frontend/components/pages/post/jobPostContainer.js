@@ -7,9 +7,7 @@ const mapStateToProps = (state, ownProps) => {
   const postId = ownProps.history.location.pathname.slice(6)
 
   const post = state.records.jobPosts.info[postId] || {}
-  console.log(state, 's')
-  console.log(postId, 'id')
-  console.log(post, 'p')
+  
   return {
     post,
     postId,

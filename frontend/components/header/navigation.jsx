@@ -36,7 +36,6 @@ class Navigation extends React.Component {
   }
 
   navigateTo (path) {
-    console.log(path, 'navigating')
     this.props.updateRoute(path)
   }
 

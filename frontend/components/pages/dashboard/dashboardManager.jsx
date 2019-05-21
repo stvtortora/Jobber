@@ -6,7 +6,7 @@ export default ({ posts, del, title, createRoute, editRoute, updateRoute }) => {
       <div className='manager-columns'>
         {
           relevantFields.map(field => {
-            return <div className='manager-column'>{field === 'company_title' ? 'Company' : field.split('_').join(' ')}</div>
+            return <div className='manager-column'>{field.split('_').join(' ')}</div>
           })
         }
       </div>
@@ -56,7 +56,7 @@ export default ({ posts, del, title, createRoute, editRoute, updateRoute }) => {
 
   if (postIds.length) {
     relevantFields = [
-      'title', 'city', 'company_title',
+      'title', 'city', 'company',
       'website', 'phone_number', 'job_type'
     ].filter(field => {
       return posts[postIds[0]][field]

@@ -11,7 +11,6 @@ class Post extends React.Component {
     const { postType, post, overViewKeys, additionalInfo } = this.props
 
     if (post && post.description) {
-      console.log(post, 'post')
       return (
         <div className='full-post-container'>
           <div className='full-post'>

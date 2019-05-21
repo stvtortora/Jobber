@@ -9,6 +9,16 @@ class Api::JobPostsController < ApplicationController
     end
   end
 
+  def update
+    @job_post = JobPost.find(params[:id])
+
+    if @job_post.update_attributes(job_post_params)
+      render :show
+    else
+      render json: @job_post.errors.full_messages, status: 422
+    end
+  end
+
   def index
     if params[:current_user_id]
       if  params[:current_user_id].to_i == current_user.id

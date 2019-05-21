@@ -29,8 +29,16 @@ export const createJobPost = job_post => {
   })
 }
 
+export const updateJobPost = job_post => {
+  return $.ajax({
+    method: 'PATCH',
+    url: `api/job_posts/${job_post.id}`,
+    data: { job_post }
+  })
+}
+
+
 export const deleteJobPost = jobPostId => {
-  console.log(jobPostId)
   return $.ajax({
     method: 'DELETE',
     url: `api/job_posts/${jobPostId}`
@@ -68,7 +76,6 @@ export const fetchJobCategories = () => {
 }
 
 export const createCompany = company => {
-  console.log(company)
   return $.ajax({
     method: 'POST',
     url: `api/companies`,

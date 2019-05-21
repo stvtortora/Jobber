@@ -10,7 +10,7 @@ const mapStateToProps = (state, ownProps) => {
   const postId = ownProps.history.location.pathname.slice(12)
   return {
     postId,
-    initialState: state.records.jobPosts.info[postId],
+    post: state.records.jobPosts.info[postId],
     newRecordKey: 'jobPost',
     redirectRoute: '/jobs/',
     formName: 'Job',
@@ -34,7 +34,7 @@ const mapDispatchToProps = dispatch => {
       })
     },
     loadPost: (jobPostId) => dispatch(fetchJobPost(jobPostId)),
-    action: (job_post) => dispatch(createJobPost(job_post)),
+    action: (job_post) => dispatch(updateJobPost(job_post)),
     updateRoute: (newRoute) => dispatch(updateRoute(newRoute))
   }
 }

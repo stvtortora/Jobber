@@ -25,10 +25,16 @@ export default class UpdatePostForm extends React.Component {
         redirectRoute,
         formName,
         formFields,
-        relatedRecords,
-        initialState
+        relatedRecords
       } = this.props
-    
+
+      const initialState = Object.keys(post).reduce((state, field) => {
+        if (post[field]) {
+          state[field] = post[field]
+        }
+        return state
+      }, {})
+
       return (
         <PostForm
         action={action}

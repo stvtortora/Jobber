@@ -44,7 +44,12 @@ export default class PostForm extends React.Component {
       theme: 'snow'
     };
 
-    this.editor = new Quill(document.getElementById('editor'), options);
+    this.editor = new Quill(document.getElementById('editor'), options)
+
+    if (this.state.description) {
+      this.editor.setContents(JSON.parse(this.state.description).richText)
+      this.setState({description: null})
+    }
   }
 
   update (field) {
@@ -61,7 +66,13 @@ export default class PostForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    let post = merge({}, this.state, { description: this.editor.root.innerHTML, job_category_id: Number(this.state.job_category_id) })
+
+    const description = {
+      html: this.editor.root.innerHTML,
+      richText: this.editor.getContents()
+    }
+
+    let post = merge({}, this.state, { description: JSON.stringify(description), job_category_id: Number(this.state.job_category_id) })
     let formData
 
     if (this.state.picture) {
