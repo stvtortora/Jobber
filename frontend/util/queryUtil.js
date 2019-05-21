@@ -7,13 +7,11 @@ const defaultOptions = {
 }
 
 export const buildQuery = (queryOptions) => {
+  console.log(queryOptions)
   const options = merge({}, defaultOptions, queryOptions)
   let query = '?'
 
   Object.keys(options).forEach(key => {
-    if (query.length > 1) {
-      query += '&'
-    }
 
     const optionType = key.split(' ').join('_')
     let optionVal
@@ -25,8 +23,15 @@ export const buildQuery = (queryOptions) => {
     } else {
       optionVal = options[key].split(' ').join('_')
     }
+    
+    if (typeof optionVal === 'number' || optionVal.length > 0) {
 
-    query += `${optionType}=${optionVal}`
+      if (query.length > 1) {
+        query += '&'
+      }
+
+      query += `${optionType}=${optionVal}`
+    }
   })
 
   return query
@@ -44,6 +49,8 @@ export const parseQuery = query => {
     } else if (filterKey === 'order') {
       filterValue = filterParts[1].split(':').join(' ')
     } else {
+      console.log(query)
+      console.log(filterParts, 'fp')
       filterValue = filterParts[1].split('_').join(' ')
     }
 

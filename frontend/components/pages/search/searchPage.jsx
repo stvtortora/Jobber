@@ -18,6 +18,7 @@ class SearchPage extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.currentQuery !== prevProps.currentQuery && this.props.isThisComponentsRoute) {
+      console.log('what the fuck', this.props.searchSpecifications)
       this.props.search(this.props.searchSpecifications)
     }
   }

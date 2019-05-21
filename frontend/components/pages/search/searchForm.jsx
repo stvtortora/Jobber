@@ -17,7 +17,8 @@ class SearchForm extends React.Component {
   }
 
   buildQueryAndUpdateRoute() {
-    const queryOptions = merge({}, this.state, parseQuery(this.props.currentQuery))
+    const queryOptions = merge({}, parseQuery(this.props.currentQuery), this.state)
+
     this.props.updateRoute(`/jobs/${buildQuery(queryOptions)}`)
   }
 
@@ -29,6 +30,7 @@ class SearchForm extends React.Component {
 
   updateQuery(field) {
     return (e) => {
+      console.log('updating')
       this.setState({[field]: e.target.value})
     }
   }
@@ -52,6 +54,7 @@ class SearchForm extends React.Component {
             <input
             type='text'
             id='location-input'
+            value={this.state.city}
             placeholder='Choose your city'
             onKeyPress={this.handleKeyPress}
             onChange={this.updateQuery('city')}

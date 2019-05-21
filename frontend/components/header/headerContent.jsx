@@ -4,30 +4,65 @@ import SearchForm from '../pages/search/searchForm'
 
 const HeaderContent = ({ currentRoute }) => {
   const sectionHeader = () => {
+    const getText = () => {
+      const textMap = {
+        '/': 'The Easiest Way To Get Your New Job',
+        '/jobs/?': 'Jobs',
+        '/companies': 'Companies',
+      }
+
+      let text = ''
+      const prefixes = ['/', '/jobs/', '/jobs/?', '/companies']
+
+      prefixes.forEach(prefix => {
+        if (currentRoute.indexOf(prefix) > -1) {
+          text = textMap[prefix]
+        }
+      })
+
+      return text
+    }
+
     return (
-      <div className='home-section-header'>
-        <h3>The Easiest Way To Get Your New Job</h3>
-        <span>Find Full Time, Part Time, or Freelance Opportunities</span>
+      <div className='form-section-header'>
+        <h3>
+        {
+          getText()
+        }
+        </h3>
+        {
+          currentRoute === '/' ?
+          <span>Find Full Time, Part Time, or Freelance Opportunities</span> :<div></div>
+        }
       </div>
     )
   }
 
-  if (currentRoute !== '/login') {
-    return (
-      <content className='content'>
-      <div className='home-page-content'>
-      {sectionHeader()}
-      <SearchForm
-      searchBoxClass='home-search-box'
-      keyWordsClass='search-keywords'
-      submitButtonClass='search-submit'
-      currentQuery={''}/>
-      </div>
-      </content>
-    )
+  let klassName
+  if (currentRoute === '/') {
+    klassName = 'home-page-content'
+  } else {
+    klassName='non-home-page-content'
   }
 
-  return []
+  return (
+    <content className={klassName}>
+      <div className='page-content'>
+        {sectionHeader()}
+        {
+          currentRoute === '/' ?
+          <SearchForm
+          searchBoxClass='home-search-box'
+          keyWordsClass='search-keywords'
+          submitButtonClass='search-submit'
+          currentQuery={''}/> :
+          <div></div>
+        }
+      </div>
+    </content>
+  )
+
+
 }
 
 const mapStateToProps = state => {
