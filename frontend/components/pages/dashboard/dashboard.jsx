@@ -2,8 +2,10 @@ import React from 'react'
 import DashboardNav from './dashboardNav'
 import DashboardManager from './dashboardManager'
 import { connect } from 'react-redux'
+import { updateRoute } from '../../../actions/routeActions'
 import { deleteJobPost, fetchJobPosts } from '../../../actions/jobPostsActions'
 import { deleteCompany, fetchCompanies } from '../../../actions/companiesActions'
+
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -33,13 +35,15 @@ class Dashboard extends React.Component {
       const stateMap = {
         'jobPost': {
           title: 'Job Post',
-          posts: this.props.jobPosts,
-          delete: this.props.deleteJobPost
+          delete: this.props.deleteJobPost,
+          createRoute: '/post-a-job',
+          editRoute: '/edit-a-job'
         },
         'company': {
           title: 'Company',
-          posts: this.props.companies,
-          delete: this.props.deleteCompany
+          delete: this.props.deleteCompany,
+          createRoute: '/post-a-company',
+          editRoute: '/edit-a-company'
         }
       }
 
@@ -53,10 +57,15 @@ class Dashboard extends React.Component {
         <section className='dashboard-contenet'>
           <DashboardNav
           updateManager={this.updateManager}
+          selected={this.state.title}
           />
           <DashboardManager
-          posts={this.state.posts}
+          posts={this.state.title === 'Company' ? this.props.companies : this.props.jobPosts}
           del={this.state.delete}
+          title={this.state.title}
+          createRoute={this.state.createRoute}
+          editRoute={this.state.editRoute}
+          updateRoute={this.props.updateRoute}
           />
         </section>
       </div>
@@ -75,9 +84,10 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     deleteJobPost: jobPostId => dispatch(deleteJobPost(jobPostId)),
-    deleteCompany: jobPostId => dispatch(deleteCompany(companyId)),
+    deleteCompany: companyId => dispatch(deleteCompany(companyId)),
     fetchJobPosts: (currentUser) => dispatch(fetchJobPosts(currentUser)),
-    fetchCompanies: () => dispatch(fetchCompanies())
+    fetchCompanies: () => dispatch(fetchCompanies()),
+    updateRoute: (newRoute) => dispatch(updateRoute(newRoute))
   }
 }
 

@@ -29,7 +29,7 @@ export const fetchCompanies = currentUser => {
 export const deleteCompany = companyId => {
   return dispatch => {
     return APIUtil.deleteCompany(companyId).then(company => {
-      return dispatch({ type: DELETE_COMPANY, company })
+      return dispatch({ type: DELETE_COMPANY, companyId })
     })
   }
 }

@@ -30,7 +30,7 @@ class Api::JobPostsController < ApplicationController
   end
 
   def destroy
-    @job_post = JobPost.where(id: params[:id]).includes(:company).first
+    @job_post = JobPost.where(id: params[:id]).includes(:company, :job_category).first
 
     if @job_post.company.user_id == current_user.id
       @job_post.destroy

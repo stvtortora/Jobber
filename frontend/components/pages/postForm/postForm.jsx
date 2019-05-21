@@ -25,7 +25,7 @@ export default class PostForm extends React.Component {
     super(props)
     this.state = this.props.initialState
     this.constructRow = this.constructRow.bind(this)
-    this.constructIdFields = this.constructIdFields.bind(this)
+    this.constructAssociatedFields = this.constructAssociatedFields.bind(this)
     this.constructFields = this.constructFields.bind(this)
     this.update = this.update.bind(this)
     this.updateFile = this.updateFile.bind(this)
@@ -63,7 +63,7 @@ export default class PostForm extends React.Component {
     e.preventDefault();
     let post = merge({}, this.state, { description: this.editor.root.innerHTML, job_category_id: Number(this.state.job_category_id) })
     let formData
-    console.log(this.state, this.state)
+
     if (this.state.picture) {
       formData = new FormData()
       Object.keys(post).forEach(param => {
@@ -73,16 +73,16 @@ export default class PostForm extends React.Component {
 
     post = formData ? formData : post
 
-    this.props.create(post).then(post => {
+    this.props.action(post).then(post => {
       this.props.updateRoute(`${this.props.redirectRoute + post[this.props.newRecordKey].id}`)
     })
   }
 
-  constructIdFields (field) {
+  constructAssociatedFields (field) {
     return this.props.relatedRecords[field].ids.map(recordId => {
       const record = this.props.relatedRecords[field].info[recordId]
       const title = `${record.name ? record.name : record.title}`
-      return <option selected={this.state.job_type === title} value={record.id}>{title}</option>
+      return <option selected={this.state[field] === record.id} value={record.id}>{title}</option>
     })
   }
 
@@ -102,7 +102,7 @@ export default class PostForm extends React.Component {
                   <option value=''>{`Choose ${['a','e','i','o','u'].includes(displayTitle[0]) ? 'an' : 'a'} ${displayTitle}...`}</option>
                   {
                     field.split('_').includes('id') ?
-                    this.constructIdFields(field) :
+                    this.constructAssociatedFields(field) :
                     this.constructFields(field)
                   }
                 </select>
@@ -116,7 +116,6 @@ export default class PostForm extends React.Component {
   }
 
   constructFields (field) {
-    console.log(field)
     return fieldMap[field].map(option => {
       return <option selected={this.state[field]=== option} value={option}>{option}</option>
     })

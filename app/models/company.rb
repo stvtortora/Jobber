@@ -15,8 +15,12 @@ class Company < ApplicationRecord
     message: "'%{value}' is not a valid job team size."
   }, allow_nil: true
 
-
+  before_destroy :destroy_job_posts
   belongs_to :user
   has_many :job_posts
   has_one_attached :picture
+
+  def destroy_job_posts
+     self.job_posts.destroy_all
+   end
 end

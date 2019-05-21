@@ -34,7 +34,8 @@ export const fetchJobPosts = currentUser => {
 export const deleteJobPost = postId => {
   return dispatch => {
     return APIUtil.deleteJobPost(postId).then(jobPost => {
-      return dispatch({ type: DELETE_JOB_POST, jobPost })
+      console.log(jobPost)
+      return dispatch({ type: DELETE_JOB_POST, postId })
     })
   }
 }

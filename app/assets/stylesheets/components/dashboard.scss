@@ -5,5 +5,146 @@
     max-width: 1170px;
     margin: auto;
     padding: 0 15px;
+    display: flex;
+    flex-direction: row;
+
+    .dashboard-nav {
+      max-width: 25%;
+      width: 100%;
+
+      #selected {
+        color: #8b91dd;
+        i {
+          color: #8b91dd;
+          font-size: 19px;
+          margin-right: 10px;
+        }
+      }
+
+      #unselected {
+        color: #888;
+        i {
+          color: #888;
+          font-size: 19px;
+          margin-right: 10px;
+        }
+      }
+
+      .dashboard-nav-option {
+        padding: 15px;
+
+        &:hover {
+          cursor: pointer;
+        }
+
+      }
+    }
+
+    .dashboard-manager {
+      max-width: 75%;
+      width: 100%;
+
+      .dashboard-create-container {
+        padding: 15px;
+        border: 1px solid #dee2e6;
+
+        button {
+          background: #fb236a;
+          padding: 8px 18px;
+          color: white;
+          border-radius: 4px;
+          font-family: 'Quicksand', sans-serif;
+
+          &:hover {
+            cursor: pointer;
+            background-color: #555;
+          }
+        }
+      }
+
+      .dashboard-manager-prompt {
+        margin-bottom: 16px;
+        color: #576366;
+      }
+
+      .manager-columns {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+
+        .manager-column {
+          width: 25%;
+          text-transform: capitalize;
+          color: #1a1e21;
+          border: 1px solid #dee2e6;
+          padding: 12px;
+          font-family: 'Varela Round', 'Montserrat', sans-serif;
+        }
+      }
+
+      .manager-posts {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        .post-row {
+          display: flex;
+          flex-direction: row;
+          width: 100%;
+
+
+          .manager-post-field {
+            width: 25%;
+            padding: 12px;
+            border: 1px solid #dee2e6;
+            height: 50px;
+
+            p {
+              color: #576366;
+              font-family: 'Varela Round', sans-serif;
+            }
+
+            .modify-buttons {
+              display: none;
+            }
+
+            &:hover {
+              .modify-buttons {
+                display: flex;
+                flex-direction: row;
+
+                .delete-button {
+                  color: red;
+                  padding: 10px;
+                  font-size: 12px;
+                  i {
+                    color: red;
+                    font-size: 12px;
+                  }
+
+                  &:hover {
+                    cursor: pointer;
+                  }
+                }
+
+                .update-button {
+                  color: #2c7dfa;
+                  padding: 10px;
+                  font-size: 12px;
+                  i {
+                    color: #2c7dfa;
+                    font-size: 12px;
+                  }
+
+                  &:hover {
+                    cursor: pointer;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }

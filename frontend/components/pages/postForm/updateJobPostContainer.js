@@ -1,12 +1,16 @@
-import PostForm from './postForm'
+import UpdatePostForm from './updatePostForm'
+import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import { fetchJobCategories } from '../../../actions/jobCategoriesActions'
 import { fetchCompanies } from '../../../actions/companiesActions'
-import { createJobPost } from '../../../actions/jobPostsActions'
+import { updateJobPost, fetchJobPost } from '../../../actions/jobPostsActions'
 import { updateRoute } from '../../../actions/routeActions'
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, ownProps) => {
+  const postId = ownProps.history.location.pathname.slice(12)
   return {
+    postId,
+    initialState: state.records.jobPosts.info[postId],
     newRecordKey: 'jobPost',
     redirectRoute: '/jobs/',
     formName: 'Job',
@@ -18,12 +22,6 @@ const mapStateToProps = state => {
     relatedRecords: {
       'job_category_id': state.records.jobCategories,
       'company_id': state.records.companies
-    },
-    initialState: {
-      'title': '',
-      'city': '',
-      'job_type': '',
-      'job_category_id': ''
     }
   }
 }
@@ -35,9 +33,10 @@ const mapDispatchToProps = dispatch => {
         return dispatch(fetchCompanies(currentUser))
       })
     },
+    loadPost: (jobPostId) => dispatch(fetchJobPost(jobPostId)),
     action: (job_post) => dispatch(createJobPost(job_post)),
     updateRoute: (newRoute) => dispatch(updateRoute(newRoute))
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PostForm)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(UpdatePostForm))

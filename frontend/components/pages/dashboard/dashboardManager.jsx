@@ -1,15 +1,15 @@
 import React from 'react'
 
-export default ({ posts, del }) => {
+export default ({ posts, del, title, createRoute, editRoute, updateRoute }) => {
   const managerColumns = () => {
     return (
-      <span className='manager-columns'>
+      <div className='manager-columns'>
         {
           relevantFields.map(field => {
-            return <div className='manager-column'>{field}</div>
+            return <div className='manager-column'>{field === 'company_title' ? 'Company' : field.split('_').join(' ')}</div>
           })
         }
-      </span>
+      </div>
     )
   }
 
@@ -20,15 +20,30 @@ export default ({ posts, del }) => {
           postIds.map(postId => {
             const post = posts[postId]
             return (
-              <span className='post-row'>
+              <div className='post-row'>
               {
-                relevantFields.map(field => {
+                relevantFields.map((field, i) => {
                   return (
-                    <div className='manager-post-field'>{post[field].split('_').join(' ')}</div>
+                    <div className='manager-post-field'>
+                      <p>{post[field].split('_').join(' ')}</p>
+                      {
+                        i === 0 ?
+                        <div className='modify-buttons'>
+                          <div onClick={() => del(post.id)} className='delete-button'>
+                            <i class="fa fa-trash" aria-hidden="true"></i> Delete
+                          </div>
+                          <div onClick={() => updateRoute(`${editRoute}/${post.id}`)} className='update-button'>
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Update
+                          </div>
+                        </div>
+                        :
+                        <div></div>
+                      }
+                    </div>
                   )
                 })
               }
-              </span>
+              </div>
             )
           })
         }
@@ -41,19 +56,28 @@ export default ({ posts, del }) => {
 
   if (postIds.length) {
     relevantFields = [
-      'title', 'city', 'company',
+      'title', 'city', 'company_title',
       'website', 'phone_number', 'job_type'
     ].filter(field => {
       return posts[postIds[0]][field]
     })
-
-    return (
-      <div className='dashboard-manager'>
-        {managerColumns()}
-        {postRows()}
-      </div>
-    )
   }
 
-  return []
+  return (
+    <div className='dashboard-manager'>
+      <p className='dashboard-manager-prompt'>Your post can be modified below.</p>
+      {
+        postIds.length ?
+        <div>
+          {managerColumns()}
+          {postRows()}
+        </div>
+         :
+        <div></div>
+      }
+      <div className='dashboard-create-container'>
+        <button onClick={() => updateRoute(createRoute)}>{`+ Add ${title}`}</button>
+      </div>
+    </div>
+  )
 }

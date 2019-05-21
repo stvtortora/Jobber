@@ -29,8 +29,19 @@ class Api::CompaniesController < ApplicationController
   end
 
   def show
-    @company = JobPost.where(id: params[:id])
+    @company = Company.find(params[:id])
     render :show
+  end
+
+  def destroy
+    @company = Company.find(params[:id])
+
+    if @company.user_id == current_user.id
+      @company.destroy
+      :show
+    else
+      render json: ['Not authorized to delete this company']
+    end
   end
 
   private

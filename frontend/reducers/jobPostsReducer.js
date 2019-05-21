@@ -5,17 +5,17 @@ import { RECEIVE_JOB_POSTS, RECEIVE_JOB_POST, DELETE_JOB_POST } from '../actions
 
 const info = (state = {}, action) => {
   let newState
-  console.log(action)
+
   switch (action.type) {
     case RECEIVE_JOB_POSTS:
-      return action.jobPosts.content;
+      return action.jobPosts.content || {};
     case RECEIVE_JOB_POST:
       newState = merge({}, state)
       newState[action.jobPost.id] = action.jobPost
       return newState
     case DELETE_JOB_POST:
       newState = merge({}, state)
-      delete newState[action.jobPost.id]
+      delete newState[action.postId]
       return newState
     default:
       return state;

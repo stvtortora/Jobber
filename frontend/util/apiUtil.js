@@ -30,6 +30,7 @@ export const createJobPost = job_post => {
 }
 
 export const deleteJobPost = jobPostId => {
+  console.log(jobPostId)
   return $.ajax({
     method: 'DELETE',
     url: `api/job_posts/${jobPostId}`

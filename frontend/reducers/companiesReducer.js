@@ -15,7 +15,7 @@ const info = (state = {}, action) => {
       return newState
     case DELETE_COMPANY:
       newState = merge({}, state)
-      delete newState[action.company.id]
+      delete newState[action.companyId]
       return newState
     default:
       return state;

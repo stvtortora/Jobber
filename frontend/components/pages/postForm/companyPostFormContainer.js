@@ -26,7 +26,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    create: (job_post) => dispatch(createCompany(job_post)),
+    action: (job_post) => dispatch(createCompany(job_post)),
     updateRoute: (newRoute) => dispatch(updateRoute(newRoute))
   }
 }
