@@ -17,7 +17,7 @@ const mapStateToProps = state => {
     searchResultOptions: {
       stylingId: 'job-post-result',
       mainTitleKey: 'title',
-      subTitleKey: 'company_title',
+      subTitleKey: 'company',
       buttonContentKey: 'job_type'
     }
   }

@@ -18,7 +18,7 @@ const mapStateToProps = state => {
       'title': '',
       'city': '',
       'website': '',
-      'linkedin': '',
+      'linked_in': '',
       'facebook': ''
     }
   }

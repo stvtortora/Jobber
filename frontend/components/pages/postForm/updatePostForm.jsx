@@ -25,11 +25,12 @@ export default class UpdatePostForm extends React.Component {
         redirectRoute,
         formName,
         formFields,
-        relatedRecords
+        relatedRecords,
+        includeImageUpload
       } = this.props
 
       const initialState = Object.keys(post).reduce((state, field) => {
-        if (post[field]) {
+        if (field !== 'picture' && post[field]) {
           state[field] = post[field]
         }
         return state
@@ -46,6 +47,7 @@ export default class UpdatePostForm extends React.Component {
         formFields={formFields}
         relatedRecords={relatedRecords}
         initialState={initialState}
+        includeImageUpload={includeImageUpload}
         />
       )
     }

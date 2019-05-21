@@ -6,7 +6,8 @@ class Api::CompaniesController < ApplicationController
     @company.user = current_user
 
     @company.user = current_user
-
+    puts "params:"
+    puts company_params
     if @company.save
       render :show
     else
@@ -60,7 +61,8 @@ class Api::CompaniesController < ApplicationController
       :title, :city, :description,
       :website, :tagline, :linked_in,
       :twitter, :team_size, :industry,
-      :phone_number
+      :phone_number, :facebook,
+      :picture
     )
   end
 end

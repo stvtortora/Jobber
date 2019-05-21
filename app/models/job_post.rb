@@ -65,12 +65,13 @@ class JobPost < ApplicationRecord
   scope :job_category, -> (job_category) { joins(:job_category).where('job_categories.name = ?', job_category) }
 
   def self.search_by_query(query_params)
-    keyword_matches = search_by_keyword(query_params[:keyword], query_params[:order]).includes(:job_category, :company)
+    keyword_matches = query_params[:keyword] ? search_by_keyword(query_params[:keyword], query_params[:order]).includes(:job_category, :company) : self.where(nil)
     filter(query_params.slice(:city, :job_type, :job_category), keyword_matches)
   end
 
   def self.retrieve_by_query(query_params)
     search_by_query(query_params)
+    .order(query_params[:order])
     .limit(query_params[:limit].to_i)
     .offset(query_params[:offset].to_i * query_params[:limit].to_i - query_params[:limit].to_i)
   end

@@ -19,6 +19,7 @@ const mapStateToProps = (state, ownProps) => {
       secondRow: ['job_type', 'salary', 'career_level'],
       thirdRow: ['qualification', 'experience', 'industry']
     },
+    includeImageUpload: false,
     relatedRecords: {
       'job_category_id': state.records.jobCategories,
       'company_id': state.records.companies

@@ -1,7 +1,6 @@
 import React from 'react'
 import Quill from 'quill'
 import merge from 'lodash/merge'
-import quill from './quill'
 
 const textFields = ['city', 'website', 'linked_in', 'twitter', 'phone_number', 'tagline', 'facebook']
 
@@ -74,7 +73,6 @@ export default class PostForm extends React.Component {
 
     let post = merge({}, this.state, { description: JSON.stringify(description), job_category_id: Number(this.state.job_category_id) })
     let formData
-
     if (this.state.picture) {
       formData = new FormData()
       Object.keys(post).forEach(param => {
@@ -83,7 +81,8 @@ export default class PostForm extends React.Component {
     }
 
     post = formData ? formData : post
-
+    console.log("ARE YOU KIDDING")
+    console.log(this.state, "NO IM NOT")
     this.props.action(post).then(post => {
       this.props.updateRoute(`${this.props.redirectRoute + post[this.props.newRecordKey].id}`)
     })
@@ -150,7 +149,7 @@ export default class PostForm extends React.Component {
             <span className='field-row'>
               <div className='file-field'>
                 <label>Logo</label>
-                <input type='file' onChange={this.updateFile}/>
+                <input type='file' value={this.state.picture} onChange={this.updateFile}/>
               </div>
             </span>
             :
