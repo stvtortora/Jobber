@@ -85,6 +85,13 @@ export const createCompany = company => {
   })
 }
 
+export const fetchCompany = companyId => {
+  return $.ajax({
+    method: 'GET',
+    url: `api/companies/${companyId}`
+  })
+}
+
 export const fetchCompanies = current_user_id => {
   return $.ajax({
     method: 'GET',
@@ -92,6 +99,15 @@ export const fetchCompanies = current_user_id => {
     data: { current_user_id }
   })
 }
+
+export const updateCompany = company => {
+  return $.ajax({
+    method: 'PATCH',
+    url: `api/companies/${company.id}`,
+    data: { company }
+  })
+}
+
 
 export const deleteCompany = companyId => {
   return $.ajax({

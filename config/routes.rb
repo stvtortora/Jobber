@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     resource :session, only: [:create, :destroy]
     resource :users, only: [:create, :show]
     resources :job_categories, only: [:index]
-    resources :companies, only: [:index, :create, :updare, :show, :destroy]
+    resources :companies, only: [:index, :create, :update, :show, :destroy]
     resources :categories, only: [:index, :show, :create]
     resources :job_posts, only: [:create, :update, :show, :index, :destroy]
   end

@@ -11,6 +11,7 @@ import CompanyPostForm from './pages/postForm/companyPostFormContainer'
 import SessionPage from './pages/session/sessionPage'
 import Dashboard from './pages/dashboard/dashboard'
 import UpdateJobPostForm from './pages/postForm/updateJobPostContainer'
+import UpdateCompanyForm from './pages/postForm/updateCompanyContainer'
 
 class App extends React.Component {
   constructor (props) {
@@ -43,6 +44,7 @@ class App extends React.Component {
             <Route path='/jobs/:postId' exact component={JobPost} />
             <Route path='/jobs' component={JobPostsSearch} />
             <Route path='/edit-a-job/:postId' component={UpdateJobPostForm}/>
+            <Route path='/edit-a-company/:postId' component={UpdateCompanyForm}/>
             <Route path='/post-a-job' component={JobPostForm} />
             <Route path='/post-a-company' component={CompanyPostForm} />
           </Switch>

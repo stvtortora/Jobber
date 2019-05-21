@@ -14,6 +14,16 @@ class Api::CompaniesController < ApplicationController
     end
   end
 
+  def update
+    @company = Company.find(params[:id])
+
+    if @company.update_attributes(company_params)
+      render :show
+    else
+      render json: @company.errors.full_messages, status: 422
+    end
+  end
+
   def index
     if (params[:current_user_id])
       if params[:current_user_id].to_i != current_user.id

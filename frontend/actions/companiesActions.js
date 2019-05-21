@@ -26,6 +26,28 @@ export const fetchCompanies = currentUser => {
   }
 }
 
+export const fetchCompany = companyId => {
+  return dispatch => {
+    return APIUtil.fetchCompany(companyId).then(company => {
+      return dispatch({ type: RECEIVE_COMPANY, company })
+    },
+    errors => {
+      return dispatch(receiveErrors(errors))
+    })
+  }
+}
+
+export const updateCompany = company => {
+  return dispatch => {
+    return APIUtil.updateCompany(company).then(company => {
+      return dispatch({ type: RECEIVE_COMPANY, company })
+    },
+    errors => {
+      return dispatch(receiveErrors(errors))
+    })
+  }
+}
+
 export const deleteCompany = companyId => {
   return dispatch => {
     return APIUtil.deleteCompany(companyId).then(company => {
