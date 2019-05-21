@@ -9,6 +9,7 @@ import JobPost from './pages/post/jobPostContainer'
 import JobPostForm from './pages/postForm/jobPostFormContainer'
 import CompanyPostForm from './pages/postForm/companyPostFormContainer'
 import SessionPage from './pages/session/sessionPage'
+import Dashboard from './pages/dashboard/dashboard'
 
 class App extends React.Component {
   constructor (props) {
@@ -36,6 +37,7 @@ class App extends React.Component {
       <content className='all-content'>
           <Header/>
           <Switch>
+            <Route path='/user-dashboard' exact component={Dashboard} />
             <Route path='/login' exact component={SessionPage} />
             <Route path='/jobs/:postId' exact component={JobPost} />
             <Route path='/jobs' component={JobPostsSearch} />
@@ -59,6 +61,5 @@ const mapDispatchToProps = dispatch => {
     updateRoute: newRoute => dispatch(updateRoute(newRoute))
   }
 }
-// <Route path='/' exact component={PlaceBuyOrderForm} />
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

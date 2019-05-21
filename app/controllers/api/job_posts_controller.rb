@@ -10,14 +10,34 @@ class Api::JobPostsController < ApplicationController
   end
 
   def index
-    @job_posts = JobPost.retrieve_by_query(query_params)
-    @total_count = JobPost.total_count_by_query(query_params)
-    render :index
+    if params[:current_user_id]
+      if  params[:current_user_id].to_i == current_user.id
+        @job_posts = JobPost.joins(:company).where('companies.user_id = ?', current_user.id).includes(:company, :job_category)
+        render :index
+      else
+        render json: ['Not authorized to view job posts']
+      end
+    else
+      @job_posts = JobPost.retrieve_by_query(query_params)
+      @total_count = JobPost.total_count_by_query(query_params)
+      render :index
+    end
   end
 
   def show
     @job_post = JobPost.where(id: params[:id]).includes(:company, :job_category).first
     render :show
+  end
+
+  def destroy
+    @job_post = JobPost.where(id: params[:id]).includes(:company).first
+
+    if @job_post.company.user_id == current_user.id
+      @job_post.destroy
+      :show
+    else
+      render json: ['Not authorized to delete this job post']
+    end
   end
 
   private

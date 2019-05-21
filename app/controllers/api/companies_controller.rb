@@ -16,7 +16,7 @@ class Api::CompaniesController < ApplicationController
 
   def index
     if (params[:current_user_id])
-      if params[:current_user_id] != current_user.id
+      if params[:current_user_id].to_i != current_user.id
         render json: ['Not authorized']
       else
         @companies = Company.where(user: params[:current_user_id])

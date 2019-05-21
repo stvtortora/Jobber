@@ -9,6 +9,6 @@ Rails.application.routes.draw do
     resources :job_categories, only: [:index]
     resources :companies, only: [:index, :create, :show]
     resources :categories, only: [:index, :show, :create]
-    resources :job_posts, only: [:create, :show, :index]
+    resources :job_posts, only: [:create, :show, :index, :destroy]
   end
 end

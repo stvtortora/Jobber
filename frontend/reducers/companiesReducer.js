@@ -1,16 +1,21 @@
 import { combineReducers } from 'redux';
 import merge from 'lodash/merge'
-import { RECEIVE_COMPANIES, RECEIVE_COMPANY } from '../actions/companiesActions'
+import { RECEIVE_COMPANIES, RECEIVE_COMPANY, DELETE_COMPANY } from '../actions/companiesActions'
 
 
 const info = (state = {}, action) => {
+  let newState
+
   switch (action.type) {
     case RECEIVE_COMPANIES:
       return action.companies.content;
     case RECEIVE_COMPANY:
-    console.log(action)
-      const newState = merge({}, state)
+      newState = merge({}, state)
       newState[action.company.id] = action.company
+      return newState
+    case DELETE_COMPANY:
+      newState = merge({}, state)
+      delete newState[action.company.id]
       return newState
     default:
       return state;
