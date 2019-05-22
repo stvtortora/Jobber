@@ -1,172 +1,176 @@
+.post-page {
+  display: flex;
+  flex-direction: column;
 
-.full-post-container {
-  display: block;
-  max-width: 1170px;
-  width: 100%;
-  margin: auto;
-  padding-right: 15px;
-  padding-left: 15px;
+  .full-post-container {
+    display: block;
+    max-width: 1170px;
+    width: 100%;
+    margin: auto;
+    padding-right: 15px;
+    padding-left: 15px;
 
-  .full-post {
-    display: flex;
-    flex-direction: row;
-    padding-top: 45px;
+    .full-post {
+      display: flex;
+      flex-direction: row;
 
-    .main-post-content {
-      max-width: 66.6666666667%;
-      width: 100%;
+      .main-post-content {
+        max-width: 66.6666666667%;
+        width: 100%;
 
-      .post-description-container {
-        .post-description-title {
-          margin: .67em 0;
-          font-size: 20px;
-          color: #384047;
-        }
-
-        #post-description {
-          h1 {
+        .post-description-container {
+          .post-description-title {
+            margin: .67em 0;
             font-size: 20px;
             color: #384047;
           }
 
-          h2 {
-            font-size: 19px;
-            color: #384047;
+          #post-description {
+            h1 {
+              font-size: 20px;
+              color: #384047;
+            }
+
+            h2 {
+              font-size: 19px;
+              color: #384047;
+            }
+
+            h3 {
+              font-size: 18px;
+              color: #384047;
+            }
+
+            h4 {
+              font-size: 17px;
+              color: #384047;
+            }
+
+            h5 {
+              font-size: 16px;
+              color: #384047;
+            }
+          }
+        }
+
+        .post-header {
+          margin-bottom: 20px;
+          padding-bottom: 30px;
+          border-bottom: 1px solid #e8ecec;
+          display: flex;
+          flex-direction: row;
+
+          img {
+            margin-right: 25px;
           }
 
-          h3 {
-            font-size: 18px;
+          .post-header-title {
             color: #384047;
-          }
-
-          h4 {
-            font-size: 17px;
-            color: #384047;
-          }
-
-          h5 {
             font-size: 16px;
-            color: #384047;
+            margin-bottom: 15px;
+          }
+          .header-line {
+            display: flex;
+            flex-direction: row;
+            margin-bottom: 12px;
+
+            p {
+              color: #576366;
+              font-size: 14px;
+              margin-right: 20px;
+
+              i {
+                color: #8b91dd;
+              }
+            }
+            a {
+              color: #576366;
+              font-size: 14px;
+              margin-right: 20px;
+
+              i {
+                font-size: 17px;
+                color: #8b91dd;
+              }
+
+              &:hover {
+                cursor: pointer;
+                color: #8b91dd;
+              }
+            }
           }
         }
       }
 
-      .post-header {
-        margin-bottom: 20px;
-        padding-bottom: 30px;
-        border-bottom: 1px solid #e8ecec;
-        display: flex;
-        flex-direction: row;
+      .side-bar-container {
+        padding: 0 15px;
+        max-width: 33.3333333%;
+        width: 100%;
 
-        img {
-          margin-right: 25px;
-        }
-
-        .post-header-title {
-          color: #384047;
-          font-size: 16px;
-          margin-bottom: 15px;
-        }
-        .header-line {
-          display: flex;
-          flex-direction: row;
-          margin-bottom: 12px;
+        .post-button {
+          margin-bottom: 20px;
 
           p {
-            color: #576366;
-            font-size: 14px;
-            margin-right: 20px;
-
-            i {
-              color: #8b91dd;
-            }
-          }
-          a {
-            color: #576366;
-            font-size: 14px;
-            margin-right: 20px;
-
-            i {
-              font-size: 17px;
-              color: #8b91dd;
-            }
+            color: #fff;
+            background-color: #fb236a;
+            padding: 8px 16px;
+            font-size: 1.25rem;
+            line-height: 1.5;
+            border-radius: 0.3rem;
+            display: block;
+            width: 100%;
+            text-align: center;
+            font-family: "Quicksand", sans-serif;
+            font-size: 20px;
 
             &:hover {
               cursor: pointer;
-              color: #8b91dd;
+            }
+          }
+        }
+
+        .info-bar {
+          margin-top: 30px;
+
+          .info-bar-title {
+            margin-bottom: 20px;
+            font-size: 16px;
+
+          }
+          ul {
+            padding: 35px;
+            border: 2px solid #edeff7;
+            border-radius: 5px;
+
+
+            li {
+              display: flex;
+              flex-direction: row;
+              margin: 0 30px 30px 15px;
+              list-style: none;
+
+              i {
+                margin-right: 15px;
+                font-size: 19px;
+                color: #8b91dd;
+                margin-top: 1px;
+              }
+
+              .info-type {
+                text-transform: capitalize;
+                margin-bottom: .67rem;
+                color: #384047
+              }
+              .info-value {
+                color: #888;
+                font-size: 14px;
+              }
             }
           }
         }
       }
+
     }
-
-    .side-bar-container {
-      padding: 0 15px;
-      max-width: 33.3333333%;
-      width: 100%;
-
-      .post-button {
-        margin-bottom: 20px;
-
-        p {
-          color: #fff;
-          background-color: #fb236a;
-          padding: 8px 16px;
-          font-size: 1.25rem;
-          line-height: 1.5;
-          border-radius: 0.3rem;
-          display: block;
-          width: 100%;
-          text-align: center;
-          font-family: "Quicksand", sans-serif;
-          font-size: 20px;
-
-          &:hover {
-            cursor: pointer;
-          }
-        }
-      }
-
-      .info-bar {
-        margin-top: 30px;
-
-        .info-bar-title {
-          margin-bottom: 20px;
-          font-size: 16px;
-
-        }
-        ul {
-          padding: 35px;
-          border: 2px solid #edeff7;
-          border-radius: 5px;
-
-
-          li {
-            display: flex;
-            flex-direction: row;
-            margin: 0 30px 30px 15px;
-            list-style: none;
-
-            i {
-              margin-right: 15px;
-              font-size: 19px;
-              color: #8b91dd;
-              margin-top: 1px;
-            }
-
-            .info-type {
-              text-transform: capitalize;
-              margin-bottom: .67rem;
-              color: #384047
-            }
-            .info-value {
-              color: #888;
-              font-size: 14px;
-            }
-          }
-        }
-      }
-    }
-
   }
+
 }

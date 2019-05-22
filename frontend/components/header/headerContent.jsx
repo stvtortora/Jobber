@@ -7,12 +7,12 @@ const HeaderContent = ({ currentRoute }) => {
     const getText = () => {
       const textMap = {
         '/': 'The Easiest Way To Get Your New Job',
-        '/jobs/?': 'Jobs',
-        '/companies': 'Companies',
+        '/jobs/': 'Jobs',
+        '/companies': 'Companies'
       }
 
       let text = ''
-      const prefixes = ['/', '/jobs/', '/jobs/?', '/companies']
+      const prefixes = ['/', '/jobs/',  '/companies']
 
       prefixes.forEach(prefix => {
         if (currentRoute.indexOf(prefix) > -1) {
@@ -41,8 +41,10 @@ const HeaderContent = ({ currentRoute }) => {
   let klassName
   if (currentRoute === '/') {
     klassName = 'home-page-content'
-  } else {
+  } else if (currentRoute.indexOf('/jobs/?') > -1) {
     klassName='non-home-page-content'
+  } else {
+    klassName='no-content'
   }
 
   return (
@@ -67,7 +69,7 @@ const HeaderContent = ({ currentRoute }) => {
 
 const mapStateToProps = state => {
   return {
-    currentRoute: state.currentRoute
+    currentRoute: state.currentRoute,
   }
 }
 

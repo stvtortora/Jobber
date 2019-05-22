@@ -1,6 +1,7 @@
 import React from 'react'
 import LoginForm from './loginFormContainer'
 import RegisterForm from './registerFormContainer'
+import TitleHeader from '../../header/titleHeader'
 
 class SessionPage extends React.Component {
   constructor(props) {
@@ -19,11 +20,7 @@ class SessionPage extends React.Component {
   render() {
     return (
       <div className='session-page'>
-        <div className='session-form-header-container'>
-          <div className='session-form-header-inner'>
-            <span className='session-form-header'>Register / Login</span>
-          </div>
-        </div>
+        <TitleHeader message={'Register / Login'}/>
         <div className='session-form-container'>
           <div className='form-options'>
             <p onClick={this.updateForm('Register')} className={this.state.currentForm === 'Register' ? 'selected-session-option' : 'unselected-session-option'}>Register</p>

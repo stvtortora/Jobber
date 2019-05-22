@@ -39,6 +39,28 @@
   }
 }
 
+.title-header-container {
+  width: 100%;
+  background: #f6f9fa;
+  border-bottom: 1px solid #e9f0f3;
+  border-top: 1px solid #e9f0f3;
+  margin-bottom: 40px;
+  margin-top: 70px;
+
+  .title-header-inner {
+    padding: 50px 15px;
+    max-width: 1170px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+
+    .title-header {
+      font-size: 30px;
+      color: #384047;
+    }
+  }
+}
+
 .header {
   background-image: url(https://demo2.madrasthemes.com/jobhunt/wp-content/uploads/2018/09/home-bg.jpg);
   // background-size: cover;
@@ -63,6 +85,31 @@
     left: 0;
     right: 0;
     z-index: 101;
+
+    #gray-nav-option {
+      color: #7b8b8e;
+
+    }
+
+    #white-nav-option {
+      color: white;
+    }
+
+  }
+
+  #gray-arrow {
+    border: solid #7b8b8e;
+    border-width:  0 1px 1px 0;
+    display: inline-block;
+    font-weight: 400;
+    margin-left: 10px;
+    margin-bottom: 2px;
+    padding: 3px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+  }
+  #gray-fa-image {
+    color: #7b8b8e;
   }
 
   .stick-bar-container {
@@ -96,17 +143,19 @@
         color: #7b8b8e;
       }
     }
-    .create-navigation {
-      div {
-        &:hover {
-          cursor: pointer;
-        }
-        p {
-          color: white;
-        }
+  }
+
+  .create-navigation {
+    div {
+      &:hover {
+        cursor: pointer;
+      }
+      p {
+        color: white;
       }
     }
   }
+
   .center-bar {
     display: block;
     margin: auto;
@@ -146,7 +195,7 @@
       }
 
       p {
-        color: white;
+        // color: white;
         font-weight: lighter;
         padding: 7px 10px;
         .arrow-down {
@@ -179,7 +228,9 @@
     }
   }
 
-
+  .no-content {
+    display: none;
+  }
 
   .non-home-page-content {
     z-index: 100;
@@ -187,7 +238,8 @@
     display: block;
 
     .page-content {
-      width: 1170px;
+      max-width: 1170px;
+      width: 100%;
       margin-left: auto;
       margin-right: auto;
       display: block;
@@ -210,7 +262,8 @@
     z-index: 100;
 
     .page-content {
-      width: 1170px;
+      max-width: 1170px;
+      width: 100%;
       margin-left: auto;
       margin-right: auto;
       display: block;

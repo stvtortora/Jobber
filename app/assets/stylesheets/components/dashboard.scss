@@ -1,5 +1,7 @@
 .dashboard {
-
+  display: flex;
+  flex-direction: column;
+  
   .dashboard-contenet {
     width: 100%;
     max-width: 1170px;

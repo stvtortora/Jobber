@@ -1,5 +1,6 @@
 import React from 'react'
 
+
 export default class MainPostContent extends React.Component {
   constructor(props) {
     super(props)
@@ -28,7 +29,7 @@ export default class MainPostContent extends React.Component {
       <header className='post-header'>
         <img src={post.picture_url}/>
         <div>
-          <h3 className='post-header-title'>{post.title}</h3>
+          <h3 className='post-header-title'>{post.company}</h3>
           <div className='header-second-line header-line'>
             <p><i className="fa fa-map-marker" aria-hidden="true"></i> {post.city}</p>
             <p>{additionalInfo}</p>

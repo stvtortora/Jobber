@@ -4,6 +4,7 @@ import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import { updateRoute } from '../actions/routeActions'
 import Header from './header/header'
+import Home from './pages/home/home'
 import JobPostsSearch from './pages/search/jobPostsSearchContainer'
 import JobPost from './pages/post/jobPostContainer'
 import JobPostForm from './pages/postForm/jobPostFormContainer'
@@ -12,6 +13,7 @@ import SessionPage from './pages/session/sessionPage'
 import Dashboard from './pages/dashboard/dashboard'
 import UpdateJobPostForm from './pages/postForm/updateJobPostContainer'
 import UpdateCompanyForm from './pages/postForm/updateCompanyContainer'
+import Footer from './footer/footer'
 
 class App extends React.Component {
   constructor (props) {
@@ -47,8 +49,9 @@ class App extends React.Component {
             <Route path='/edit-a-company/:postId' component={UpdateCompanyForm}/>
             <Route path='/post-a-job' component={JobPostForm} />
             <Route path='/post-a-company' component={CompanyPostForm} />
+            <Route path='/' exact component={Home} />
           </Switch>
-          <div className='under-header'></div>
+          <Footer/>
       </content>
     )
   }

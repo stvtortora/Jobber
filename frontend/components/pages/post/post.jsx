@@ -1,6 +1,7 @@
 import React from 'react'
 import SideBar from './sideBar'
 import MainPostContent from './MainPostContent'
+import TitleHeader from '../../header/titleHeader'
 
 class Post extends React.Component {
   componentDidMount() {
@@ -12,18 +13,21 @@ class Post extends React.Component {
 
     if (post && post.description) {
       return (
-        <div className='full-post-container'>
-          <div className='full-post'>
-            <MainPostContent
-            post={post}
-            postType={postType}
-            additionalInfo={additionalInfo}
-            />
-            <SideBar
-            post={post}
-            postType={postType}
-            overViewKeys={overViewKeys}
-            />
+        <div className='post-page'>
+          <TitleHeader message={post.title}/>
+          <div className='full-post-container'>
+            <div className='full-post'>
+              <MainPostContent
+              post={post}
+              postType={postType}
+              additionalInfo={additionalInfo}
+              />
+              <SideBar
+              post={post}
+              postType={postType}
+              overViewKeys={overViewKeys}
+              />
+            </div>
           </div>
         </div>
       )

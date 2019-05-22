@@ -1,6 +1,7 @@
 import React from 'react'
 import DashboardNav from './dashboardNav'
 import DashboardManager from './dashboardManager'
+import TitleHeader from '../../header/titleHeader'
 import { connect } from 'react-redux'
 import { updateRoute } from '../../../actions/routeActions'
 import { deleteJobPost, fetchJobPosts } from '../../../actions/jobPostsActions'
@@ -54,6 +55,7 @@ class Dashboard extends React.Component {
   render() {
     return (
       <div className='dashboard'>
+        <TitleHeader message={'User Dashboard'}/>
         <section className='dashboard-contenet'>
           <DashboardNav
           updateManager={this.updateManager}

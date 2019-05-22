@@ -1,5 +1,6 @@
 import React from 'react'
 import Quill from 'quill'
+import TitleHeader from '../../header/titleHeader'
 import merge from 'lodash/merge'
 
 const textFields = ['city', 'website', 'linked_in', 'twitter', 'phone_number', 'tagline', 'facebook']
@@ -81,8 +82,7 @@ export default class PostForm extends React.Component {
     }
 
     post = formData ? formData : post
-    console.log("ARE YOU KIDDING")
-    console.log(this.state, "NO IM NOT")
+
     this.props.action(post).then(post => {
       this.props.updateRoute(`${this.props.redirectRoute + post[this.props.newRecordKey].id}`)
     })
@@ -134,6 +134,7 @@ export default class PostForm extends React.Component {
   render() {
     return (
       <section className='job-post-form'>
+        <TitleHeader message={`Post a ${this.props.formName}`}/>
         <form onSubmit={this.handleSubmit}>
           <span className='field-row'>
             <div className='title-field form-field'>
