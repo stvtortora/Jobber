@@ -101,6 +101,10 @@
           max-width: 550px;
         }
 
+        @media only screen and (max-width: $--breakpoint-sm) {
+          max-width: 490px;
+        }
+
 
         .side-bar-search-submit {
           display: none;

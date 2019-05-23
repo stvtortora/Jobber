@@ -68,7 +68,7 @@ export default ({ posts, del, title, createRoute, editRoute, updateRoute }) => {
       <p className='dashboard-manager-prompt'>Your post can be modified below.</p>
       {
         postIds.length ?
-        <div>
+        <div className='dashboard-table'>
           {managerColumns()}
           {postRows()}
         </div>
