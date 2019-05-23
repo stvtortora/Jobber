@@ -1,4 +1,5 @@
 import React from 'react';
+import Errors from '../../errors/errors'
 import { withRouter } from 'react-router';
 
 
@@ -6,7 +7,6 @@ class SessionForm extends React.Component {
   constructor (props) {
     super(props);
     this.state = { dname: '', password: '' };
-    this.renderErrors = this.renderErrors.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -23,26 +23,10 @@ class SessionForm extends React.Component {
     })
   }
 
-  renderErrors() {
-    return(
-      this.props.errors.map((error) => (
-          <div>
-            {error}
-          </div>
-        ))
-    );
-  }
-
   render () {
     return (
       <form className='session-form' onSubmit={this.handleSubmit}>
-        {
-          this.props.errors.length ?
-          <div className='errors'>
-          {this.renderErrors()}
-          </div> :
-          <div></div>
-        }
+        <Errors/>
         <div className='form-field'>
           <label>Username</label>
           <input type="text" value={this.state.username} onChange={this.update('dname')}/>

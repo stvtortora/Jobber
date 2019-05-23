@@ -9,7 +9,7 @@ const mapStateToProps = state => {
   return {
     newRecordKey: 'jobPost',
     redirectRoute: '/jobs/',
-    formName: 'Job',
+    formName: 'Job Post',
     formFields: {
       firstRow: ['city', 'company_id', 'job_category_id'],
       secondRow: ['job_type', 'salary', 'career_level'],

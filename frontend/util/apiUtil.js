@@ -76,12 +76,14 @@ export const fetchJobCategories = () => {
 }
 
 export const createCompany = company => {
+  const isFormData = company instanceof FormData
+
   return $.ajax({
     method: 'POST',
     url: `api/companies`,
-    data: company,
-    contentType: false,
-    processData: false
+    data: isFormData ? company : { company },
+    contentType: isFormData ? false : 'application/x-www-form-urlencoded; charset=UTF-8',
+    processData: isFormData ? false : true
   })
 }
 
@@ -101,10 +103,14 @@ export const fetchCompanies = current_user_id => {
 }
 
 export const updateCompany = company => {
+  const isFormData = company instanceof FormData
+  
   return $.ajax({
     method: 'PATCH',
     url: `api/companies/${company.id}`,
-    data: { company }
+    data: isFormData ? company : { company },
+    contentType: isFormData ? false : 'application/x-www-form-urlencoded; charset=UTF-8',
+    processData: isFormData ? false : true
   })
 }
 

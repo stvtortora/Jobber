@@ -1,6 +1,7 @@
 import React from 'react'
 import Quill from 'quill'
 import TitleHeader from '../../header/titleHeader'
+import Errors from '../../errors/errors'
 import merge from 'lodash/merge'
 
 const textFields = ['city', 'website', 'linked_in', 'twitter', 'phone_number', 'tagline', 'facebook']
@@ -59,6 +60,7 @@ export default class PostForm extends React.Component {
   }
 
   updateFile(e) {
+    console.log(e.currentTarget.files)
     this.setState({
       'picture': e.currentTarget.files[0]
     })
@@ -135,6 +137,7 @@ export default class PostForm extends React.Component {
     return (
       <section className='job-post-form'>
         <TitleHeader message={`Post a ${this.props.formName}`}/>
+        <Errors/>
         <form onSubmit={this.handleSubmit}>
           <span className='field-row'>
             <div className='title-field form-field'>
@@ -150,7 +153,7 @@ export default class PostForm extends React.Component {
             <span className='field-row'>
               <div className='file-field'>
                 <label>Logo</label>
-                <input type='file' value={this.state.picture} onChange={this.updateFile}/>
+                <input type='file' onChange={this.updateFile}/>
               </div>
             </span>
             :
