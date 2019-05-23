@@ -221,7 +221,7 @@
           margin: 10px;
           border-radius: 4px;
         }
-        @media only screen and (max-width: $--breakpoint-xl) {
+        @media only screen and (max-width: $--breakpoint-xxl) {
           display: none;
         }
       }
@@ -247,6 +247,7 @@
       padding-bottom: 70px;
       text-align: center;
       color: white;
+
       .form-section-header {
         h3 {
           font-size: 25px;
@@ -273,7 +274,7 @@
 
       &:hover {
         cursor: pointer;
-        
+
         .scroll-button {
           border-color: #fb236a;
 
@@ -322,11 +323,26 @@
       padding-bottom: 270px;
       text-align: center;
       color: white;
+
+      @media only screen and (max-width: $--breakpoint-lg) {
+        padding-top: 170px;
+        padding-bottom: 170px;
+      }
+
       .form-section-header {
         h3 {
           font-size: 50px;
           margin-bottom: 30px;
           color: white;
+          font-family: 'Quicksand', sans-serif;
+
+          @media only screen and (max-width: $--breakpoint-lg) {
+            font-size: 35px;
+          }
+
+          @media only screen and (max-width: $--breakpoint-md) {
+            font-size: 28px;
+          }
         }
         span {
           font-size: 18px;
@@ -335,10 +351,17 @@
       }
 
       .home-search-box {
+        display: flex;
+        justify-content: center;
+
         form {
           display: flex;
           flex-direction: row;
           justify-content: center;
+          @media only screen and (max-width: $--breakpoint-lg) {
+            flex-direction: column;
+            align-items: center;
+          }
           .search-submit {
             width: 65px;
             padding: 0;
@@ -348,6 +371,10 @@
               width:100%;
               padding-left: 17px;
               padding-right: 17px;
+
+              @media only screen and (max-width: $--breakpoint-lg) {
+                padding: 17px;
+              }
               i {
                 color: white;
                 font-size: 30px;
@@ -356,10 +383,16 @@
 
           }
           .search-location {
-            width: 330px;
+            max-width: 330px;
+            width: 100%;
+            @media only screen and (max-width: $--breakpoint-lg) {
+              max-width: 510px;
+              width: 100%;
+            }
           }
           .search-keywords {
-            width: 510px;
+            max-width: 510px;
+            width: 100%;
       // i {
             //   color: red;
             //   font-size: 18px;

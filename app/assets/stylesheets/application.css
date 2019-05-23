@@ -30,10 +30,12 @@ span, article, footer, time, small {
   vertical-align: inherit;
   box-sizing: inherit;
   background: transparent;
-  font-family: 'Varela Round', 'Montserrat', 'Quicksand', sans-serif;
+  font-family: 'Quicksand', sans-serif;
   word-wrap: break-word;
   font-size: 14px;
 }
+
+/* 'Varela Round', 'Montserrat',  */
 body {
   font-family: 'Varela Round', 'Montserrat', 'Quicksand', sans-serif;
   font-size: 14px;

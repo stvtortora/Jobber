@@ -1,3 +1,5 @@
+@import "variables.scss";
+
 .content-container {
   max-width: 1170px;
   margin: auto;
@@ -6,12 +8,30 @@
     display: flex;
     flex-direction: row;
 
+    @media only screen and (max-width: $--breakpoint-xl) {
+      flex-direction: column;
+    }
+
     .side-bar {
       width: 33.333333%;
       padding: 32px 0px 60px 15px;
 
+      @media only screen and (max-width: $--breakpoint-xl) {
+        width: 100%;
+        padding-right: 0;
+        padding-left: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
       .filter {
         margin-bottom: 1rem;
+
+        @media only screen and (max-width: $--breakpoint-xl) {
+          width: 100%;
+          max-width: 550px;
+        }
 
         span {
           margin-bottom: 16px;
@@ -74,6 +94,14 @@
         display: flex;
         flex-direction: column;
 
+        @media only screen and (max-width: $--breakpoint-xl) {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          max-width: 550px;
+        }
+
+
         .side-bar-search-submit {
           display: none;
         }
@@ -92,6 +120,12 @@
           text-align: left;
           padding: 14px;
           margin-bottom: 30px;
+
+          @media only screen and (max-width: $--breakpoint-xl) {
+          //   width: 100%;
+          //   max-width: 550px;
+          }
+
           &:hover {
             border: 2px solid #8c9aa6;
           }
@@ -108,14 +142,26 @@
       padding: 30px 15px 30px 0;
       border-left: 1px solid #edeff7;
 
+      @media only screen and (max-width: $--breakpoint-xl) {
+        width: 100%;
+        padding-right: 0;
+        padding-left: 0;
+      }
+
       .sort-and-limit-options {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
         margin: 0 0 32px 32px;
+
+        @media only screen and (max-width: $--breakpoint-xl) {
+          flex-direction: column;
+        }
+
         .showing-text {
           font-size: 16px;
+          font-family: 'Varela Round', sans-serif;
         }
         .sort-and-limit-forms {
           display: flex;
@@ -150,6 +196,12 @@
   margin: auto;
   margin-bottom: 50px;
 
+  @media only screen and (max-width: $--breakpoint-xl) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
   .search-result {
     border-top: 1px solid #edeff7;
     border-bottom: 1px solid #edeff7;
@@ -157,6 +209,10 @@
     display: flex;
     flex-direction: row;
     width: 100%;
+    @media only screen and (max-width: $--breakpoint-xl) {
+      width: 100%;
+      max-width: 700px;
+    }
     &:hover {
       box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
       cursor: pointer;
@@ -180,6 +236,7 @@
       .search-result-city {
         color: #717F86;
         font-size: 13px;
+        font-family: 'Varela Round', sans-serif;
 
         i {
           color: #717F86;
@@ -190,10 +247,12 @@
 
       p {
         padding: 5px;
+        font-family: 'Varela Round', sans-serif;
       }
 
       .search-result-title {
         font-weight: bolder;
+        font-family: 'Varela Round', sans-serif;
       }
     }
   }
@@ -205,7 +264,7 @@
     }
     .search-result-subtitle {
       text-transform: uppercase;
-      color: #fb236a
+      color: #fb236a;
     }
     .search-result-details-right {
       display: flex;
@@ -220,6 +279,7 @@
         border: 2px solid #0F834D;
         border-radius: 4px;
         max-width: 55.56px;
+        font-family: 'Quicksand', sans-serif;
 
         &:hover {
           color: white;
