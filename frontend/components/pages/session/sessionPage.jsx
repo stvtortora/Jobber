@@ -7,7 +7,7 @@ class SessionPage extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      currentForm: 'Login'
+      currentForm: 'Register'
     }
   }
 

@@ -261,6 +261,57 @@
     position: relative;
     z-index: 100;
 
+    .scroll-button-container {
+      position: absolute;
+      left: 50%;
+      border-radius: 500px;
+      -webkit-transform: translate(-50%,-50%);
+      -ms-transform: translate(-50%,-50%);
+      transform: translate(-50%,-50%);
+      top: 100%;
+      z-index: 2;
+
+      &:hover {
+        cursor: pointer;
+        
+        .scroll-button {
+          border-color: #fb236a;
+
+          .fa-arrow-down {
+            background-color: #fb236a;
+            color: white;
+          }
+        }
+      }
+
+      .scroll-button {
+        width: 130px;
+        height: 130px;
+        border: 2px solid #fff;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        border-radius: 500px;
+        -webkit-transition: all 0.3s ease 0s;
+        transition: all 0.3s ease 0s;
+
+        .fa-arrow-down{
+          color: #fb236a;
+          font-size: 30px;
+          padding: 15px;
+          border-radius: 500px;
+          background-color: #fff;
+          box-shadow: 0 0 50px 0 rgba(32,32,32,.15);
+        }
+      }
+    }
+
     .page-content {
       max-width: 1170px;
       width: 100%;

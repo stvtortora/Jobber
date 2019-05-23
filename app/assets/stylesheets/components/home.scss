@@ -1,6 +1,6 @@
 .home-page {
   display: flex;
-  flex-grow: column;
+  flex-direction: column;
   margin-top: 84px;
 
   div {
@@ -10,9 +10,111 @@
     margin-right: auto;
   }
 
+  .inquiry-banner {
+    background-color: #8b91dd;
+
+    &:hover {
+      background-color: #fb236a;
+      cursor: pointer;
+    }
+  }
+
+  .featured-jobs {
+    margin-top: 80px;
+    margin-bottom: 70px;
+
+    button {
+      padding: 15px 36px;
+      color: #fb236a;
+      background-color: transparent;
+      background-image: none;
+      border-color: #fb236a;
+      font-size: 15px;
+      border: 2px solid #fb236a;
+      border-radius: 8px;
+      display: flex;
+      margin: auto;
+
+
+      &:hover {
+        background-color: #fb236a;
+        color: white;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .sign-up-prompt {
+    background-image: url(https://demo2.madrasthemes.com/jobhunt/wp-content/uploads/2018/08/parallax1.jpg);
+    position: relative;
+    padding: 87px 0 113px;
+
+    &:after{
+      background-color: #232a79;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      opacity: 0.8;
+      content: '';
+      z-index: 1;
+    }
+
+    div {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+
+      h2 {
+        z-index: 100;
+        color: inherit;
+        font-size: 40px;
+        padding: 8px 0;
+        margin: 8px 0;
+        font-family: 'Varela Round', 'Montserrat', sans-serif;
+      }
+
+      p {
+        z-index: 100;
+        color: inherit;
+        font-size: 16px;
+        margin-bottom: 41px;
+      }
+
+      button {
+        z-index: 100;
+        color: inherit;
+        padding: 15px 36px;
+        font-size: 16px;
+        border: 2px solid white;
+        border-radius: 8px;
+        &:hover {
+          cursor: pointer;
+          background-color: white;
+          color: black;
+        }
+      }
+    }
+  }
+
+  #white-text {
+    margin-top: 50px;
+    h3 {
+      color: white;
+    }
+
+    span {
+      color: white
+    }
+  }
+
   .section-header {
     text-align: center;
     margin-bottom: 50px;
+
 
     h3 {
       font-size: 30px;
@@ -29,6 +131,8 @@
 
   .popular-categories {
     padding: 0 15px;
+    margin-bottom: 70px;
+
     ul {
       display: flex;
       flex-direction: row;

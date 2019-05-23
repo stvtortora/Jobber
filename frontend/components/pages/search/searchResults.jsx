@@ -9,7 +9,7 @@ export default ({ searchResults, searchResultOptions, updateRoute, routePrefix }
       {
         searchResults.ids.map(id => {
           const searchResult = searchResults.info[id]
-          
+
           return (
             <li id={stylingId} className='search-result' onClick={() => updateRoute(`${routePrefix}/${searchResult.id}`)}>
               <img src={searchResult.picture_url} />

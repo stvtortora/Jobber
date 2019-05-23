@@ -18,6 +18,7 @@ import Footer from './footer/footer'
 class App extends React.Component {
   constructor (props) {
     super(props)
+    this.scrollRef = React.createRef()
   }
 
   componentDidMount () {
@@ -39,7 +40,7 @@ class App extends React.Component {
   render() {
     return (
       <content className='all-content'>
-          <Header/>
+          <Header scrollRef={this.scrollRef}/>
           <Switch>
             <Route path='/user-dashboard' exact component={Dashboard} />
             <Route path='/login' exact component={SessionPage} />
@@ -49,13 +50,18 @@ class App extends React.Component {
             <Route path='/edit-a-company/:postId' component={UpdateCompanyForm}/>
             <Route path='/post-a-job' component={JobPostForm} />
             <Route path='/post-a-company' component={CompanyPostForm} />
-            <Route path='/' exact component={Home} />
+            <Route path='/' exact component={() => <Home scrollRef={this.scrollRef}/>} />
           </Switch>
           <Footer/>
       </content>
     )
   }
 }
+// 
+// <Route
+//   path='/dashboard'
+//   component={() => <Dashboard isAuthed={true} />}
+// />
 
 const mapStateToProps = state => {
   return {

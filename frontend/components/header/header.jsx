@@ -2,11 +2,11 @@ import React from 'react'
 import Navigation from './navigation'
 import HeaderContent from './headerContent'
 
-export default () => {
+export default ({ scrollRef }) => {
   return (
     <div className='header'>
       <Navigation/>
-      <HeaderContent/>
+      <HeaderContent scrollRef={scrollRef}/>
     </div>
 
   )

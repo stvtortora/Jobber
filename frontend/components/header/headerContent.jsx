@@ -1,8 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import SearchForm from '../pages/search/searchForm'
+import ScrollArrow from './scrollArrow'
 
-const HeaderContent = ({ currentRoute }) => {
+const HeaderContent = ({ currentRoute, scrollRef }) => {
   const sectionHeader = () => {
     const getText = () => {
       const textMap = {
@@ -53,11 +54,15 @@ const HeaderContent = ({ currentRoute }) => {
         {sectionHeader()}
         {
           currentRoute === '/' ?
-          <SearchForm
-          searchBoxClass='home-search-box'
-          keyWordsClass='search-keywords'
-          submitButtonClass='search-submit'
-          currentQuery={''}/> :
+          <div>
+            <SearchForm
+            searchBoxClass='home-search-box'
+            keyWordsClass='search-keywords'
+            submitButtonClass='search-submit'
+            currentQuery={''}/>
+            <ScrollArrow scrollRef={scrollRef}/>
+          </div>
+          :
           <div></div>
         }
       </div>
@@ -66,6 +71,7 @@ const HeaderContent = ({ currentRoute }) => {
 
 
 }
+
 
 const mapStateToProps = state => {
   return {

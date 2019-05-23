@@ -70,7 +70,7 @@ class PopularCategories extends React.Component {
     if (this.state.loaded) {
       return (
         <div className='popular-categories'>
-          <SectionHeader title='Popular Categories' subtitle={`${this.totalPositionCount()} jobs live`}/>
+          <SectionHeader id='black-text' title='Popular Categories' subtitle={`${this.totalPositionCount()} jobs live`}/>
           <ul>
             {this.display()}
           </ul>

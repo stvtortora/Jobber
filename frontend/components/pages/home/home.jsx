@@ -1,19 +1,21 @@
 import React from 'react'
 import PopularCategories from './popularCategories'
-// import SignpUpPrompt from './singUpPrompt'
-// import FeaturedJobs from './FeaturedJobs'
+import SignUpPrompt from './signUpPrompt'
+import LatestJobs from './latestJobs'
+import InquiryBanner from './inquiryBanner'
 import { connect } from 'react-redux'
 import { updateRoute } from '../../../actions/routeActions'
 
-const Home = ({ updateRoute }) => {
+const Home = ({ updateRoute, scrollRef }) => {
   return (
-    <div className='home-page'>
+    <div className='home-page' ref={scrollRef}>
       <PopularCategories updateRoute={updateRoute}/>
+      <SignUpPrompt updateRoute={updateRoute}/>
+      <LatestJobs updateRoute={updateRoute}/>
+      <InquiryBanner/>
     </div>
   )
 }
-// <SignUpPrompt/>
-// <FeaturedJobs/>
 
 const mapDispatchToProps = dispatch => {
   return {
