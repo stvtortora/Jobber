@@ -32,6 +32,7 @@ class App extends React.Component {
     }
     const { pathname, search } = this.props.history.location
     const { prevPathname, prevSearch } = prevProps.history.location
+
     if (prevPathname !== pathname && prevSearch !== search) {
       this.props.updateRoute(pathname + search)
     }
@@ -57,7 +58,7 @@ class App extends React.Component {
     )
   }
 }
-// 
+//
 // <Route
 //   path='/dashboard'
 //   component={() => <Dashboard isAuthed={true} />}
@@ -65,7 +66,8 @@ class App extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    currentRoute: state.currentRoute
+    currentRoute: state.currentRoute,
+    currentUser: state.session.id
   }
 }
 

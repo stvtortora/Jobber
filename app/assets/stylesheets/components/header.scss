@@ -53,10 +53,32 @@
     width: 100%;
     margin-left: auto;
     margin-right: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 
     .title-header {
       font-size: 30px;
       color: #384047;
+    }
+
+    .additional-data {
+      display: flex;
+      flex-direction: row;
+      padding-left: 30px;
+      align-items: center;
+
+      p {
+        padding: 10px;
+      }
+
+      button {
+        text-decoration: underline;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
     }
   }
 }

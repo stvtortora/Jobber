@@ -6,7 +6,7 @@ const UserNavigation = ({ navigateTo, faColor, currentUser, currentRoute, logout
   const logOutAndRedirect = () => {
     logout(currentUser).then(() => {
       if (currentRoute !== '/') {
-        navigateTo('/')
+        navigateTo('/login')
       }
     })
   }

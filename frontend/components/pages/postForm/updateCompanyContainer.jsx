@@ -7,6 +7,7 @@ import { updateRoute } from '../../../actions/routeActions'
 const mapStateToProps = (state, ownProps) => {
   const postId = ownProps.history.location.pathname.slice(16)
   return {
+    currentUser: state.session.id,
     postId,
     post: state.records.companies.info[postId],
     redirectRoute: '/',

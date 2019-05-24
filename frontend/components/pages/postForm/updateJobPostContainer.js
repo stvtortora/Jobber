@@ -9,6 +9,7 @@ import { updateRoute } from '../../../actions/routeActions'
 const mapStateToProps = (state, ownProps) => {
   const postId = ownProps.history.location.pathname.slice(12)
   return {
+    currentUser: state.session.id,
     postId,
     post: state.records.jobPosts.info[postId],
     newRecordKey: 'jobPost',

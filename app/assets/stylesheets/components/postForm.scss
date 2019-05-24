@@ -91,6 +91,11 @@
           border: 2px solid #d4d9dd;
           border-radius: 4px;
           height: 39.99px;
+
+          &:hover {
+            cursor: pointer;
+            border-color: #8c9aa6;
+          }
         }
 
         select {

@@ -7,6 +7,7 @@ import { updateRoute } from '../../../actions/routeActions'
 
 const mapStateToProps = state => {
   return {
+    currentUser: state.session.id,
     newRecordKey: 'jobPost',
     redirectRoute: '/jobs/',
     formName: 'Job Post',

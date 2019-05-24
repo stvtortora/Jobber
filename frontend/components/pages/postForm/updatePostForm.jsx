@@ -17,6 +17,7 @@ export default class UpdatePostForm extends React.Component {
     if (this.state.postLoaded) {
 
       const {
+        currentUser,
         action,
         updateRoute,
         fetch,
@@ -38,6 +39,7 @@ export default class UpdatePostForm extends React.Component {
 
       return (
         <PostForm
+        currentUser={currentUser}
         action={action}
         updateRoute={updateRoute}
         fetch={fetch}

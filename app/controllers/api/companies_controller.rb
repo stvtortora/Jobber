@@ -26,7 +26,7 @@ class Api::CompaniesController < ApplicationController
   end
 
   def index
-    if (params[:current_user_id])
+    if params[:current_user_id]
       if params[:current_user_id].to_i != current_user.id
         render json: ['Not authorized']
       else

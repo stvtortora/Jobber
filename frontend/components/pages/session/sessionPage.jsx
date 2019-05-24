@@ -2,6 +2,8 @@ import React from 'react'
 import LoginForm from './loginFormContainer'
 import RegisterForm from './registerFormContainer'
 import TitleHeader from '../../header/titleHeader'
+import { connect } from 'react-redux'
+import { logout } from '../../../actions/sessionActions'
 
 class SessionPage extends React.Component {
   constructor(props) {
@@ -9,6 +11,7 @@ class SessionPage extends React.Component {
     this.state = {
       currentForm: 'Register'
     }
+    this.form = this.form.bind(this)
   }
 
   updateForm (formType) {
@@ -17,20 +20,53 @@ class SessionPage extends React.Component {
     }
   }
 
+  form() {
+    return (
+      <div className='session-form-container'>
+        <div className='form-options'>
+          <p onClick={this.updateForm('Register')} className={this.state.currentForm === 'Register' ? 'selected-session-option' : 'unselected-session-option'}>Register</p>
+          <p onClick={this.updateForm('Login')} className={this.state.currentForm === 'Login' ? 'selected-session-option' : 'unselected-session-option'}>Login</p>
+        </div>
+      {this.state.currentForm === 'Login' ? <LoginForm formName='Login'/> : <RegisterForm formName='Register'/>}
+      </div>
+    )
+  }
+
   render() {
+    const { currentUser, logout } = this.props
+
     return (
       <div className='session-page'>
-        <TitleHeader message={'Register / Login'}/>
-        <div className='session-form-container'>
-          <div className='form-options'>
-            <p onClick={this.updateForm('Register')} className={this.state.currentForm === 'Register' ? 'selected-session-option' : 'unselected-session-option'}>Register</p>
-            <p onClick={this.updateForm('Login')} className={this.state.currentForm === 'Login' ? 'selected-session-option' : 'unselected-session-option'}>Login</p>
-          </div>
-          {this.state.currentForm === 'Login' ? <LoginForm formName='Login'/> : <RegisterForm formName='Register'/>}
-        </div>
+        <TitleHeader
+        message={'Register / Login'}
+        additionalData={
+          {
+            message: 'You are already logged in.',
+            buttonText: 'Logout',
+            buttonAction: () => logout(currentUser),
+            useData: Boolean(currentUser)
+          }
+        }/>
+        {
+          currentUser ?
+          <div/> :
+          this.form()
+        }
       </div>
     )
   }
 }
 
-export default SessionPage
+const mapStateToProps = state => {
+  return {
+    currentUser: state.session.id
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    logout: (currentUser) => dispatch(logout(currentUser))
+  }
+}
+
+export default connect(mapStateToProps)(SessionPage)

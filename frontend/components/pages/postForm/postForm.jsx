@@ -34,22 +34,28 @@ export default class PostForm extends React.Component {
   }
 
   componentDidMount() {
-    const { relatedRecords, currentUser } = this.props
-
-    if (relatedRecords) {
-      this.props.fetch(currentUser)
+    if (!this.props.currentRouter) {
+      this.props.history.push('/login')
     }
 
-    const options = {
-      placeholder: 'Describe this role',
-      theme: 'snow'
-    };
+    else {
+      const { relatedRecords, currentUser } = this.props
 
-    this.editor = new Quill(document.getElementById('editor'), options)
+      if (relatedRecords) {
+        this.props.fetch(currentUser)
+      }
 
-    if (this.state.description) {
-      this.editor.setContents(JSON.parse(this.state.description).richText)
-      this.setState({description: null})
+      const options = {
+        placeholder: 'Describe this role',
+        theme: 'snow'
+      };
+
+      this.editor = new Quill(document.getElementById('editor'), options)
+
+      if (this.state.description) {
+        this.editor.setContents(JSON.parse(this.state.description).richText)
+        this.setState({description: null})
+      }
     }
   }
 
@@ -134,38 +140,42 @@ export default class PostForm extends React.Component {
   }
 
   render() {
-    return (
-      <section className='job-post-form'>
-        <TitleHeader message={`Post a ${this.props.formName}`}/>
-        <Errors/>
-        <form onSubmit={this.handleSubmit}>
-          <span className='field-row'>
-            <div className='title-field form-field'>
-              <label>{`${this.props.formName} Title`}</label>
-              <input type="text" value={this.state.title} onChange={this.update('title')}/>
-            </div>
-          </span>
-          {this.constructRow(this.props.formFields.firstRow)}
-          {this.constructRow(this.props.formFields.secondRow)}
-          {this.constructRow(this.props.formFields.thirdRow)}
-          {
-            this.props.includeImageUpload ?
+    if (this.props.currentUser) {
+      return (
+        <section className='job-post-form'>
+          <TitleHeader message={`Post a ${this.props.formName}`}/>
+          <Errors/>
+          <form onSubmit={this.handleSubmit}>
             <span className='field-row'>
-              <div className='file-field'>
-                <label>Logo</label>
-                <input type='file' onChange={this.updateFile}/>
+              <div className='title-field form-field'>
+                <label>{`${this.props.formName} Title`}</label>
+                <input type="text" value={this.state.title} onChange={this.update('title')}/>
               </div>
             </span>
-            :
-            <div></div>
-          }
-          <div className='quill-container'>
-            <label>Description</label>
-              <div id='editor'/>
-          </div>
-          <button><p>Post</p></button>
-        </form>
-      </section>
-    )
+            {this.constructRow(this.props.formFields.firstRow)}
+            {this.constructRow(this.props.formFields.secondRow)}
+            {this.constructRow(this.props.formFields.thirdRow)}
+            {
+              this.props.includeImageUpload ?
+              <span className='field-row'>
+                <div className='file-field'>
+                  <label>Logo</label>
+                  <input type='file' onChange={this.updateFile}/>
+                </div>
+              </span>
+              :
+              <div></div>
+            }
+            <div className='quill-container'>
+              <label>Description</label>
+                <div id='editor'/>
+            </div>
+            <button><p>Post</p></button>
+          </form>
+        </section>
+      )
+    }
+
+    return null
   }
 }
