@@ -12,14 +12,20 @@ class Api::JobPostsController < ApplicationController
   def update
     @job_post = JobPost.find(params[:id])
 
-    if @job_post.update_attributes(job_post_params)
-      render :show
+    if @job_post.company.user_id == current_user.id
+      if @job_post.update_attributes(job_post_params)
+        render :show
+      else
+        render json: @job_post.errors.full_messages, status: 422
+      end
     else
-      render json: @job_post.errors.full_messages, status: 422
+      render json: ['Not authorized to edit this job post']
     end
   end
 
   def index
+    puts '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
+    puts params
     if params[:current_user_id]
       if  params[:current_user_id].to_i == current_user.id
         @job_posts = JobPost.joins(:company).where('companies.user_id = ?', current_user.id).includes(:company, :job_category)
@@ -29,7 +35,7 @@ class Api::JobPostsController < ApplicationController
       end
     else
       @job_posts = JobPost.retrieve_by_query(query_params)
-      @total_count = JobPost.total_count_by_query(query_params)
+      @filter_counts = JobPost.filter_counts_by_query(query_params)
       render :index
     end
   end

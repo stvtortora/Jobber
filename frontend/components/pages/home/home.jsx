@@ -6,9 +6,9 @@ import InquiryBanner from './inquiryBanner'
 import { connect } from 'react-redux'
 import { updateRoute } from '../../../actions/routeActions'
 
-const Home = ({ updateRoute, scrollRef }) => {
+const Home = ({ updateRoute, landingScrollRef }) => {
   return (
-    <div className='home-page' ref={scrollRef}>
+    <div className='home-page' ref={landingScrollRef}>
       <PopularCategories updateRoute={updateRoute}/>
       <SignUpPrompt updateRoute={updateRoute}/>
       <LatestJobs updateRoute={updateRoute}/>

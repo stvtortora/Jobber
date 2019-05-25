@@ -9,7 +9,7 @@ export default class MainPostContent extends React.Component {
   }
 
   componentDidMount() {
-    document.getElementById('post-description').innerHTML = this.props.post.description.html
+    document.getElementById('post-description').innerHTML = JSON.parse(this.props.post.description).html
   }
 
   description() {

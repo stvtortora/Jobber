@@ -10,7 +10,7 @@ const mapStateToProps = state => {
     currentUser: state.session.id,
     newRecordKey: 'jobPost',
     redirectRoute: '/jobs/',
-    formName: 'Job Post',
+    formName: 'Job',
     formFields: {
       firstRow: ['city', 'company_id', 'job_category_id'],
       secondRow: ['job_type', 'salary', 'career_level'],
@@ -32,7 +32,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     fetch: (currentUser) => {
-      return dispatch(fetchJobCategories()).then(() => {
+      return dispatch(fetchJobCategories(currentUser)).then(() => {
         return dispatch(fetchCompanies(currentUser))
       })
     },

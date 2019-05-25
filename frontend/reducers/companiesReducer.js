@@ -8,7 +8,7 @@ const info = (state = {}, action) => {
 
   switch (action.type) {
     case RECEIVE_COMPANIES:
-      return action.companies.content;
+      return action.companies.content || {};
     case RECEIVE_COMPANY:
       newState = merge({}, state)
       newState[action.company.id] = action.company

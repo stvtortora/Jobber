@@ -9,17 +9,29 @@ import merge from 'lodash/merge'
 class SearchPage extends React.Component {
   constructor(props) {
     super(props)
+    this.state = {
+      contentLoaded: false
+    }
     this.updateSearch = this.updateSearch.bind(this)
   }
 
   componentDidMount() {
-    this.props.search(this.props.searchSpecifications)
+    if (this.props.isThisComponentsRoute) {
+      this.props.search(this.props.searchSpecifications).then(() => {
+        this.setState({
+          contentLoaded: true
+        })
+      })
+    }
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.currentQuery !== prevProps.currentQuery && this.props.isThisComponentsRoute) {
-      console.log('what the fuck', this.props.searchSpecifications)
-      this.props.search(this.props.searchSpecifications)
+      this.props.search(this.props.searchSpecifications).then(() => {
+        this.setState({
+          contentLoaded: true
+        })
+      })
     }
   }
 
@@ -38,7 +50,7 @@ class SearchPage extends React.Component {
       else {
         delete queryOptions[optionType]
       }
-      
+
       const { routePrefix } = this.props
       this.props.updateRoute(`${routePrefix}/${buildQuery(queryOptions)}`)
     }
@@ -46,6 +58,7 @@ class SearchPage extends React.Component {
 
   sideBar() {
     const { currentQuery, filterTypes, searchSpecifications, searchResults } = this.props
+    const { filterCounts } = searchResults
     return (
       <section className='side-bar'>
         <SearchForm
@@ -54,6 +67,7 @@ class SearchPage extends React.Component {
         submitButtonClass='side-bar-search-submit'
         currentQuery={currentQuery}/>
         <Filters
+        filterCounts={filterCounts}
         filterTypes={filterTypes}
         searchSpecifications={searchSpecifications}
         searchResults={searchResults.info}
@@ -64,8 +78,14 @@ class SearchPage extends React.Component {
 
   mainContent() {
     const { searchResults, searchSpecifications } = this.props
-    const { totalCount, info } = searchResults
+    const { info, filterCounts } = searchResults
     const { limit, order, offset } = searchSpecifications
+    const firstFilter = filterCounts[Object.keys(filterCounts)[0]]
+
+    const totalCount = Object.keys(firstFilter).reduce((count, option) => {
+      count += firstFilter[option]
+      return count
+    }, 0)
 
     return (
       <section className='main-content'>
@@ -82,7 +102,11 @@ class SearchPage extends React.Component {
   }
 
   render() {
-    if (this.props.currentRoute !== '/') {
+    console.log(this.state)
+    console.log(this.props)
+    if (this.props.currentRoute !== '/' && this.state.contentLoaded) {
+
+      console.log(this.props, 'props')
       return(
         <content className='page-content'>
           <div className='content-container'>

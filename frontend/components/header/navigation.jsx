@@ -55,7 +55,7 @@ class Navigation extends React.Component {
 
   render () {
     return (
-      <div className={this.state.klassName}>
+      <div ref={this.props.redirectScrollRef} className={this.state.klassName}>
         <div className='center-bar'>
           <div className='top-bar'>
             <Logo logoColor={this.state.fontColor}/>

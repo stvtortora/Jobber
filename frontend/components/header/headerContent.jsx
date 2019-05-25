@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import SearchForm from '../pages/search/searchForm'
 import ScrollArrow from './scrollArrow'
 
-const HeaderContent = ({ currentRoute, scrollRef }) => {
+const HeaderContent = ({ currentRoute, landingScrollRef }) => {
   const sectionHeader = () => {
     const getText = () => {
       const textMap = {
@@ -60,7 +60,7 @@ const HeaderContent = ({ currentRoute, scrollRef }) => {
             keyWordsClass='search-keywords'
             submitButtonClass='search-submit'
             currentQuery={''}/>
-            <ScrollArrow scrollRef={scrollRef}/>
+            <ScrollArrow landingScrollRef={landingScrollRef}/>
           </div>
           :
           <div></div>

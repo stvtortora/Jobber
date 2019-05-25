@@ -7,7 +7,6 @@ const defaultOptions = {
 }
 
 export const buildQuery = (queryOptions) => {
-  console.log(queryOptions)
   const options = merge({}, defaultOptions, queryOptions)
   let query = '?'
 
@@ -23,7 +22,7 @@ export const buildQuery = (queryOptions) => {
     } else {
       optionVal = options[key].split(' ').join('_')
     }
-    
+
     if (typeof optionVal === 'number' || optionVal.length > 0) {
 
       if (query.length > 1) {
@@ -49,8 +48,6 @@ export const parseQuery = query => {
     } else if (filterKey === 'order') {
       filterValue = filterParts[1].split(':').join(' ')
     } else {
-      console.log(query)
-      console.log(filterParts, 'fp')
       filterValue = filterParts[1].split('_').join(' ')
     }
 

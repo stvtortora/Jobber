@@ -8,6 +8,7 @@ const info = (state = {}, action) => {
 
   switch (action.type) {
     case RECEIVE_JOB_POSTS:
+    console.log(action, 'posts')
       return action.jobPosts.content || {};
     case RECEIVE_JOB_POST:
       newState = merge({}, state)
@@ -31,14 +32,14 @@ const ids = (state = [], action) => {
   }
 }
 
-const totalCount = (state = {}, action) => {
+const filterCounts = (state = {}, action) => {
   switch (action.type) {
     case RECEIVE_JOB_POSTS:
-      return action.jobPosts.total_count;
+      return action.jobPosts.filter_counts || state;
     default:
       return state;
   }
 }
 
 
-export default combineReducers({ info, ids, totalCount });
+export default combineReducers({ info, ids, filterCounts });

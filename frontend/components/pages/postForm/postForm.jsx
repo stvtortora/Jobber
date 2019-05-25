@@ -34,28 +34,22 @@ export default class PostForm extends React.Component {
   }
 
   componentDidMount() {
-    if (!this.props.currentRouter) {
-      this.props.history.push('/login')
+    const { relatedRecords, currentUser } = this.props
+
+    if (relatedRecords) {
+      this.props.fetch(currentUser)
     }
 
-    else {
-      const { relatedRecords, currentUser } = this.props
+    const options = {
+      placeholder: 'Describe this role',
+      theme: 'snow'
+    };
 
-      if (relatedRecords) {
-        this.props.fetch(currentUser)
-      }
+    this.editor = new Quill(document.getElementById('editor'), options)
 
-      const options = {
-        placeholder: 'Describe this role',
-        theme: 'snow'
-      };
-
-      this.editor = new Quill(document.getElementById('editor'), options)
-
-      if (this.state.description) {
-        this.editor.setContents(JSON.parse(this.state.description).richText)
-        this.setState({description: null})
-      }
+    if (this.state.description) {
+      this.editor.setContents(JSON.parse(this.state.description).richText)
+      this.setState({description: null})
     }
   }
 
@@ -66,7 +60,6 @@ export default class PostForm extends React.Component {
   }
 
   updateFile(e) {
-    console.log(e.currentTarget.files)
     this.setState({
       'picture': e.currentTarget.files[0]
     })
@@ -115,7 +108,7 @@ export default class PostForm extends React.Component {
               <label>{displayTitle}</label>
               {
                 textFields.includes(field) ?
-                <input placeholder={textPlaceHolders[field]} type='text' value={this.state[field]} onChange={this.update(field)}/> :
+                <input id={field === 'city' ? 'loc-input' : 'input'} placeholder={textPlaceHolders[field]} type='text' value={this.state[field]} onChange={this.update(field)}/> :
                 <select onChange={this.update(field)}>
                   <option value=''>{`Choose ${['a','e','i','o','u'].includes(displayTitle[0]) ? 'an' : 'a'} ${displayTitle}...`}</option>
                   {
@@ -140,42 +133,56 @@ export default class PostForm extends React.Component {
   }
 
   render() {
-    if (this.props.currentUser) {
-      return (
-        <section className='job-post-form'>
-          <TitleHeader message={`Post a ${this.props.formName}`}/>
-          <Errors/>
-          <form onSubmit={this.handleSubmit}>
-            <span className='field-row'>
-              <div className='title-field form-field'>
-                <label>{`${this.props.formName} Title`}</label>
-                <input type="text" value={this.state.title} onChange={this.update('title')}/>
-              </div>
-            </span>
-            {this.constructRow(this.props.formFields.firstRow)}
-            {this.constructRow(this.props.formFields.secondRow)}
-            {this.constructRow(this.props.formFields.thirdRow)}
-            {
-              this.props.includeImageUpload ?
+    const { currentUser } = this.props
+    return (
+      <section className='job-post-form'>
+        <TitleHeader
+        message={`Post a ${this.props.formName}`}
+        additionalData={
+          {
+            message: `You must login to post a ${this.props.formName}.`,
+            buttonText: 'Login / Register',
+            buttonAction: () => this.props.updateRoute('/login'),
+            useData: !Boolean(currentUser)
+          }
+        }/>
+        {
+          currentUser ?
+          <div>
+            <Errors/>
+            <form onSubmit={this.handleSubmit}>
               <span className='field-row'>
-                <div className='file-field'>
-                  <label>Logo</label>
-                  <input type='file' onChange={this.updateFile}/>
+                <div className='title-field form-field'>
+                  <label>{`${this.props.formName} Title`}</label>
+                  <input type="text" value={this.state.title} onChange={this.update('title')}/>
                 </div>
               </span>
-              :
-              <div></div>
-            }
-            <div className='quill-container'>
-              <label>Description</label>
-                <div id='editor'/>
-            </div>
-            <button><p>Post</p></button>
-          </form>
-        </section>
-      )
-    }
+              {this.constructRow(this.props.formFields.firstRow)}
+              {this.constructRow(this.props.formFields.secondRow)}
+              {this.constructRow(this.props.formFields.thirdRow)}
+              {
+                this.props.includeImageUpload ?
+                <span className='field-row'>
+                  <div className='file-field'>
+                    <label>Logo</label>
+                    <input type='file' onChange={this.updateFile}/>
+                  </div>
+                </span>
+                :
+                <div></div>
+              }
+              <div className='quill-container'>
+                <label>Description</label>
+                  <div id='editor'/>
+              </div>
+              <button className='submit-post'><p>Post</p></button>
+            </form>
+          </div>
+          :
+          <div/>
+        }
 
-    return null
+      </section>
+    )
   }
 }

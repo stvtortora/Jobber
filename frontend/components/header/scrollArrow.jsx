@@ -1,8 +1,8 @@
 import React from 'react'
 
-export default ({ scrollRef }) => {
+export default ({ landingScrollRef }) => {
   const scrollToContent = () => window.scrollTo({
-    top: scrollRef.current.offsetTop, behavior: 'smooth'
+    top: landingScrollRef.current.offsetTop, behavior: 'smooth'
   })
 
   return (

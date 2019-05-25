@@ -6,7 +6,7 @@ export default ({ totalCount, totalOnPage, limit, order, offset, updateSearch })
 
   return (
     <div className='sort-and-limit-options'>
-      <div className='showing-text'>{`Showing ${firstPost}-${lastPost} of ${totalCount} jobs`}</div>
+      <div className='showing-text'>{totalCount ? `Showing ${firstPost}-${lastPost} of ${totalCount} jobs` : 'No results match your search'}</div>
       <div className='sort-and-limit-forms'>
         <form>
           <select onChange={updateSearch('order')}>

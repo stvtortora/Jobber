@@ -60,7 +60,7 @@ class JobPost < ApplicationRecord
     }
   }
 
-  scope :city, -> (city) { where("lower(city) = ?", city) }
+  scope :city, -> (city) { where("lower(city) = ?", city.downcase) }
   scope :job_type, -> (job_type) { where("lower(job_type) = ?", job_type.downcase) }
   scope :job_category, -> (job_category) { joins(:job_category).where('job_categories.name = ?', job_category) }
 
@@ -78,5 +78,20 @@ class JobPost < ApplicationRecord
 
   def self.total_count_by_query(query_params)
     search_by_query(query_params).count
+  end
+
+  def self.filter_counts_by_query(query_params)
+    job_category = Hash.new(0)
+    job_type = Hash.new(0)
+
+    search_by_query(query_params).each do |job_post|
+      job_category[job_post.job_category.name] += 1
+      job_type[job_post.job_type] += 1
+    end
+
+    {
+      'job_category' => job_category,
+      'job_type' => job_type
+    }
   end
 end

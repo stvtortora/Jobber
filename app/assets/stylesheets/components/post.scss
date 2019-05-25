@@ -3,6 +3,7 @@
 .post-page {
   display: flex;
   flex-direction: column;
+  padding-bottom: 70px;
 
   .full-post-container {
     display: block;
@@ -30,6 +31,8 @@
 
 
         .post-description-container {
+          padding: 30px;
+
           .post-description-title {
             margin: .67em 0;
             font-size: 20px;
@@ -40,26 +43,74 @@
             h1 {
               font-size: 20px;
               color: #384047;
+              font-weight: 1000;
+              text-rendering: optimizeLegibility;
+              text-transform: b;
+              font-weight: bolder;
+              font-family: 'Varela Round', sans-serif;
             }
 
             h2 {
               font-size: 19px;
               color: #384047;
+              font-weight: 1000;
+              text-rendering: optimizeLegibility;
+              text-transform: b;
+              font-weight: bolder;
+              font-family: 'Varela Round', sans-serif;
             }
 
             h3 {
               font-size: 18px;
               color: #384047;
+              font-weight: 1000;
+              text-rendering: optimizeLegibility;
+              text-transform: b;
+              font-weight: bolder;
+              font-family: 'Varela Round', sans-serif;
             }
 
             h4 {
               font-size: 17px;
               color: #384047;
+              font-weight: 1000;
+              text-rendering: optimizeLegibility;
+              text-transform: b;
+              font-weight: bolder;
+              font-family: 'Varela Round', sans-serif;
             }
 
             h5 {
               font-size: 16px;
               color: #384047;
+              font-weight: 1000;
+              text-rendering: optimizeLegibility;
+              text-transform: b;
+              font-weight: bolder;
+              font-family: 'Varela Round', sans-serif;
+            }
+
+            p {
+              color: #576366;
+              font-family: 'Varela Round', sans-serif;
+              line-height: 1.75;
+            }
+
+            span {
+              color: #576366;
+              font-family: 'Varela Round', sans-serif;
+              line-height: 1.75;
+              font-weight: 900;
+            }
+
+            ul {
+              padding-left: 40px;
+              line-height: 1.75;
+
+              li {
+                color: #576366;
+                font-family: 'Varela Round', sans-serif;
+              }
             }
           }
         }

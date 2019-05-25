@@ -13,6 +13,7 @@ class LatestJobs extends React.Component {
   }
 
   componentDidMount() {
+    console.log('mounting again')
     this.props.searchJobPosts({
       'order': 'created_at desc',
       'limit': '10',

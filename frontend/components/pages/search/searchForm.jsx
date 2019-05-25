@@ -18,7 +18,6 @@ class SearchForm extends React.Component {
 
   buildQueryAndUpdateRoute() {
     const queryOptions = merge({}, parseQuery(this.props.currentQuery), this.state)
-
     this.props.updateRoute(`/jobs/${buildQuery(queryOptions)}`)
   }
 

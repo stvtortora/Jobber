@@ -1,4 +1,5 @@
 export const searchJobPosts = query => {
+  console.log(query, 'query')
   return $.ajax({
     method: 'GET',
     url: 'api/job_posts',
@@ -87,6 +88,13 @@ export const createCompany = company => {
   })
 }
 
+export const fetchUser = (currentUser) => {
+  return $.ajax({
+    method: 'GET',
+    url: `api/users/${currentUser}`
+  })
+}
+
 export const fetchCompany = companyId => {
   return $.ajax({
     method: 'GET',
@@ -104,7 +112,7 @@ export const fetchCompanies = current_user_id => {
 
 export const updateCompany = company => {
   const isFormData = company instanceof FormData
-  
+
   return $.ajax({
     method: 'PATCH',
     url: `api/companies/${company.id}`,

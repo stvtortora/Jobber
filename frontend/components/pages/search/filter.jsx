@@ -8,25 +8,25 @@ class Filter extends React.Component {
     }
     this.toggleShowOptions = this.toggleShowOptions.bind(this)
     this.renderFilterOptions = this.renderFilterOptions.bind(this)
-    this.getOptionCounts = this.getOptionCounts.bind(this)
+    // this.getOptionCounts = this.getOptionCounts.bind(this)
   }
 
-  getOptionCounts() {
-    const { searchResults, filterType } = this.props
-    return Object.keys(searchResults).reduce((optionCounts, resultId) => {
-      const filterValue = searchResults[resultId][filterType]
-      if (optionCounts[filterValue]) {
-        optionCounts[filterValue]++
-      } else {
-        optionCounts[filterValue] = 1
-      }
-      return optionCounts
-    }, {})
-  }
+  // getOptionCounts() {
+  //   const { searchResults, filterType } = this.props
+  //   return Object.keys(searchResults).reduce((optionCounts, resultId) => {
+  //     const filterValue = searchResults[resultId][filterType]
+  //     if (optionCounts[filterValue]) {
+  //       optionCounts[filterValue]++
+  //     } else {
+  //       optionCounts[filterValue] = 1
+  //     }
+  //     return optionCounts
+  //   }, {})
+  // }
 
   renderFilterOptions () {
-    const { updateSearch, currentOptionSelected, filterType, filterTypeTitle } = this.props
-    const optionCounts = this.getOptionCounts()
+    const { updateSearch, currentOptionSelected, filterType, filterTypeTitle, optionCounts } = this.props
+    // const optionCounts = this.getOptionCounts()
 
     return currentOptionSelected ?
 

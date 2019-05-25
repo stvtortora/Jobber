@@ -5,6 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
 User.destroy_all
 JobPost.destroy_all
 Company.destroy_all
@@ -13,220 +14,176 @@ JobCategory.destroy_all
 #make a company
 #make some job_categories
 #make some job posts
-
 steven_tortora = User.create!({
-  email: 'stvtortora@gmail.com',
-  fname: 'Steven',
-  lname: 'Tortora',
   password: 'password',
-  dname: 'Steven Tortora',
-  city: 'NewYork'
+  dname: 'Steven Tortora'
 })
 
-puts steven_tortora.id
-
-tenfold = Company.create!({
-  title: 'Tenfold',
-  website: 'tenfold.com',
-  tagline: 'We fold ten times',
-  description: 'Tenfold merges technology with the number ten in ways you never thought possible',
-  city: 'New York',
-  user_id: steven_tortora.id,
-  twitter: 'twitter.com',
-  linked_in: 'linkedin.com',
-  team_size: '<10',
-  industry: 'Software',
-  phone_number: '6073213700'
+awesome_user = User.create!({
+  password: 'password',
+  dname: 'Awsome User'
 })
 
-engineer_developer = JobCategory.create!({
-  name: 'Engineer/Developer'
-})
+users = [steven_tortora, awesome_user]
 
-marketing  = JobCategory.create!({
-  name: 'Marketing'
-})
+latin_job_description = "{\"html\":\"<h3>Job Description </h3><p><br></p><p>Lorem ipsum dolor sit amet, te vim tractatos reformidans, id pri porro perfecto pertinacia. Eum te dolore volumus. Quo option feugiat ornatus cu, nam ad vero latine. Clita menandri in nam, mutat quando at ius, nisl idque debitis cu est. Vel at viderer noluisse perfecto.</p><p><br></p><p>Nisl ocurreret philosophia per cu. Aliquip consequuntur in sed, partem altera abhorreant te vix, vis ne tollit graeci. Labore conceptam vituperatoribus ut mel, suas numquam sed eu. Velit novum cum ex. Erant deserunt expetenda ad duo, elitr euismod salutatus quo ex.</p><p><br></p><h3>Must Have </h3><p><br></p><ul><li>At nec tota senserit. Cu erat lorem per. Cu dissentiet definitionem ius. In usu duis facer errem, timeam laboramus assentior pri ad.</li><li>Et nam quodsi mollis. Clita pertinax vel in, electram laboramus et has, ne primis inciderint scribentur per. His ut nominavi senserit. Et has odio vitae causae, inani graeci eu nec.</li><li>Omnis debet deterruisset vel ea, eam soluta propriae ei, ne corrumpit intellegam disputationi quo. Eos audiam regione vivendo ei, pri no decore pericula definitiones, unum sale ullum cu sed.</li><li>Salutatus persecuti at eum, his ut graeci imperdiet, ex mei tempor impetus. Ad has illud quodsi concludaturque, ad mei accumsan disputationi, quas ludus oportere est no. Ut enim movet quo, his et velit assum, forensibus omittantur no qui.&nbsp; </li></ul><p><br></p><h3>Nice To Have </h3><p><br></p><ul><li>An nec modus mollis vidisse, eu scaevola suavitate maluisset his, an sit inani discere. Duo ad postulant qualisque, nam id sensibus adolescens mediocritatem. Noster honestatis cu eam.&nbsp;</li><li>Vero aliquam scribentur usu in. Ipsum dicat eos no, ut has graeci viderer, elit tantas vim id.</li><li>Cu latine indoctum qualisque mel, in alia dolore pri. Eros clita cum et, omnis elitr at nam. Has purto nominavi voluptatum ad. Mel cu timeam adolescens, qui debet officiis ne. Eum eligendi ponderum expetenda cu.</li><li>Ei duo causae temporibus, ut sea oratio nullam, an solet virtute eleifend eos. Error inermis mei no, ut regione dignissim reprehendunt sit, quo et dicit sadipscing. Cu mei debet mucius eleifend. Eos id albucius philosophia.</li><li>Ut vel solum exerci, pro ne vide munere inimicus. Cu affert alterum indoctum his, id saepe putant cum. Qui an civibus accusam conclusionemque.&nbsp; </li></ul>\",\"richText\":{\"ops\":[{\"insert\":\"Job Description \"},{\"attributes\":{\"header\":3},\"insert\":\"\\n\"},{\"insert\":\"\\nLorem ipsum dolor sit amet, te vim tractatos reformidans, id pri porro perfecto pertinacia. Eum te dolore volumus. Quo option feugiat ornatus cu, nam ad vero latine. Clita menandri in nam, mutat quando at ius, nisl idque debitis cu est. Vel at viderer noluisse perfecto.\\n\\nNisl ocurreret philosophia per cu. Aliquip consequuntur in sed, partem altera abhorreant te vix, vis ne tollit graeci. Labore conceptam vituperatoribus ut mel, suas numquam sed eu. Velit novum cum ex. Erant deserunt expetenda ad duo, elitr euismod salutatus quo ex.\\n\\nMust Have \"},{\"attributes\":{\"header\":3},\"insert\":\"\\n\"},{\"insert\":\"\\nAt nec tota senserit. Cu erat lorem per. Cu dissentiet definitionem ius. In usu duis facer errem, timeam laboramus assentior pri ad.\"},{\"attributes\":{\"list\":\"bullet\"},\"insert\":\"\\n\"},{\"insert\":\"Et nam quodsi mollis. Clita pertinax vel in, electram laboramus et has, ne primis inciderint scribentur per. His ut nominavi senserit. Et has odio vitae causae, inani graeci eu nec.\"},{\"attributes\":{\"list\":\"bullet\"},\"insert\":\"\\n\"},{\"insert\":\"Omnis debet deterruisset vel ea, eam soluta propriae ei, ne corrumpit intellegam disputationi quo. Eos audiam regione vivendo ei, pri no decore pericula definitiones, unum sale ullum cu sed.\"},{\"attributes\":{\"list\":\"bullet\"},\"insert\":\"\\n\"},{\"insert\":\"Salutatus persecuti at eum, his ut graeci imperdiet, ex mei tempor impetus. Ad has illud quodsi concludaturque, ad mei accumsan disputationi, quas ludus oportere est no. Ut enim movet quo, his et velit assum, forensibus omittantur no qui.  \"},{\"attributes\":{\"list\":\"bullet\"},\"insert\":\"\\n\"},{\"insert\":\"\\nNice To Have \"},{\"attributes\":{\"header\":3},\"insert\":\"\\n\"},{\"insert\":\"\\nAn nec modus mollis vidisse, eu scaevola suavitate maluisset his, an sit inani discere. Duo ad postulant qualisque, nam id sensibus adolescens mediocritatem. Noster honestatis cu eam. \"},{\"attributes\":{\"list\":\"bullet\"},\"insert\":\"\\n\"},{\"insert\":\"Vero aliquam scribentur usu in. Ipsum dicat eos no, ut has graeci viderer, elit tantas vim id.\"},{\"attributes\":{\"list\":\"bullet\"},\"insert\":\"\\n\"},{\"insert\":\"Cu latine indoctum qualisque mel, in alia dolore pri. Eros clita cum et, omnis elitr at nam. Has purto nominavi voluptatum ad. Mel cu timeam adolescens, qui debet officiis ne. Eum eligendi ponderum expetenda cu.\"},{\"attributes\":{\"list\":\"bullet\"},\"insert\":\"\\n\"},{\"insert\":\"Ei duo causae temporibus, ut sea oratio nullam, an solet virtute eleifend eos. Error inermis mei no, ut regione dignissim reprehendunt sit, quo et dicit sadipscing. Cu mei debet mucius eleifend. Eos id albucius philosophia.\"},{\"attributes\":{\"list\":\"bullet\"},\"insert\":\"\\n\"},{\"insert\":\"Ut vel solum exerci, pro ne vide munere inimicus. Cu affert alterum indoctum his, id saepe putant cum. Qui an civibus accusam conclusionemque.  \"},{\"attributes\":{\"list\":\"bullet\"},\"insert\":\"\\n\"}]}}"
 
-design_ux = JobCategory.create!({
-  name: 'Design/UX'
-})
+latin_company_description = "{\"html\":\"<h3>About </h3><p><br></p><p>Lorem ipsum dolor sit amet, ei doming senserit mel. Eum ut dicta quando sensibus, tale aperiam postulant duo ut. Brute affert in est, usu nullam volumus dissentiet et. Vel ei suas vidisse viderer.</p><p><br></p><p>Et pro amet iudicabit. Fugit debitis vim ei, ius stet aperiam ad. Per brute inani putent eu, tibique ponderum mei id, nulla suavitate neglegentur ex duo. Tota natum sea cu. Ut nec idque sanctus reprimique, sumo voluptatibus cum ex, postea nusquam prodesset quo an. Ad pri vero liber. Vim harum decore ei, ius graece conceptam deseruisse ei, in vim ullum dissentias.</p>\",\"richText\":{\"ops\":[{\"insert\":\"About \"},{\"attributes\":{\"header\":3},\"insert\":\"\\n\"},{\"insert\":\"\\nLorem ipsum dolor sit amet, ei doming senserit mel. Eum ut dicta quando sensibus, tale aperiam postulant duo ut. Brute affert in est, usu nullam volumus dissentiet et. Vel ei suas vidisse viderer.\\n\\nEt pro amet iudicabit. Fugit debitis vim ei, ius stet aperiam ad. Per brute inani putent eu, tibique ponderum mei id, nulla suavitate neglegentur ex duo. Tota natum sea cu. Ut nec idque sanctus reprimique, sumo voluptatibus cum ex, postea nusquam prodesset quo an. Ad pri vero liber. Vim harum decore ei, ius graece conceptam deseruisse ei, in vim ullum dissentias.\\n\"}]}}"
 
-product = JobCategory.create!({
-  name: 'Product'
-})
+company_pictures = [
+  'https://s3.amazonaws.com/job-boardapp-seeds/icons8-3ds-max-64.png',
+  'https://s3.amazonaws.com/job-boardapp-seeds/icons8-active-directory-48.png',
+  'https://s3.amazonaws.com/job-boardapp-seeds/icons8-alpha-16.png',
+  'https://s3.amazonaws.com/job-boardapp-seeds/icons8-approximately-equal-48.png',
+  'https://s3.amazonaws.com/job-boardapp-seeds/icons8-artichoke-48.png',
+  'https://s3.amazonaws.com/job-boardapp-seeds/icons8-artificial-intelligence-filled-48.png',
+  'https://s3.amazonaws.com/job-boardapp-seeds/icons8-artificial-intelligence-filled-64.png',
+  'https://s3.amazonaws.com/job-boardapp-seeds/icons8-biotech-48.png',
+  'https://s3.amazonaws.com/job-boardapp-seeds/icons8-bot-16.png',
+  'https://s3.amazonaws.com/job-boardapp-seeds/icons8-bot-40.png',
+  'https://s3.amazonaws.com/job-boardapp-seeds/icons8-bot-48.png',
+  'https://s3.amazonaws.com/job-boardapp-seeds/icons8-bring-forward-48.png',
+  'https://s3.amazonaws.com/job-boardapp-seeds/icons8-chat-room-48.png',
+  'https://s3.amazonaws.com/job-boardapp-seeds/icons8-currency-48.png',
+  'https://s3.amazonaws.com/job-boardapp-seeds/icons8-connection-status-on-48.png',
+  'https://s3.amazonaws.com/job-boardapp-seeds/icons8-deviantart-48.png',
+  'https://s3.amazonaws.com/job-boardapp-seeds/icons8-evil-40.png',
+  'https://s3.amazonaws.com/job-boardapp-seeds/icons8-evil-64.png',
+  'https://s3.amazonaws.com/job-boardapp-seeds/icons8-fuji-48.png',
+  'https://s3.amazonaws.com/job-boardapp-seeds/icons8-godtier-48.png',
+  'https://s3.amazonaws.com/job-boardapp-seeds/icons8-iceberg-48.png',
+  'https://s3.amazonaws.com/job-boardapp-seeds/icons8-innovation-48.png',
+  'https://s3.amazonaws.com/job-boardapp-seeds/icons8-intelligence-16.png',
+  'https://s3.amazonaws.com/job-boardapp-seeds/icons8-merge-48.png',
+  'https://s3.amazonaws.com/job-boardapp-seeds/icons8-merge-64.png',
+  'https://s3.amazonaws.com/job-boardapp-seeds/icons8-mind-map-48.png',
+  'https://s3.amazonaws.com/job-boardapp-seeds/icons8-mind-map-64.png',
+  'https://s3.amazonaws.com/job-boardapp-seeds/icons8-modern-art-48.png',
+  'https://s3.amazonaws.com/job-boardapp-seeds/icons8-mountain-48.png',
+  'https://s3.amazonaws.com/job-boardapp-seeds/icons8-multichannel-40.png',
+  'https://s3.amazonaws.com/job-boardapp-seeds/icons8-multichannel-64.png',
+  'https://s3.amazonaws.com/job-boardapp-seeds/icons8-network-64.png',
+  'https://s3.amazonaws.com/job-boardapp-seeds/icons8-omega-48.png',
+  'https://s3.amazonaws.com/job-boardapp-seeds/icons8-plasmid-48.png',
+  'https://s3.amazonaws.com/job-boardapp-seeds/icons8-poll-48.png',
+  'https://s3.amazonaws.com/job-boardapp-seeds/icons8-registry-editor-48.png',
+  'https://s3.amazonaws.com/job-boardapp-seeds/icons8-robot-2-40.png',
+  'https://s3.amazonaws.com/job-boardapp-seeds/icons8-saturation-16.png',
+  'https://s3.amazonaws.com/job-boardapp-seeds/icons8-signal-48.png',
+  'https://s3.amazonaws.com/job-boardapp-seeds/icons8-skyatlas-filled-64.png',
+  'https://s3.amazonaws.com/job-boardapp-seeds/icons8-source-code-48.png',
+  'https://s3.amazonaws.com/job-boardapp-seeds/icons8-sync-48.png',
+  'https://s3.amazonaws.com/job-boardapp-seeds/icons8-synchronize-64.png',
+  'https://s3.amazonaws.com/job-boardapp-seeds/icons8-test-tube-64.png',
+  'https://s3.amazonaws.com/job-boardapp-seeds/icons8-thinking-bubble-48.png',
+  'https://s3.amazonaws.com/job-boardapp-seeds/icons8-touch-id-48.png',
+  'https://s3.amazonaws.com/job-boardapp-seeds/icons8-trollface-48.png',
+  'https://s3.amazonaws.com/job-boardapp-seeds/icons8-volcano-40.png',
+  'https://s3.amazonaws.com/job-boardapp-seeds/icons8-wi-fi-48.png'
+].shuffle
 
-finance = JobCategory.create!({
-  name: 'Finance'
-})
+cities = [
+  'New York',
+  'San Francisco',
+  'Boston',
+  'Miami',
+  'Los Angeles',
+  'Seattle',
+  'Austin',
+  'Chicago',
+  'London',
+  'Atlanta',
+  'Washington DC'
+]
 
-hr = JobCategory.create!({
-  name: 'HR'
-})
+industries = ['Ad Tech', 'Agriculture', 'Arts', 'FinTech', 'eCommerce', 'Digital Media', 'Sales', 'Software', 'GreenTech', 'Payments', 'Professional Services', 'Machine Learning']
+team_sizes = ['<10', '10-25', '25-50', '50-100', '100-200', '200-300', '300-500', '500+']
+phone_numbers = ['5555555555', '6073213700', '8888888888', '4444444444', '3333333333']
 
-sales = JobCategory.create!({
-  name: 'Sales'
-})
+require 'open-uri'
 
-project_management = JobCategory.create!({
-  name: 'Project_Management'
-})
+companies = [
+  'Metics',
+  'OkCode',
+  'UsaBit',
+  'Metah',
+  'Artics',
+  'Cartup',
+  'Computio',
+  'Progix',
+  'Strix',
+  'Symbit',
+  'Filems',
+  'NovaSys',
+  'Logify',
+  'Softyk',
+  'Modesk'
+].map do |name|
+  company = Company.create!({
+    title: name,
+    website: 'company.com',
+    tagline: 'Lorem ipsum dolor sit amet, alienum delicata te vix, in.',
+    description: latin_company_description,
+    city: cities.sample,
+    user_id: users.sample.id,
+    twitter: 'twitter.com',
+    linked_in: 'linkedin.com',
+    team_size: team_sizes.sample,
+    industry: industries.sample,
+    phone_number: phone_numbers.sample,
+    })
 
-content = JobCategory.create!({
-  name: 'Content'
-})
+    picture_url = company_pictures.sample
+    file = open(picture_url)
+    company.picture.attach(io: file, filename: picture_url[44...picture_url.length])
 
-data_analytics = JobCategory.create!({
-  name: 'Data/Analytics'
-})
+    company
+end
 
-operations = JobCategory.create!({
-  name: 'Operations'
-})
+jobs = {
+  'Engineer/Developer' => ['Software Engineer', 'Frontend Engineer', 'Backend Engineer', 'Web Developer', 'Senior Software Engineer', 'UI Engineer'],
+  'Marketing' => ['Marketing Specialist'],
+  'Design/UX' => ['UI Designer', 'UX Designer', 'Graphic Designer'],
+  'Product' => ['Product Manager'],
+  'Finance' => ['Financial Analyst'],
+  'HR' => ['HR Specialist'],
+  'Sales' => ['Account Manager', 'Account Executive'],
+  'Project_Management' => ['Project Manager'],
+  'Content' => ['Product Designer', 'Technical Writer','Technician', 'IT Billing Lead', 'Business Representative'],
+  'Data/Analytics' => ['Data Scientist', 'Machine Learning Engineer'],
+  'Operations' => ['Research Architect', 'Technician', 'IT Billing Lead', 'Business Representative']
+}
 
+job_categories = jobs.keys.map do |category_name|
+  JobCategory.create!({
+    name: category_name
+  })
+end
 
-JobPost.create!({
-  title: 'Software Engineer',
-  city: 'New York',
-  description: 'Job Description
-  We are looking for a smart Frontend Engineer who can participate in building our next generation interface. You will get a chance to get your hands dirty with our core product working directly with the Leadership and Business. You will also participate in web security, compatibility and experience design.
+job_types = ['Full Time', 'Part Time', 'Contract', 'Internship']
+salaries = ['$20000-$30000', '$30000-$40000','$40000-$50000','$50000-$60000','$60000-$70000','$70000-$80000','$80000-$90000','$90000-$100000','$100000-$1100000', '$110000-$1200000','$120000-$1300000','$130000-$1400000','$140000-$1500000','$150000-$1600000','$160000-$1700000','$170000-$1800000','$180000-$1900000','$190000-$2000000','$200000+']
+levels = ['Junior', 'Mid', 'Senior', 'Lead', 'Assistant Manager', 'Manager', 'Department Head', 'Executive']
+experiences = ['0-2 Years', '2-3 Years', '3-5 Years', '6-7 Years', '6-7 Years', '8-9 Years', '9-10 Years', '10+ Years']
+qualifications = ['Associate Degree', 'Bachelor Degree', 'Master Degree', 'Doctorate Degree']
+languages = ['Arabic', 'English', 'Spanish', 'Mandarin', 'French', 'Portuguese', 'Hindi']
 
-  This involves a lot of collaboration with the engineering and R&D Teams to prioritise and launch new features. You will also play an important role in deployments, product roadmaps and data security.
+companies.each do |company|
+  (1..7).to_a.sample.times do
+    job_category = job_categories.sample
 
-  Experience
-  Minimum of 3 Years relevant experience with JS libraries and ReactJS
-
-  Must Have
-  Proficient in  ReactJS and other5modern JS libraries/frameworks
-  Proficient in ES6/7 object oriented JavaScript and architecture and development of Single page web applications.
-  Basic understanding of nodeJS and its package managers like npm and yarn.
-  Proficient in flux pattern based development and libraries build upon it like redux, mobX and its derivative micro frameworks like reduxForm etc.
-  Proficient in Event handling/event driven programming and creating event observers at appropriate abstraction levels.
-  Strong understanding of build tools like web-pack, its configuration, scripting and environment management (dev/test/prod).
-  Basic knowledge of HTML5, CSS3 and its frameworks and pre-processors.
-  Should be able to resolve cross browser incompatibilities associates with JS and CSS…
-  Working Knowledge of D3 and similar JS charting libraries
-  Nice to Have
-  Working knowledge of User Experience Design
-  Working knowledge of REST API design.
-  Working knowledge of responsive design.
-  Good understanding of Web 2.0 and Semantic Web standards.
-  Good understanding of data-structures and algorithms.
-  Ability to understand and balance performance tradeoffs.
-  Experience with programming languages like Ruby on Rails, Python, Node JS
-  Experience in deploying complex systems in AWS
-  Experience with best practices such as A/B testing.
-  Just to Add
-  Creative Workplace and open work culture. Creativity and out of the box thinking is nurtured.
-
-  Some perks: Excellent Filter Coffee, Free lunches, PS4 and Fooseball breaks, stocked kitchen topped up with a nice set of people to work with!',
-  job_type: 'Full Time',
-  salary: '$90000-$100000',
-  career_level: 'Mid',
-  experience: '2-3 Years',
-  industry: 'Software',
-  qualification: 'Bachelor Degree',
-  language: 'English',
-  keyword_a: 'GreenTech',
-  keyword_b: 'Development',
-  keyword_c: 'Front End',
-  company_id: tenfold.id,
-  job_category_id: engineer_developer.id
-})
-
-JobPost.create!({
-  title: 'UX Designer',
-  city: 'New York',
-  description: 'Job Description
-  We are looking for a smart Frontend Engineer who can participate in building our next generation interface. You will get a chance to get your hands dirty with our core product working directly with the Leadership and Business. You will also participate in web security, compatibility and experience design.
-
-  This involves a lot of collaboration with the engineering and R&D Teams to prioritise and launch new features. You will also play an important role in deployments, product roadmaps and data security.
-
-  Experience
-  Minimum of 3 Years relevant experience with JS libraries and ReactJS
-
-  Must Have
-  Proficient in  ReactJS and other5modern JS libraries/frameworks
-  Proficient in ES6/7 object oriented JavaScript and architecture and development of Single page web applications.
-  Basic understanding of nodeJS and its package managers like npm and yarn.
-  Proficient in flux pattern based development and libraries build upon it like redux, mobX and its derivative micro frameworks like reduxForm etc.
-  Proficient in Event handling/event driven programming and creating event observers at appropriate abstraction levels.
-  Strong understanding of build tools like web-pack, its configuration, scripting and environment management (dev/test/prod).
-  Basic knowledge of HTML5, CSS3 and its frameworks and pre-processors.
-  Should be able to resolve cross browser incompatibilities associates with JS and CSS…
-  Working Knowledge of D3 and similar JS charting libraries
-  Nice to Have
-  Working knowledge of User Experience Design
-  Working knowledge of REST API design.
-  Working knowledge of responsive design.
-  Good understanding of Web 2.0 and Semantic Web standards.
-  Good understanding of data-structures and algorithms.
-  Ability to understand and balance performance tradeoffs.
-  Experience with programming languages like Ruby on Rails, Python, Node JS
-  Experience in deploying complex systems in AWS
-  Experience with best practices such as A/B testing.
-  Just to Add
-  Creative Workplace and open work culture. Creativity and out of the box thinking is nurtured.
-
-  Some perks: Excellent Filter Coffee, Free lunches, PS4 and Fooseball breaks, stocked kitchen topped up with a nice set of people to work with!',
-  job_type: 'Full Time',
-  salary: '$80000-$90000',
-  career_level: 'Mid',
-  experience: '2-3 Years',
-  industry: 'GreenTech',
-  qualification: 'Bachelor Degree',
-  language: 'English',
-  keyword_a: 'UX',
-  keyword_b: 'Design',
-  keyword_c: 'Creative',
-  company_id: tenfold.id,
-  job_category_id: design_ux.id
-})
-
-JobPost.create!({
-  title: 'Financial Analyst',
-  city: 'New York',
-  description: 'Job Description
-  We are looking for a smart Frontend Engineer who can participate in building our next generation interface. You will get a chance to get your hands dirty with our core product working directly with the Leadership and Business. You will also participate in web security, compatibility and experience design.
-
-  This involves a lot of collaboration with the engineering and R&D Teams to prioritise and launch new features. You will also play an important role in deployments, product roadmaps and data security.
-
-  Experience
-  Minimum of 3 Years relevant experience with JS libraries and ReactJS
-
-  Must Have
-  Proficient in  ReactJS and other5modern JS libraries/frameworks
-  Proficient in ES6/7 object oriented JavaScript and architecture and development of Single page web applications.
-  Basic understanding of nodeJS and its package managers like npm and yarn.
-  Proficient in flux pattern based development and libraries build upon it like redux, mobX and its derivative micro frameworks like reduxForm etc.
-  Proficient in Event handling/event driven programming and creating event observers at appropriate abstraction levels.
-  Strong understanding of build tools like web-pack, its configuration, scripting and environment management (dev/test/prod).
-  Basic knowledge of HTML5, CSS3 and its frameworks and pre-processors.
-  Should be able to resolve cross browser incompatibilities associates with JS and CSS…
-  Working Knowledge of D3 and similar JS charting libraries
-  Nice to Have
-  Working knowledge of User Experience Design
-  Working knowledge of REST API design.
-  Working knowledge of responsive design.
-  Good understanding of Web 2.0 and Semantic Web standards.
-  Good understanding of data-structures and algorithms.
-  Ability to understand and balance performance tradeoffs.
-  Experience with programming languages like Ruby on Rails, Python, Node JS
-  Experience in deploying complex systems in AWS
-  Experience with best practices such as A/B testing.
-  Just to Add
-  Creative Workplace and open work culture. Creativity and out of the box thinking is nurtured.
-
-  Some perks: Excellent Filter Coffee, Free lunches, PS4 and Fooseball breaks, stocked kitchen topped up with a nice set of people to work with!',
-  job_type: 'Full Time',
-  salary: '$90000-$100000',
-  career_level: 'Mid',
-  experience: '2-3 Years',
-  industry: 'GreenTech',
-  qualification: 'Bachelor Degree',
-  language: 'English',
-  keyword_a: 'Finance',
-  keyword_b: 'Data Analysis',
-  keyword_c: 'Big Data',
-  company_id: tenfold.id,
-  job_category_id: finance.id
-})
+    JobPost.create!({
+      title: jobs[job_category.name].sample,
+      city: company.city,
+      description: latin_job_description,
+      job_type: job_types.sample,
+      salary: salaries.sample,
+      career_level: levels.sample,
+      experience: experiences.sample,
+      industry: company.industry,
+      qualification: qualifications.sample,
+      language: languages.sample,
+      company_id: company.id,
+      job_category_id: job_category.id
+    })
+  end
+end

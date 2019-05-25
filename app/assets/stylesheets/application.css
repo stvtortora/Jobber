@@ -49,6 +49,16 @@ body {
   position: relative;
 }
 
+.page-container {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  display: block;
+  padding-bottom: 2.5rem;
+}
+
+
+
 img {
   height: auto;
   width: auto;

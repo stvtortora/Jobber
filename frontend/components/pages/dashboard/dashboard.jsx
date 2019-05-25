@@ -88,7 +88,7 @@ const mapDispatchToProps = dispatch => {
     deleteJobPost: jobPostId => dispatch(deleteJobPost(jobPostId)),
     deleteCompany: companyId => dispatch(deleteCompany(companyId)),
     fetchJobPosts: (currentUser) => dispatch(fetchJobPosts(currentUser)),
-    fetchCompanies: () => dispatch(fetchCompanies()),
+    fetchCompanies: (currentUser) => dispatch(fetchCompanies(currentUser)),
     updateRoute: (newRoute) => dispatch(updateRoute(newRoute))
   }
 }

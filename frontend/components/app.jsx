@@ -18,10 +18,12 @@ import Footer from './footer/footer'
 class App extends React.Component {
   constructor (props) {
     super(props)
-    this.scrollRef = React.createRef()
+    this.landingScrollRef = React.createRef()
+    this.redirectScrollRef = React.createRef()
   }
 
   componentDidMount () {
+    console.log('entire app mounting')
     const { pathname, search } = this.props.history.location
     this.props.updateRoute(pathname + search)
   }
@@ -30,18 +32,23 @@ class App extends React.Component {
     if (prevProps.currentRoute !== this.props.currentRoute) {
       this.props.history.push(this.props.currentRoute)
     }
+
     const { pathname, search } = this.props.history.location
     const { prevPathname, prevSearch } = prevProps.history.location
 
     if (prevPathname !== pathname && prevSearch !== search) {
       this.props.updateRoute(pathname + search)
+      window.scrollTo({
+        top: this.redirectScrollRef.current.offsetTop, behavior: 'smooth'
+      })
     }
   }
 
   render() {
     return (
-      <content className='all-content'>
-          <Header scrollRef={this.scrollRef}/>
+      <div className='page-container'>
+        <content className='all-content'>
+          <Header redirectScrollRef={this.redirectScrollRef} landingScrollRef={this.landingScrollRef}/>
           <Switch>
             <Route path='/user-dashboard' exact component={Dashboard} />
             <Route path='/login' exact component={SessionPage} />
@@ -51,18 +58,15 @@ class App extends React.Component {
             <Route path='/edit-a-company/:postId' component={UpdateCompanyForm}/>
             <Route path='/post-a-job' component={JobPostForm} />
             <Route path='/post-a-company' component={CompanyPostForm} />
-            <Route path='/' exact component={() => <Home scrollRef={this.scrollRef}/>} />
+            <Route path='/' exact render={() => <Home landingScrollRef={this.landingScrollRef}/>} />
           </Switch>
-          <Footer/>
-      </content>
+        </content>
+        <Footer/>
+      </div>
     )
   }
 }
-//
-// <Route
-//   path='/dashboard'
-//   component={() => <Dashboard isAuthed={true} />}
-// />
+
 
 const mapStateToProps = state => {
   return {
