@@ -41,7 +41,7 @@ class Api::CompaniesController < ApplicationController
   end
 
   def show
-    @company = Company.find(params[:id])
+    @company = Company.where('id = ?', params[:id]).includes(:job_posts).first
     render :show
   end
 

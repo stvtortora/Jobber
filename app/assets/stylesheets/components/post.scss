@@ -29,9 +29,19 @@
           max-width: 100%;
         }
 
+        .related-posts {
+          padding: 30px;
+          h3 {
+            margin: 13.4px 0;
+            color: #384047;
+            font-size: 18px;
+            font-family: 'Varela Round', sans-serif;
+          }
+        }
 
         .post-description-container {
           padding: 30px;
+          border-bottom: 1px solid #e8ecec;
 
           .post-description-title {
             margin: .67em 0;
@@ -176,7 +186,7 @@
         }
 
         .post-button {
-          margin-bottom: 20px;
+          margin-bottom: 45px;
 
           p {
             color: #fff;

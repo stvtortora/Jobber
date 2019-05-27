@@ -8,11 +8,11 @@ const icons = {
   'industry': 'industry'
 }
 
-export default ({ postType, post, overViewKeys }) => {
+export default ({ postType, post, overViewKeys, buttonContent, updateRoute }) => {
   return (
     <section className='side-bar-container'>
       <div className='post-button'>
-        <p>Apply Now</p>
+        <p onClick={buttonContent.redirectRoute ? () => updateRoute(buttonContent.redirectRoute) : () => null}>{buttonContent.message}</p>
       </div>
       <div className='info-bar'>
         <p className='info-bar-title'>{`${postType} Information`}</p>

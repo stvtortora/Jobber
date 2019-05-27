@@ -14,7 +14,8 @@ const imageMap = {
   'Content': 'pencil-alt',
   'Data/Analytics': 'analytics',
   'Operations': 'tasks',
-  'Project_Management': 'user'
+  'Project_Management': 'user',
+  'Content': 'pencil'
 }
 
 class PopularCategories extends React.Component {

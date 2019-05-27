@@ -139,15 +139,22 @@ export default class PostForm extends React.Component {
         <TitleHeader
         message={`Post a ${this.props.formName}`}
         additionalData={
+          !currentUser ?
           {
             message: `You must login to post a ${this.props.formName}.`,
             buttonText: 'Login / Register',
             buttonAction: () => this.props.updateRoute('/login'),
             useData: !Boolean(currentUser)
+          } :
+          {
+            message: `You must post a company to post a job.`,
+            buttonText: 'Post a Company',
+            buttonAction: () => this.props.updateRoute('/post-a-company'),
+            useData: Boolean(this.props.formName === 'Job' && !this.props.relatedRecords.company_id.ids.length)
           }
         }/>
         {
-          currentUser ?
+          currentUser && (this.props.formName === 'Company' || this.props.relatedRecords.company_id.ids.length) ?
           <div>
             <Errors/>
             <form onSubmit={this.handleSubmit}>

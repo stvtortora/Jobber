@@ -6,7 +6,8 @@ import { updateRoute } from '../../../actions/routeActions'
 const mapStateToProps = state => {
   return {
     currentUser: state.session.id,
-    redirectRoute: '/',
+    newRecordKey: 'company',
+    redirectRoute: '/companies/',
     formName: 'Company',
     formFields: {
       firstRow: ['city', 'website', 'linked_in'],

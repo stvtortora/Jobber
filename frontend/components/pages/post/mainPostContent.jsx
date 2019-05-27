@@ -1,4 +1,5 @@
 import React from 'react'
+import SearchResults from '../search/searchResults'
 
 
 export default class MainPostContent extends React.Component {
@@ -6,6 +7,7 @@ export default class MainPostContent extends React.Component {
     super(props)
     this.description = this.description.bind(this)
     this.header = this.header.bind(this)
+    this.relatedPosts = this.relatedPosts.bind(this)
   }
 
   componentDidMount() {
@@ -16,7 +18,6 @@ export default class MainPostContent extends React.Component {
     const { postType, post } = this.props
     return (
       <section className='post-description-container'>
-
         <div id='post-description' className='post-description'></div>
       </section>
     )
@@ -29,7 +30,7 @@ export default class MainPostContent extends React.Component {
       <header className='post-header'>
         <img src={post.picture_url}/>
         <div>
-          <h3 className='post-header-title'>{post.company}</h3>
+          <h3 className='post-header-title'>{post.company ? post.company : post.title}</h3>
           <div className='header-second-line header-line'>
             <p><i className="fa fa-map-marker" aria-hidden="true"></i> {post.city}</p>
             <p>{additionalInfo}</p>
@@ -43,13 +44,35 @@ export default class MainPostContent extends React.Component {
     )
   }
 
+  relatedPosts() {
+    const { relatedPosts, updateRoute } = this.props
 
+    return this.props.relatedPosts ?
+    <div className='related-posts'>
+      <h3>Related Jobs</h3>
+      <SearchResults
+      searchResults={relatedPosts}
+      searchResultOptions={{
+        stylingId: 'job-post-result',
+        mainTitleKey: 'title',
+        subTitleKey: 'company',
+        buttonContentKey: 'job_type'
+      }}
+      updateRoute={updateRoute}
+      routePrefix={'/jobs'}
+      />
+    </div>
+    :
+    <div/>
+  }
 
   render() {
+    const { relatedPosts, updateRoute } = this.props
     return (
       <div className='main-post-content'>
         {this.header()}
         {this.description()}
+        {this.relatedPosts()}
       </div>
     )
   }

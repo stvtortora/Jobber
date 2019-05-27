@@ -7,6 +7,7 @@ import Header from './header/header'
 import Home from './pages/home/home'
 import JobPostsSearch from './pages/search/jobPostsSearchContainer'
 import JobPost from './pages/post/jobPostContainer'
+import CompanyPost from './pages/post/companyPostContainer'
 import CompaniesSearch from './pages/search/companiesSearchContainer'
 import JobPostForm from './pages/postForm/jobPostFormContainer'
 import CompanyPostForm from './pages/postForm/companyPostFormContainer'
@@ -53,6 +54,7 @@ class App extends React.Component {
             <Route path='/user-dashboard' exact component={Dashboard} />
             <Route path='/login' exact component={SessionPage} />
             <Route path='/jobs/:postId' exact component={JobPost} />
+            <Route path='/companies/:postId' exact component={CompanyPost} />
             <Route path='/jobs' component={JobPostsSearch} />
             <Route path='/companies' component={CompaniesSearch} />
             <Route path='/edit-a-job/:postId' component={UpdateJobPostForm}/>
