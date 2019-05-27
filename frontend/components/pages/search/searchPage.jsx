@@ -112,22 +112,22 @@ class SearchPage extends React.Component {
   }
 
   render() {
-    if (this.props.currentRoute !== '/' && this.state.contentLoaded) {
 
-      console.log(this.props, 'props')
-      return(
-        <content className='page-content'>
+    return(
+      <content className='page-content'>
+        {
+          this.props.currentRoute !== '/' && this.state.contentLoaded ?
           <div className='content-container'>
             <div className='content-flex'>
               {this.sideBar()}
               {this.mainContent()}
             </div>
           </div>
-        </content>
-      )
-    }
-
-    return []
+          :
+          <div className='loader-container'><div className="loader"><div></div><div></div><div></div></div></div>
+        }
+      </content>
+    )
   }
 }
 
