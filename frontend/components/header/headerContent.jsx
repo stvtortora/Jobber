@@ -4,6 +4,7 @@ import SearchForm from '../pages/search/searchForm'
 import ScrollArrow from './scrollArrow'
 
 const HeaderContent = ({ currentRoute, landingScrollRef }) => {
+  console.log(currentRoute, 'cr')
   const sectionHeader = () => {
     const getText = () => {
       const textMap = {
@@ -13,7 +14,7 @@ const HeaderContent = ({ currentRoute, landingScrollRef }) => {
       }
 
       let text = ''
-      const prefixes = ['/', '/jobs/',  '/companies']
+      const prefixes = ['/', '/jobs/', '/companies']
 
       prefixes.forEach(prefix => {
         if (currentRoute.indexOf(prefix) > -1) {
@@ -40,10 +41,13 @@ const HeaderContent = ({ currentRoute, landingScrollRef }) => {
   }
 
   let klassName
+  let routePrefix
   if (currentRoute === '/') {
     klassName = 'home-page-content'
-  } else if (currentRoute.indexOf('/jobs/?') > -1) {
+    routePrefix = '/jobs'
+  } else if (currentRoute.indexOf('/jobs/?') > -1 || currentRoute.indexOf('/companies/?') > -1) {
     klassName='non-home-page-content'
+    routePrefix = currentRoute.indexOf('/jobs/?') > -1 ? '/jobs' : '/companies'
   } else {
     klassName='no-content'
   }
@@ -56,6 +60,7 @@ const HeaderContent = ({ currentRoute, landingScrollRef }) => {
           currentRoute === '/' ?
           <div>
             <SearchForm
+            routePrefix={routePrefix}
             searchBoxClass='home-search-box'
             keyWordsClass='search-keywords'
             submitButtonClass='search-submit'

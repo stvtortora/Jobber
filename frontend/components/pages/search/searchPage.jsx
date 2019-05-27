@@ -3,6 +3,7 @@ import SearchResults from './searchResults'
 import SearchForm from './searchForm'
 import Filters from './filters'
 import SortAndLimitOptions from './sortAndLimitOptions'
+import PaginationButtons from './paginationButtons'
 import { buildQuery, getLimit, getOffset, getSort } from '../../../util/queryUtil'
 import merge from 'lodash/merge'
 
@@ -51,17 +52,20 @@ class SearchPage extends React.Component {
         delete queryOptions[optionType]
       }
 
+      if (optionType !== 'offset') queryOptions.offset = 1
+
       const { routePrefix } = this.props
       this.props.updateRoute(`${routePrefix}/${buildQuery(queryOptions)}`)
     }
   }
 
   sideBar() {
-    const { currentQuery, filterTypes, searchSpecifications, searchResults } = this.props
+    const { currentQuery, filterTypes, searchSpecifications, searchResults, routePrefix } = this.props
     const { filterCounts } = searchResults
     return (
       <section className='side-bar'>
         <SearchForm
+        routePrefix={routePrefix}
         searchBoxClass='side-bar-search-box'
         keyWordsClass='side-bar-search-keywords'
         submitButtonClass='side-bar-search-submit'
@@ -77,7 +81,7 @@ class SearchPage extends React.Component {
   }
 
   mainContent() {
-    const { searchResults, searchSpecifications } = this.props
+    const { searchResults, searchSpecifications, routePrefix } = this.props
     const { info, filterCounts } = searchResults
     const { limit, order, offset } = searchSpecifications
     const firstFilter = filterCounts[Object.keys(filterCounts)[0]]
@@ -92,18 +96,22 @@ class SearchPage extends React.Component {
         <SortAndLimitOptions
         totalCount={totalCount}
         totalOnPage={Object.keys(info).length}
+        resultsType={routePrefix.slice(1)}
         limit={limit}
         order={order}
         offset={offset}
         updateSearch={this.updateSearch}/>
         <SearchResults {...this.props}/>
+        <PaginationButtons
+        totalCount={totalCount}
+        limit={limit}
+        offset={offset}
+        updateSearch={this.updateSearch}/>
       </section>
     )
   }
 
   render() {
-    console.log(this.state)
-    console.log(this.props)
     if (this.props.currentRoute !== '/' && this.state.contentLoaded) {
 
       console.log(this.props, 'props')

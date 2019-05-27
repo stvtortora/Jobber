@@ -1,12 +1,12 @@
 import React from 'react'
 
-export default ({ totalCount, totalOnPage, limit, order, offset, updateSearch }) => {
+export default ({ totalCount, totalOnPage, resultsType, limit, order, offset, updateSearch }) => {
   const firstPost = totalCount > 0 ? limit * (offset - 1) + 1 : 0
   const lastPost = firstPost + Math.min(totalCount, limit) - 1
 
   return (
     <div className='sort-and-limit-options'>
-      <div className='showing-text'>{totalCount ? `Showing ${firstPost}-${lastPost} of ${totalCount} jobs` : 'No results match your search'}</div>
+      <div className='showing-text'>{totalCount ? `Showing ${firstPost}-${lastPost} of ${totalCount} ${resultsType}` : 'No results match your search'}</div>
       <div className='sort-and-limit-forms'>
         <form>
           <select onChange={updateSearch('order')}>

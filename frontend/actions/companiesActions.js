@@ -4,6 +4,14 @@ export const DELETE_COMPANY = "DELETE_COMPANY"
 import * as APIUtil from '../util/apiUtil'
 import { receiveErrors } from './errorsActions'
 
+export const searchCompanies = query => {
+  return dispatch => {
+    return APIUtil.searchCompanies(query).then(companies => {
+      return dispatch({ type: RECEIVE_COMPANIES, companies })
+    })
+  }
+}
+
 export const createCompany = company => {
   return dispatch => {
     return APIUtil.createCompany(company).then(company => {

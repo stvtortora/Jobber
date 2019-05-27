@@ -1,5 +1,4 @@
 export const searchJobPosts = query => {
-  console.log(query, 'query')
   return $.ajax({
     method: 'GET',
     url: 'api/job_posts',
@@ -73,6 +72,14 @@ export const fetchJobCategories = () => {
   return $.ajax({
     method: 'GET',
     url: 'api/job_categories'
+  })
+}
+
+export const searchCompanies = query => {
+  return $.ajax({
+    method: 'GET',
+    url: 'api/companies',
+    data: { query }
   })
 }
 

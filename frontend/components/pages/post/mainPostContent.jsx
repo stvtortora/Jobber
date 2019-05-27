@@ -35,8 +35,8 @@ export default class MainPostContent extends React.Component {
             <p>{additionalInfo}</p>
           </div>
           <div className='header-links header-line'>
-            <a className='header-link' href={post.website}><i class="fa fa-link" aria-hidden="true"></i> {post.website}</a>
-            <a className='header-link' href={post.linked_in}><i class="fa fa-linkedin-square" aria-hidden="true"></i> {post.linked_in}</a>
+            <a className='header-link' href={`https://www.${post.website}`}><i class="fa fa-link" aria-hidden="true"></i> {post.website}</a>
+            <a className='header-link' href={`https://www.${post.linked_in}`}><i class="fa fa-linkedin-square" aria-hidden="true"></i> {post.linked_in}</a>
           </div>
         </div>
       </header>

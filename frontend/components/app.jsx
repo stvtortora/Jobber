@@ -7,6 +7,7 @@ import Header from './header/header'
 import Home from './pages/home/home'
 import JobPostsSearch from './pages/search/jobPostsSearchContainer'
 import JobPost from './pages/post/jobPostContainer'
+import CompaniesSearch from './pages/search/companiesSearchContainer'
 import JobPostForm from './pages/postForm/jobPostFormContainer'
 import CompanyPostForm from './pages/postForm/companyPostFormContainer'
 import SessionPage from './pages/session/sessionPage'
@@ -23,7 +24,6 @@ class App extends React.Component {
   }
 
   componentDidMount () {
-    console.log('entire app mounting')
     const { pathname, search } = this.props.history.location
     this.props.updateRoute(pathname + search)
   }
@@ -54,6 +54,7 @@ class App extends React.Component {
             <Route path='/login' exact component={SessionPage} />
             <Route path='/jobs/:postId' exact component={JobPost} />
             <Route path='/jobs' component={JobPostsSearch} />
+            <Route path='/companies' component={CompaniesSearch} />
             <Route path='/edit-a-job/:postId' component={UpdateJobPostForm}/>
             <Route path='/edit-a-company/:postId' component={UpdateCompanyForm}/>
             <Route path='/post-a-job' component={JobPostForm} />

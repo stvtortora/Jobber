@@ -18,7 +18,7 @@ export default ({ postType, post, overViewKeys }) => {
         <p className='info-bar-title'>{`${postType} Information`}</p>
         <ul>
           {
-            overViewKeys.map(key => {
+            overViewKeys.filter(key => post[key]).map(key => {
               return (
                 <li key={key} className='info-bar-item'>
                   <i className={`fa fa-${icons[key]}`} aria-hidden="true"></i>

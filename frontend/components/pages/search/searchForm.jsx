@@ -17,8 +17,9 @@ class SearchForm extends React.Component {
   }
 
   buildQueryAndUpdateRoute() {
+    const { routePrefix } = this.props
     const queryOptions = merge({}, parseQuery(this.props.currentQuery), this.state)
-    this.props.updateRoute(`/jobs/${buildQuery(queryOptions)}`)
+    this.props.updateRoute(`${routePrefix}/${buildQuery(queryOptions)}`)
   }
 
   handleKeyPress (e) {
@@ -35,7 +36,7 @@ class SearchForm extends React.Component {
   }
 
   render() {
-    const { searchBoxClass, keyWordsClass, submitButtonClass } = this.props;
+    const { searchBoxClass, keyWordsClass, submitButtonClass, routePrefix } = this.props;
     return (
       <section className={searchBoxClass}>
         <form onSubmit={this.buildQueryAndUpdateRoute}>
@@ -44,7 +45,7 @@ class SearchForm extends React.Component {
             type='text'
             value={this.state.keyword}
             id='keyword-input'
-            placeholder='Job title, keyword, or company name'
+            placeholder={routePrefix === '/jobs' ? 'Job title, keyword, or company name' : 'Search Company Name'}
             onKeyPress={this.handleKeyPress}
             onChange={this.updateQuery('keyword')}></input>
             <i className="fa fa-keyboard-o"></i>

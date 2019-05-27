@@ -34,7 +34,8 @@ class Api::CompaniesController < ApplicationController
         render :index
       end
     else
-      @companies = Company.all
+      @companies = Company.retrieve_by_query(query_params).includes(:job_posts)
+      @filter_counts = Company.filter_counts_by_query(query_params)
       render :index
     end
   end
@@ -64,5 +65,9 @@ class Api::CompaniesController < ApplicationController
       :phone_number, :facebook,
       :picture
     )
+  end
+
+  def query_params
+    params.require(:query).permit(:order, :limit, :offset, :team_size, :industry, :keyword, :city)
   end
 end

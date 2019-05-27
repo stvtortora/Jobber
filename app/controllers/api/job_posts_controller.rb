@@ -24,8 +24,6 @@ class Api::JobPostsController < ApplicationController
   end
 
   def index
-    puts '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
-    puts params
     if params[:current_user_id]
       if  params[:current_user_id].to_i == current_user.id
         @job_posts = JobPost.joins(:company).where('companies.user_id = ?', current_user.id).includes(:company, :job_category)

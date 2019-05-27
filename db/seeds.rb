@@ -148,7 +148,7 @@ jobs = {
   'Finance' => ['Financial Analyst'],
   'HR' => ['HR Specialist'],
   'Sales' => ['Account Manager', 'Account Executive'],
-  'Project_Management' => ['Project Manager'],
+  'Project Management' => ['Project Manager'],
   'Content' => ['Product Designer', 'Technical Writer','Technician', 'IT Billing Lead', 'Business Representative'],
   'Data/Analytics' => ['Data Scientist', 'Machine Learning Engineer'],
   'Operations' => ['Research Architect', 'Technician', 'IT Billing Lead', 'Business Representative']
@@ -167,23 +167,22 @@ experiences = ['0-2 Years', '2-3 Years', '3-5 Years', '6-7 Years', '6-7 Years', 
 qualifications = ['Associate Degree', 'Bachelor Degree', 'Master Degree', 'Doctorate Degree']
 languages = ['Arabic', 'English', 'Spanish', 'Mandarin', 'French', 'Portuguese', 'Hindi']
 
-companies.each do |company|
-  (1..7).to_a.sample.times do
-    job_category = job_categories.sample
+100.times do
+  company = companies.sample
+  job_category = job_categories.sample
 
-    JobPost.create!({
-      title: jobs[job_category.name].sample,
-      city: company.city,
-      description: latin_job_description,
-      job_type: job_types.sample,
-      salary: salaries.sample,
-      career_level: levels.sample,
-      experience: experiences.sample,
-      industry: company.industry,
-      qualification: qualifications.sample,
-      language: languages.sample,
-      company_id: company.id,
-      job_category_id: job_category.id
-    })
-  end
+  JobPost.create!({
+    title: jobs[job_category.name].sample,
+    city: company.city,
+    description: latin_job_description,
+    job_type: job_types.sample,
+    salary: salaries.sample,
+    career_level: levels.sample,
+    experience: experiences.sample,
+    industry: company.industry,
+    qualification: qualifications.sample,
+    language: languages.sample,
+    company_id: company.id,
+    job_category_id: job_category.id
+  })
 end

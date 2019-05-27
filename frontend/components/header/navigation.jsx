@@ -36,7 +36,7 @@ class Navigation extends React.Component {
   }
 
   onWhiteHeaderPage() {
-    return this.props.currentRoute !== '/' && this.props.currentRoute.indexOf('/jobs/?') === -1
+    return this.props.currentRoute !== '/' && this.props.currentRoute.indexOf('/jobs/?') === -1 && this.props.currentRoute.indexOf('/companies/?') === -1
   }
 
   handleScroll(e) {

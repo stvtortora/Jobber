@@ -31,5 +31,14 @@ const ids = (state = [], action) => {
   }
 }
 
+const filterCounts = (state = {}, action) => {
+  switch (action.type) {
+    case RECEIVE_COMPANIES:
+      return action.companies.filter_counts || state;
+    default:
+      return state;
+  }
+}
 
-export default combineReducers({ info, ids });
+
+export default combineReducers({ info, ids, filterCounts });
