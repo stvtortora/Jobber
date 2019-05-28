@@ -3,6 +3,7 @@ import Logo from '../logo'
 import PrimaryNavigation from './primaryNavigation'
 import CreateNavigation from './createNavigation'
 import UserNavigation from './userNavigation'
+import SmallScreenNav from './smallScreenNav'
 import { connect } from 'react-redux'
 import { updateRoute } from '../../actions/routeActions'
 
@@ -54,14 +55,22 @@ class Navigation extends React.Component {
   }
 
   render () {
+    console.log('nav', this.props)
     return (
       <div ref={this.props.redirectScrollRef} className={this.state.klassName}>
         <div className='center-bar'>
-          <div className='top-bar'>
+            <div className='top-bar'>
+            <SmallScreenNav
+            navigateTo={this.navigateTo}
+            currentRoute={this.props.currentRoute}
+            menuColor={this.state.fontColor}
+            />
             <Logo logoColor={this.state.fontColor}/>
-            <PrimaryNavigation navigateTo={this.navigateTo} arrowColor={this.state.fontColor}/>
-            <CreateNavigation navigateTo={this.navigateTo} />
-            <UserNavigation navigateTo={this.navigateTo} faColor={this.state.fontColor} currentRoute={this.props.currentRoute}/>
+            <div className='standard-nav'>
+              <PrimaryNavigation navigateTo={this.navigateTo} arrowColor={this.state.fontColor} klass='standard-header-ul'/>
+              <CreateNavigation navigateTo={this.navigateTo} klass='standard-create-navigation'/>
+              <UserNavigation navigateTo={this.navigateTo} faColor={this.state.fontColor} currentRoute={this.props.currentRoute} klass='standard-header-ul'/>
+            </div>
           </div>
         </div>
       </div>

@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import { updateRoute } from '../actions/routeActions'
+import { hideOptions } from '../actions/smallScreenNavActions'
 import Header from './header/header'
 import Home from './pages/home/home'
 import JobPostsSearch from './pages/search/jobPostsSearchContainer'
@@ -22,6 +23,9 @@ class App extends React.Component {
     super(props)
     this.landingScrollRef = React.createRef()
     this.redirectScrollRef = React.createRef()
+    this.state = {
+      showSmallScreenNavOptions: false
+    }
   }
 
   componentDidMount () {
@@ -47,7 +51,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className='page-container'>
+      <div className='page-container' onClick={() => this.props.hideOptions()}>
         <content className='all-content'>
           <Header redirectScrollRef={this.redirectScrollRef} landingScrollRef={this.landingScrollRef}/>
           <Switch>
@@ -80,7 +84,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    updateRoute: newRoute => dispatch(updateRoute(newRoute))
+    updateRoute: newRoute => dispatch(updateRoute(newRoute)),
+    hideOptions: () => dispatch(hideOptions())
   }
 }
 

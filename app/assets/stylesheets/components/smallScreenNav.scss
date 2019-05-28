@@ -1,0 +1,76 @@
+@import "variables.scss";
+
+.small-screen-nav {
+  display: none;
+
+  @media only screen and (max-width: $--breakpoint-xl) {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 295px;
+    position: relative;
+    top: 165%;
+  }
+
+  #gray-menu {
+    div {
+      background-color: #7b8b8e;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+  #white-menu {
+    div {
+      background-color: white;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .menu {
+    li {
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    div {
+      width: 35px;
+      height: 5px;
+      margin: 6px 0;
+      background-color: white;
+
+    }
+  }
+
+  .menu-options {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: white;
+    position: relative;
+    border-radius: 8px;
+    border: 1px solid #7b8b8e;
+    padding: 15px 20px;
+
+    li {
+      list-style: none;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    div {
+      p {
+        color: #7b8b8e;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
+    }
+  }
+}

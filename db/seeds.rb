@@ -33,7 +33,6 @@ latin_company_description = "{\"html\":\"<h3>About </h3><p><br></p><p>Lorem ipsu
 company_pictures = [
   'https://s3.amazonaws.com/job-boardapp-seeds/icons8-3ds-max-64.png',
   'https://s3.amazonaws.com/job-boardapp-seeds/icons8-active-directory-48.png',
-  'https://s3.amazonaws.com/job-boardapp-seeds/icons8-alpha-16.png',
   'https://s3.amazonaws.com/job-boardapp-seeds/icons8-approximately-equal-48.png',
   'https://s3.amazonaws.com/job-boardapp-seeds/icons8-artichoke-48.png',
   'https://s3.amazonaws.com/job-boardapp-seeds/icons8-artificial-intelligence-filled-48.png',
@@ -63,12 +62,10 @@ company_pictures = [
   'https://s3.amazonaws.com/job-boardapp-seeds/icons8-multichannel-40.png',
   'https://s3.amazonaws.com/job-boardapp-seeds/icons8-multichannel-64.png',
   'https://s3.amazonaws.com/job-boardapp-seeds/icons8-network-64.png',
-  'https://s3.amazonaws.com/job-boardapp-seeds/icons8-omega-48.png',
   'https://s3.amazonaws.com/job-boardapp-seeds/icons8-plasmid-48.png',
   'https://s3.amazonaws.com/job-boardapp-seeds/icons8-poll-48.png',
   'https://s3.amazonaws.com/job-boardapp-seeds/icons8-registry-editor-48.png',
   'https://s3.amazonaws.com/job-boardapp-seeds/icons8-robot-2-40.png',
-  'https://s3.amazonaws.com/job-boardapp-seeds/icons8-saturation-16.png',
   'https://s3.amazonaws.com/job-boardapp-seeds/icons8-signal-48.png',
   'https://s3.amazonaws.com/job-boardapp-seeds/icons8-skyatlas-filled-64.png',
   'https://s3.amazonaws.com/job-boardapp-seeds/icons8-source-code-48.png',
@@ -77,7 +74,6 @@ company_pictures = [
   'https://s3.amazonaws.com/job-boardapp-seeds/icons8-test-tube-64.png',
   'https://s3.amazonaws.com/job-boardapp-seeds/icons8-thinking-bubble-48.png',
   'https://s3.amazonaws.com/job-boardapp-seeds/icons8-touch-id-48.png',
-  'https://s3.amazonaws.com/job-boardapp-seeds/icons8-trollface-48.png',
   'https://s3.amazonaws.com/job-boardapp-seeds/icons8-volcano-40.png',
   'https://s3.amazonaws.com/job-boardapp-seeds/icons8-wi-fi-48.png'
 ].shuffle
