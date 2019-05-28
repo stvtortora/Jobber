@@ -1,6 +1,6 @@
 import React from 'react'
 import SideBar from './sideBar'
-import MainPostContent from './MainPostContent'
+import MainPostContent from './mainPostContent'
 import TitleHeader from '../../header/titleHeader'
 
 class Post extends React.Component {

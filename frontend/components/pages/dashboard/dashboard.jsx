@@ -1,5 +1,5 @@
 import React from 'react'
-import DashboardNav from './dashboardNav'
+import DashboardNav from './dashBoardNav'
 import DashboardManager from './dashboardManager'
 import TitleHeader from '../../header/titleHeader'
 import { connect } from 'react-redux'
