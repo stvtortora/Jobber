@@ -1,9 +1,9 @@
 const path = require('path')
 const webpack = require("webpack")
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
-const plugins = []
-const devPlugins = []
+let plugins = []
+let devPlugins = []
 
 const prodPlugins = [
   new webpack.DefinePlugin({
