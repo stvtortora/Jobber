@@ -10,12 +10,14 @@ const mapStateToProps = (state, ownProps) => {
 
   const post = state.records.jobPosts.info[postId] || {}
 
-  const relatedPostIds = state.records.jobPosts.ids.filter((id) => id !== postId)
+  const relatedPostIds = state.records.jobPosts.ids.filter((id) => id !== Number(postId))
 
   const relatedPosts = merge({}, state.records.jobPosts)
 
   relatedPosts.ids = relatedPostIds
-
+  console.log('stuff')
+  console.log(state.records.jobPosts.ids)
+  console.log(relatedPostIds)
   return {
     post,
     postId,
@@ -24,7 +26,7 @@ const mapStateToProps = (state, ownProps) => {
     additionalInfo: post.job_type,
     buttonContent: { message:'Apply Now' },
     relatedPostsQuery: {
-      limit: '4',
+      limit: '5',
       order: 'created_at desc',
       offset: '1',
       job_category: post.job_category

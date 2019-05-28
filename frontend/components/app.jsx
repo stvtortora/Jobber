@@ -44,7 +44,7 @@ class App extends React.Component {
     if (prevPathname !== pathname && prevSearch !== search) {
       this.props.updateRoute(pathname + search)
       window.scrollTo({
-        top: this.redirectScrollRef.current.offsetTop, behavior: 'smooth'
+        top: this.redirectScrollRef.current.offsetTop
       })
     }
   }

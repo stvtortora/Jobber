@@ -8,7 +8,7 @@ const HeaderContent = ({ currentRoute, landingScrollRef }) => {
   const sectionHeader = () => {
     const getText = () => {
       const textMap = {
-        '/': 'The Easiest Way To Get Your New Job',
+        '/': 'The Easiest Way To Land Your New Job',
         '/jobs/': 'Jobs',
         '/companies': 'Companies'
       }

@@ -12,7 +12,7 @@ const imageMap = {
   'HR': 'users',
   'Sales': 'shopping-cart',
   'Content': 'pencil-alt',
-  'Data/Analytics': 'analytics',
+  'Data/Analytics': 'bar-chart',
   'Operations': 'tasks',
   'Project_Management': 'user',
   'Content': 'pencil'

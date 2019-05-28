@@ -5,9 +5,7 @@ import { connect } from 'react-redux'
 const UserNavigation = ({ navigateTo, faColor, currentUser, currentRoute, logout, klass }) => {
   const logOutAndRedirect = () => {
     logout(currentUser).then(() => {
-      if (currentRoute !== '/') {
-        navigateTo('/login')
-      }
+      navigateTo('/login')
     })
   }
 

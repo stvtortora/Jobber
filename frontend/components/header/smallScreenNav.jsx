@@ -20,10 +20,13 @@ class SmallScreenNav extends React.Component {
         </div>
         {
           this.props.showNavOptions ?
-          <div className='menu-options'>
-            <PrimaryNavigation navigateTo={navigateTo} arrowColor='gray' klass='small-screen-primary'/>
-            <CreateNavigation navigateTo={navigateTo} klass='small-screen-create'/>
-            <UserNavigation navigateTo={navigateTo} faColor='gray' currentRoute={currentRoute} klass='small-screen-user'/>
+          <div className='menu-options-conatiner'>
+            <div className='arrow-up'/>
+            <div className='menu-options'>
+              <PrimaryNavigation navigateTo={navigateTo} arrowColor='gray' klass='small-screen-primary'/>
+              <CreateNavigation navigateTo={navigateTo} klass='small-screen-create'/>
+              <UserNavigation navigateTo={navigateTo} faColor='gray' currentRoute={currentRoute} klass='small-screen-user'/>
+            </div>
           </div>
           :
           <div/>

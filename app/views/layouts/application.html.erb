@@ -19,6 +19,12 @@
   </head>
 
   <body>
+    <script type="text/javascript">
+      window.staticImages = {
+        whiteLogo: "<%= image_path("whiteLogo.png") %>",
+        colorLogo: "<%= image_path("colorLogo.png") %>"
+      }
+    </script>
     <%= yield %>
   </body>
 </html>
