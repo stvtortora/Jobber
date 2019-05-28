@@ -129,12 +129,12 @@ companies = [
     phone_number: phone_numbers.sample,
     })
 
-    picture_url = company_pictures.sample
-    file = open(picture_url)
-    
-    filename = picture_url[44...picture_url.length]
-    puts filename
-    company.picture.attach(io: file, filename: filename)
+    # picture_url = company_pictures.sample
+    # file = open(picture_url)
+    #
+    # filename = picture_url[44...picture_url.length]
+    # puts filename
+    # company.picture.attach(io: file, filename: filename)
 
     company
 end
