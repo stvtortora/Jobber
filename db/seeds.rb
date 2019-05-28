@@ -132,8 +132,9 @@ companies = [
     picture_url = company_pictures.sample
     file = open(picture_url)
     puts "WHAT WHAT"
-    puts picture_url
-    company.picture.attach(io: file, filename: picture_url[44...picture_url.length])
+    filename = picture_url[44...picture_url.length]
+    puts filename
+    company.picture.attach(io: file, filename: filename)
 
     company
 end
