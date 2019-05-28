@@ -130,7 +130,7 @@ companies = [
     })
 
     picture_url = company_pictures.sample
-    file = open(picture_url)
+    file = File.open(picture_url)
 
     filename = picture_url[44...picture_url.length]
     puts filename
