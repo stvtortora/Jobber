@@ -135,7 +135,7 @@ companies = [
     filename = picture_url[44...picture_url.length]
     puts filename
     puts company.picture
-    puts company.picture.attach
+    # puts company.picture.attach
     company.picture.attach(io: file, filename: filename)
 
     company
