@@ -1,5 +1,6 @@
 const path = require('path')
 const webpack = require("webpack")
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const plugins = []
 const devPlugins = []
@@ -8,11 +9,6 @@ const prodPlugins = [
   new webpack.DefinePlugin({
     'process.env': {
       'NODE_ENV': JSON.stringify('production')
-    }
-  }),
-  new webpack.optimize.UglifyJsPlugin({
-    compress: {
-      warnings: true
     }
   })
 ]
@@ -28,6 +24,14 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'app', 'assets', 'javascripts'),
     filename: 'bundle.js'
+  },
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        test: /\.jsx(\?.*)?$/i,
+        exclude: /(node_modules)/
+      }),
+    ],
   },
   module: {
     rules: [
