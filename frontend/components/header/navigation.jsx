@@ -65,7 +65,7 @@ class Navigation extends React.Component {
             currentRoute={this.props.currentRoute}
             menuColor={this.state.fontColor}
             />
-            <Logo logoColor={this.state.fontColor}/>
+            <Logo logoColor={this.state.fontColor} navigateTo={this.navigateTo}/>
             <div className='standard-nav'>
               <PrimaryNavigation navigateTo={this.navigateTo} arrowColor={this.state.fontColor} klass='standard-header-ul'/>
               <CreateNavigation navigateTo={this.navigateTo} klass='standard-create-navigation'/>

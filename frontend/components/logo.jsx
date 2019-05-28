@@ -7,6 +7,6 @@ import React from 'react'
 //   </svg>
 // )
 
-export default ({ logoColor }) => {
-  return <img src={logoColor === 'white' ? window.staticImages.whiteLogo : window.staticImages.colorLogo}/>
+export default ({ logoColor, navigateTo }) => {
+  return <img onClick={() => navigateTo('/')} className='custom-logo' src={logoColor === 'white' ? window.staticImages.whiteLogo : window.staticImages.colorLogo}/>
 }

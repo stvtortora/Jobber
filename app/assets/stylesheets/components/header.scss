@@ -468,3 +468,9 @@
     display: none;
   }
 }
+
+.custom-logo {
+  &:hover {
+    cursor: pointer;
+  }
+}
