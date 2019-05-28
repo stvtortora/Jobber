@@ -136,7 +136,7 @@ companies = [
     # puts filename
     # puts company.picture
     # puts company.picture.attach
-    company.picture.attach(io: file, filename: 'colorLogo.png')
+    # company.picture.attach(io: file, filename: 'colorLogo.png')
 
     company
 end
