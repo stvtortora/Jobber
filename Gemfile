@@ -28,7 +28,7 @@ gem 'annotate'
 gem 'bcrypt'
 gem 'jquery-rails'
 gem 'pg_search'
-gem 'aws-sdk-s3'
+gem 'aws-sdk-s3', require: false
 gem 'rails_12factor'
 
 # Use Redis adapter to run Action Cable in production
