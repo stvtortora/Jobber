@@ -8,7 +8,6 @@ const info = (state = {}, action) => {
 
   switch (action.type) {
     case RECEIVE_JOB_POSTS:
-    console.log(action, 'posts')
       return action.jobPosts.content || {};
     case RECEIVE_JOB_POST:
       newState = merge({}, state)

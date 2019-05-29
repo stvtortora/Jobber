@@ -829,7 +829,6 @@ __webpack_require__.r(__webpack_exports__);
 var HeaderContent = function HeaderContent(_ref) {
   var currentRoute = _ref.currentRoute,
       landingScrollRef = _ref.landingScrollRef;
-  console.log(currentRoute, 'cr');
 
   var sectionHeader = function sectionHeader() {
     var getText = function getText() {
@@ -1001,7 +1000,6 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      console.log('nav', this.props);
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         ref: this.props.redirectScrollRef,
         className: this.state.klassName
@@ -1829,7 +1827,6 @@ function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      console.log('mounting again');
       this.props.searchJobPosts({
         'order': 'created_at desc',
         'limit': '10',
@@ -2124,7 +2121,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
-  console.log('in the container');
   var postId = ownProps.history.location.pathname.slice(11);
   var post = state.records.companies.info[postId] || {};
   return {
@@ -2187,9 +2183,6 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   });
   var relatedPosts = lodash_merge__WEBPACK_IMPORTED_MODULE_5___default()({}, state.records.jobPosts);
   relatedPosts.ids = relatedPostIds;
-  console.log('stuff');
-  console.log(state.records.jobPosts.ids);
-  console.log(relatedPostIds);
   return {
     post: post,
     postId: postId,
@@ -2392,9 +2385,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -2410,20 +2403,36 @@ var Post =
 function (_React$Component) {
   _inherits(Post, _React$Component);
 
-  function Post() {
+  function Post(props) {
+    var _this;
+
     _classCallCheck(this, Post);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(Post).apply(this, arguments));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Post).call(this, props));
+    _this.fetchPost = _this.fetchPost.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(Post, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      var _this = this;
+      this.fetchPost();
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps, prevState) {
+      if (prevProps.postId !== this.props.postId) {
+        this.fetchPost();
+      }
+    }
+  }, {
+    key: "fetchPost",
+    value: function fetchPost() {
+      var _this2 = this;
 
       if (this.props.relatedPostsQuery) {
         this.props.fetchRelatedPosts(this.props.relatedPostsQuery).then(function () {
-          _this.props.fetchPost(_this.props.postId);
+          _this2.props.fetchPost(_this2.props.postId);
         });
       } else {
         this.props.fetchPost(this.props.postId);
@@ -3564,8 +3573,6 @@ function (_React$Component) {
       var _this2 = this;
 
       return function (e) {
-        console.log('updating');
-
         _this2.setState(_defineProperty({}, field, e.target.value));
       };
     }
@@ -4533,7 +4540,6 @@ var info = function info() {
 
   switch (action.type) {
     case _actions_jobPostsActions__WEBPACK_IMPORTED_MODULE_2__["RECEIVE_JOB_POSTS"]:
-      console.log(action, 'posts');
       return action.jobPosts.content || {};
 
     case _actions_jobPostsActions__WEBPACK_IMPORTED_MODULE_2__["RECEIVE_JOB_POST"]:

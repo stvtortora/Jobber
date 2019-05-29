@@ -15,9 +15,7 @@ const mapStateToProps = (state, ownProps) => {
   const relatedPosts = merge({}, state.records.jobPosts)
 
   relatedPosts.ids = relatedPostIds
-  console.log('stuff')
-  console.log(state.records.jobPosts.ids)
-  console.log(relatedPostIds)
+
   return {
     post,
     postId,

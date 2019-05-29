@@ -5,7 +5,6 @@ import { withRouter } from 'react-router'
 import Post from './post'
 
 const mapStateToProps = (state, ownProps) => {
-  console.log('in the container')
   const postId = ownProps.history.location.pathname.slice(11)
 
   const post = state.records.companies.info[postId] || {}

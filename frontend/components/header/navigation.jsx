@@ -55,7 +55,6 @@ class Navigation extends React.Component {
   }
 
   render () {
-    console.log('nav', this.props)
     return (
       <div ref={this.props.redirectScrollRef} className={this.state.klassName}>
         <div className='center-bar'>

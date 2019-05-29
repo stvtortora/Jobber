@@ -30,7 +30,6 @@ class SearchForm extends React.Component {
 
   updateQuery(field) {
     return (e) => {
-      console.log('updating')
       this.setState({[field]: e.target.value})
     }
   }

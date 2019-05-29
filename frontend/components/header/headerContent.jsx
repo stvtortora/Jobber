@@ -4,7 +4,6 @@ import SearchForm from '../pages/search/searchForm'
 import ScrollArrow from './scrollArrow'
 
 const HeaderContent = ({ currentRoute, landingScrollRef }) => {
-  console.log(currentRoute, 'cr')
   const sectionHeader = () => {
     const getText = () => {
       const textMap = {

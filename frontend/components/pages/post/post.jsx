@@ -4,7 +4,22 @@ import MainPostContent from './mainPostContent'
 import TitleHeader from '../../header/titleHeader'
 
 class Post extends React.Component {
+  constructor(props) {
+    super(props)
+    this.fetchPost = this.fetchPost.bind(this)
+  }
+
   componentDidMount() {
+    this.fetchPost()
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.postId !== this.props.postId) {
+      this.fetchPost()
+    }
+  }
+
+  fetchPost () {
     if (this.props.relatedPostsQuery) {
       this.props.fetchRelatedPosts(this.props.relatedPostsQuery).then(() => {
         this.props.fetchPost(this.props.postId)
@@ -13,7 +28,6 @@ class Post extends React.Component {
       this.props.fetchPost(this.props.postId)
     }
   }
-
 
   render() {
     const { postType, post, overViewKeys, additionalInfo, buttonContent, updateRoute, relatedPosts } = this.props
