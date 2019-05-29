@@ -1,24 +1,33 @@
-# README
+# Job Find
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Job Find is a demo job board app.
 
-Things you may want to cover:
+[Live Demo](https://jobber-demo.herokuapp.com/#/)
 
-* Ruby version
+## Key Features
 
-* System dependencies
+### Search
 
-* Configuration
+Job Find features a search tool for jobs and companies, complete with filtering for various parameters including location, industry, job type, team size, and more.
 
-* Database creation
+![Alt text](/app/assests/images/search_page.png)
 
-* Database initialization
+### View Posts
 
-* How to run the test suite
+Users can view job posts and companies in detail.
 
-* Services (job queues, cache servers, search engines, etc.)
+![Alt text](/app/assests/images/post_page.png)
 
-* Deployment instructions
+When viewing a job, several related jobs are displayed at the bottom of the page.   
 
-* ...
+![Alt text](/app/assests/images/related_posts.png)
+
+### Create Job Posts and Companies
+
+When users sign up, they are able to add companies and job posts to the database. If requirements change, they can come back later and edit or remove their post.
+
+![Alt text](/app/assests/images/post_form.png)
+
+## Future Developmet
+
+In the future, it would be great to add features that allow job seekers to apply to jobs using resumes that they upload through the platform. Additionally, we can allow employers to search for candidates using the same filter-based approach that was used for jobs and companies.
