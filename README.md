@@ -10,23 +10,23 @@ Job Find is a demo job board app.
 
 Job Find features a search tool for jobs and companies, complete with filtering for various parameters including location, industry, job type, team size, and more.
 
-![Alt text](/app/assests/images/search_page.png)
+![Alt text](/app/assets/images/search_page.png)
 
 ### View Posts
 
 Users can view job posts and companies in detail.
 
-![Alt text](/app/assests/images/post_page.png)
+![Alt text](/app/assets/images/post_page.png)
 
 When viewing a job, several related jobs are displayed at the bottom of the page.   
 
-![Alt text](/app/assests/images/related_posts.png)
+![Alt text](/app/assets/images/related_posts.png)
 
 ### Create Job Posts and Companies
 
 When users sign up, they are able to add companies and job posts to the database. If requirements change, they can come back later and edit or remove their post.
 
-![Alt text](/app/assests/images/post_form.png)
+![Alt text](/app/assets/images/post_form.png)
 
 ## Future Developmet
 
