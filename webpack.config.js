@@ -52,7 +52,3 @@ module.exports = {
     extensions: [".js", ".jsx", "*"]
   }
 };
-
-// /storage/*
-// !/storage/.keep
-// /config/master.key
