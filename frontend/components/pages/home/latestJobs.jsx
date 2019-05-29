@@ -26,9 +26,19 @@ class LatestJobs extends React.Component {
 
   render() {
     if (this.state.loaded) {
+      const { jobPosts } = this.props
+      const { filterCounts } = jobPosts
+
+      const firstFilter = filterCounts[Object.keys(filterCounts)[0]]
+
+      const totalCount = Object.keys(firstFilter).reduce((count, option) => {
+        count += firstFilter[option]
+        return count
+      }, 0)
+
       return (
         <div className='featured-jobs'>
-          <SectionHeader id='black-text' title='Lastest Jobs' subtitle={`${this.props.jobPosts.totalCount} current listings`}/>
+          <SectionHeader id='black-text' title='Lastest Jobs' subtitle={`${totalCount} current listings`}/>
           <SearchResults
           searchResults={this.props.jobPosts}
           searchResultOptions={{
@@ -50,8 +60,10 @@ class LatestJobs extends React.Component {
 }
 
 const mapStateToProps = state => {
+  const jobPosts = state.records.jobPosts
+
   return {
-    jobPosts: state.records.jobPosts
+    jobPosts
   }
 }
 

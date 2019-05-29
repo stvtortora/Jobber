@@ -1843,12 +1843,19 @@ function (_React$Component) {
       var _this3 = this;
 
       if (this.state.loaded) {
+        var jobPosts = this.props.jobPosts;
+        var filterCounts = jobPosts.filterCounts;
+        var firstFilter = filterCounts[Object.keys(filterCounts)[0]];
+        var totalCount = Object.keys(firstFilter).reduce(function (count, option) {
+          count += firstFilter[option];
+          return count;
+        }, 0);
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "featured-jobs"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_sectionHeader__WEBPACK_IMPORTED_MODULE_1__["default"], {
           id: "black-text",
           title: "Lastest Jobs",
-          subtitle: "".concat(this.props.jobPosts.totalCount, " current listings")
+          subtitle: "".concat(totalCount, " current listings")
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_search_searchResults__WEBPACK_IMPORTED_MODULE_2__["default"], {
           searchResults: this.props.jobPosts,
           searchResultOptions: {
@@ -1874,8 +1881,9 @@ function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 var mapStateToProps = function mapStateToProps(state) {
+  var jobPosts = state.records.jobPosts;
   return {
-    jobPosts: state.records.jobPosts
+    jobPosts: jobPosts
   };
 };
 
