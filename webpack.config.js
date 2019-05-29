@@ -55,3 +55,4 @@ module.exports = {
 
 // /storage/*
 // !/storage/.keep
+// /config/master.key
