@@ -130,13 +130,13 @@ companies = [
     })
 
     picture_url = company_pictures.sample
-    file = File.open('app/assets/images/colorLogo.png')
+    file = open(picture_url)
 
     filename = picture_url[44...picture_url.length]
     # puts filename
     # puts company.picture
     # puts company.picture.attach
-    # company.picture.attach(io: file, filename: 'colorLogo.png')
+    company.picture.attach(io: file, filename: filename)
 
     company
 end
