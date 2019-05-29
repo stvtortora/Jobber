@@ -47,6 +47,8 @@ export const parseQuery = query => {
       filterValue = Number(filterParts[1])
     } else if (filterKey === 'order') {
       filterValue = filterParts[1].split(':').join(' ')
+    } else if (filterKey === 'team_size' && filterParts[1] === '%3C10') {
+      filterValue = '<10'
     } else {
       filterValue = filterParts[1].split('_').join(' ')
     }

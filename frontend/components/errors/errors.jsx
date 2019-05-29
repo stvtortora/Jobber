@@ -19,7 +19,7 @@ class Errors extends React.Component {
           <div className='errors'>
           {
             this.props.errors.map((error) => {
-              return <div>{error}</div>
+              return <div key={error}>{error}</div>
             })
           }
           </div> :

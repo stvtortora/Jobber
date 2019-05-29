@@ -11,7 +11,7 @@ export default ({ searchResults, searchResultOptions, updateRoute, routePrefix }
           const searchResult = searchResults.info[id]
 
           return (
-            <li id={stylingId} className='search-result' onClick={() => updateRoute(`${routePrefix}/${searchResult.id}`)}>
+            <li key={id} id={stylingId} className='search-result' onClick={() => updateRoute(`${routePrefix}/${searchResult.id}`)}>
               <img src={searchResult.picture_url} />
               <div className='search-result-details'>
                 <div className='search-result-details-left'>

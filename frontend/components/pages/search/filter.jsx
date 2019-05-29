@@ -21,9 +21,9 @@ class Filter extends React.Component {
 
     Object.keys(optionCounts).map(option => {
       const optionTitle = option.split('_').join(' ')
-
       return (
         <li
+        key={option}
         className='filter-option'
         onClick={() => updateSearch(filterTypeTitle)(option)}>
           <p>{`${optionTitle} (${optionCounts[option]})`}</p>

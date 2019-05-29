@@ -5,6 +5,7 @@ export default ({ filterTypes, filterCounts, searchSpecifications, searchResults
   return Object.keys(filterCounts).map(filterType => {
     return (
       <Filter
+      key={filterType}
       optionCounts={filterCounts[filterType]}
       filterType={filterType}
       filterTypeTitle={filterType.split('_').join(' ')}

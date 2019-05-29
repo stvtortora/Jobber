@@ -112,7 +112,6 @@ class SearchPage extends React.Component {
   }
 
   render() {
-
     return(
       <content className='page-content'>
         {

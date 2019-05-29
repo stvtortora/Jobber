@@ -6,7 +6,7 @@ export default ({ posts, del, title, createRoute, editRoute, updateRoute }) => {
       <div className='manager-columns'>
         {
           relevantFields.map(field => {
-            return <div className='manager-column'>{field.split('_').join(' ')}</div>
+            return <div key={field} className='manager-column'>{field.split('_').join(' ')}</div>
           })
         }
       </div>
@@ -20,11 +20,11 @@ export default ({ posts, del, title, createRoute, editRoute, updateRoute }) => {
           postIds.map(postId => {
             const post = posts[postId]
             return (
-              <div className='post-row'>
+              <div key={postId} className='post-row'>
               {
                 relevantFields.map((field, i) => {
                   return (
-                    <div className='manager-post-field'>
+                    <div key={field} className='manager-post-field'>
                       <p>{post[field].split('_').join(' ')}</p>
                       {
                         i === 0 ?

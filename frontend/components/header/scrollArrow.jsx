@@ -8,7 +8,7 @@ export default ({ landingScrollRef }) => {
   return (
     <div className='scroll-button-container' onClick={scrollToContent}>
       <div className='scroll-button'>
-        <i class="fa fa-arrow-down" aria-hidden="true"></i>
+        <i className="fa fa-arrow-down" aria-hidden="true"></i>
       </div>
     </div>
   )

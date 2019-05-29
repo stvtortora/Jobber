@@ -104,7 +104,7 @@ export default class PostForm extends React.Component {
         fields.map(field => {
           const displayTitle = `${field.split('_id').join('').split('_').join(' ')}`
           return (
-            <div className='non-title-field form-field'>
+            <div key={field} className='non-title-field form-field'>
               <label>{displayTitle}</label>
               {
                 textFields.includes(field) ?

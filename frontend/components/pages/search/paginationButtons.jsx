@@ -11,7 +11,7 @@ export default ({ totalCount, limit, offset, updateSearch }) => {
   while (buttonNumber <= lastButton) {
     const newOffset = buttonNumber.toString()
     buttons.push(
-      <li className={buttonNumber === currentPage ? 'current-page-button page-button' : 'page-button'} onClick={() => updateSearch('offset')(newOffset)}>{buttonNumber}</li>
+      <li key={buttonNumber} className={buttonNumber === currentPage ? 'current-page-button page-button' : 'page-button'} onClick={() => updateSearch('offset')(newOffset)}>{buttonNumber}</li>
     )
     buttonNumber++
   }

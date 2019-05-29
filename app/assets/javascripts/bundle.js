@@ -697,7 +697,9 @@ function (_React$Component) {
       }, this.props.errors.length ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "errors"
       }, this.props.errors.map(function (error) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, error);
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          key: error
+        }, error);
       })) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null));
     }
   }]);
@@ -1131,7 +1133,7 @@ __webpack_require__.r(__webpack_exports__);
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "scroll-button"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    "class": "fa fa-arrow-down",
+    className: "fa fa-arrow-down",
     "aria-hidden": "true"
   })));
 });
@@ -1624,6 +1626,7 @@ __webpack_require__.r(__webpack_exports__);
       className: "manager-columns"
     }, relevantFields.map(function (field) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        key: field,
         className: "manager-column"
       }, field.split('_').join(' '));
     }));
@@ -1635,9 +1638,11 @@ __webpack_require__.r(__webpack_exports__);
     }, postIds.map(function (postId) {
       var post = posts[postId];
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        key: postId,
         className: "post-row"
       }, relevantFields.map(function (field, i) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          key: field,
           className: "manager-post-field"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, post[field].split('_').join(' ')), i === 0 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "modify-buttons"
@@ -1994,6 +1999,7 @@ function (_React$Component) {
       return topEight.map(function (id) {
         var jobCategory = _this3.props.jobCategories[id];
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          key: id,
           className: "category-box",
           onClick: function onClick() {
             return _this3.props.updateRoute("/jobs/?limit=10&offset=1&job_category=".concat(jobCategory.name));
@@ -2001,7 +2007,7 @@ function (_React$Component) {
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "border"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-          "class": "fa fa-".concat(imageMap[jobCategory.name]),
+          className: "fa fa-".concat(imageMap[jobCategory.name]),
           "aria-hidden": "true"
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
           className: "category-name"
@@ -2849,6 +2855,7 @@ function (_React$Component) {
       }, fields.map(function (field) {
         var displayTitle = "".concat(field.split('_id').join('').split('_').join(' '));
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          key: field,
           className: "non-title-field form-field"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, displayTitle), textFields.includes(field) ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
           id: field === 'city' ? 'loc-input' : 'input',
@@ -3307,6 +3314,7 @@ function (_React$Component) {
       }, "".concat(currentOptionSelected)) : Object.keys(optionCounts).map(function (option) {
         var optionTitle = option.split('_').join(' ');
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          key: option,
           className: "filter-option",
           onClick: function onClick() {
             return updateSearch(filterTypeTitle)(option);
@@ -3368,6 +3376,7 @@ __webpack_require__.r(__webpack_exports__);
       updateSearch = _ref.updateSearch;
   return Object.keys(filterCounts).map(function (filterType) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filter__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      key: filterType,
       optionCounts: filterCounts[filterType],
       filterType: filterType,
       filterTypeTitle: filterType.split('_').join(' '),
@@ -3461,6 +3470,7 @@ __webpack_require__.r(__webpack_exports__);
   var _loop = function _loop() {
     var newOffset = buttonNumber.toString();
     buttons.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+      key: buttonNumber,
       className: buttonNumber === currentPage ? 'current-page-button page-button' : 'page-button',
       onClick: function onClick() {
         return updateSearch('offset')(newOffset);
@@ -3869,6 +3879,7 @@ __webpack_require__.r(__webpack_exports__);
   }, searchResults.ids.map(function (id) {
     var searchResult = searchResults.info[id];
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+      key: id,
       id: stylingId,
       className: "search-result",
       onClick: function onClick() {
@@ -4964,6 +4975,8 @@ var parseQuery = function parseQuery(query) {
       filterValue = Number(filterParts[1]);
     } else if (filterKey === 'order') {
       filterValue = filterParts[1].split(':').join(' ');
+    } else if (filterKey === 'team_size' && filterParts[1] === '%3C10') {
+      filterValue = '<10';
     } else {
       filterValue = filterParts[1].split('_').join(' ');
     }
