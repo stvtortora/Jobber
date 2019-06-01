@@ -17,6 +17,7 @@ import Dashboard from './pages/dashboard/dashboard'
 import UpdateJobPostForm from './pages/postForm/updateJobPostContainer'
 import UpdateCompanyForm from './pages/postForm/updateCompanyContainer'
 import Footer from './footer/footer'
+import NotFound from './pages/404Page/404Page'
 
 class App extends React.Component {
   constructor (props) {
@@ -66,6 +67,7 @@ class App extends React.Component {
             <Route path='/post-a-job' component={JobPostForm} />
             <Route path='/post-a-company' component={CompanyPostForm} />
             <Route path='/' exact render={() => <Home landingScrollRef={this.landingScrollRef}/>} />
+            <Route component={NotFound} />
           </Switch>
         </content>
         <Footer/>

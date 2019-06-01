@@ -4,6 +4,7 @@ import SearchForm from './searchForm'
 import Filters from './filters'
 import SortAndLimitOptions from './sortAndLimitOptions'
 import PaginationButtons from './paginationButtons'
+import NotFound from '../404Page/404Page'
 import { buildQuery, getLimit, getOffset, getSort } from '../../../util/queryUtil'
 import merge from 'lodash/merge'
 
@@ -17,7 +18,7 @@ class SearchPage extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.isThisComponentsRoute) {
+    if (this.props.isThisComponentsRoute && this.props.currentQuery) {
       this.props.search(this.props.searchSpecifications).then(() => {
         this.setState({
           contentLoaded: true
@@ -116,12 +117,15 @@ class SearchPage extends React.Component {
       <content className='page-content'>
         {
           this.props.currentRoute !== '/' && this.state.contentLoaded ?
+          Object.keys(this.props.searchSpecifications).length ?
           <div className='content-container'>
             <div className='content-flex'>
               {this.sideBar()}
               {this.mainContent()}
             </div>
           </div>
+          :
+          <NotFound/>
           :
           <div className='loader-container'><div className="loader"><div></div><div></div><div></div></div></div>
         }

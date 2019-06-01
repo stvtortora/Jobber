@@ -1,0 +1,30 @@
+.page-not-found {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  min-height: 100vh;
+
+  .page-not-found-content {
+    max-width: 585px;
+    width: 100%;
+    margin: auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    bottom: 50%;
+    right: 30%;
+    border-bottom: 8rem;
+
+    h1 {
+      font-size: 65px;
+      color: #d5d8f3;
+    }
+
+    p {
+      color: #d5d8f3;
+      font-size: 25px;
+    }
+  }
+}
