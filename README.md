@@ -2,7 +2,7 @@
 
 Job Find is a demo job board app.
 
-[Live Demo](https://jobber-demo.herokuapp.com/#/)
+[Live Demo](https://jobber-demo-app.herokuapp.com/#/)
 
 ## Key Features
 
