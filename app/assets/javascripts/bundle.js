@@ -2468,6 +2468,9 @@ function (_React$Component) {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps, prevState) {
       if (prevProps.postId !== this.props.postId) {
+        this.setState({
+          contentLoaded: false
+        });
         this.fetchData();
       }
     }

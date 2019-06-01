@@ -20,6 +20,7 @@ class Post extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.postId !== this.props.postId) {
+      this.setState({ contentLoaded: false })
       this.fetchData()
     }
   }
