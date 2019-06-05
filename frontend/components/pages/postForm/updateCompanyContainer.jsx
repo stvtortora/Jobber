@@ -10,7 +10,8 @@ const mapStateToProps = (state, ownProps) => {
     currentUser: state.session.id,
     postId,
     post: state.records.companies.info[postId],
-    redirectRoute: '/',
+    redirectRoute: '/companies/',
+    newRecordKey: 'company',
     formName: 'Company',
     formFields: {
       firstRow: ['city', 'website', 'linked_in'],
