@@ -24,7 +24,7 @@ class PopularCategories extends React.Component {
     this.state = {
       loaded: false
     }
-    this.display = this.display.bind(this)
+    this.topEightCategories = this.topEightCategories.bind(this)
     this.totalPositionCount = this.totalPositionCount.bind(this)
   }
 
@@ -36,7 +36,7 @@ class PopularCategories extends React.Component {
     })
   }
 
-  display () {
+  topEightCategories () {
     const { jobCategories } = this.props
 
     const topEight = Object.keys(jobCategories).sort((a, b) => {
@@ -73,7 +73,7 @@ class PopularCategories extends React.Component {
         <div className='popular-categories'>
           <SectionHeader id='black-text' title='Popular Categories' subtitle={`${this.totalPositionCount()} jobs live`}/>
           <ul>
-            {this.display()}
+            {this.topEightCategories()}
           </ul>
         </div>
       )
@@ -96,4 +96,3 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PopularCategories)
-// {imageMap[category.name]}

@@ -7,10 +7,7 @@ import merge from 'lodash/merge'
 class SearchForm extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      'keyword': '',
-      'city': ''
-    }
+    this.state = this.props.initialState
     this.buildQueryAndUpdateRoute = this.buildQueryAndUpdateRoute.bind(this)
     this.updateQuery = this.updateQuery.bind(this)
     this.handleKeyPress = this.handleKeyPress.bind(this)

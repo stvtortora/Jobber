@@ -5,15 +5,24 @@ import { clearErrors } from '../../actions/errorsActions'
 class Errors extends React.Component {
   constructor(props) {
     super(props)
+    this.ref = React.createRef()
   }
 
   componentDidMount() {
     this.props.clearErrors()
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.errors.length && this.props.errors !== prevProps.errors) {
+      window.scrollTo({
+        top: this.ref.current.offsetTop, behavior: 'smooth'
+      })
+    }
+  }
+
   render () {
     return (
-      <div className='errors-container'>
+      <div className='errors-container' ref={this.ref}>
         {
           this.props.errors.length ?
           <div className='errors'>

@@ -683,9 +683,13 @@ function (_React$Component) {
   _inherits(Errors, _React$Component);
 
   function Errors(props) {
+    var _this;
+
     _classCallCheck(this, Errors);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(Errors).call(this, props));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Errors).call(this, props));
+    _this.ref = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
+    return _this;
   }
 
   _createClass(Errors, [{
@@ -694,10 +698,21 @@ function (_React$Component) {
       this.props.clearErrors();
     }
   }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      if (this.props.errors.length && this.props.errors !== prevProps.errors) {
+        window.scrollTo({
+          top: this.ref.current.offsetTop,
+          behavior: 'smooth'
+        });
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "errors-container"
+        className: "errors-container",
+        ref: this.ref
       }, this.props.errors.length ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "errors"
       }, this.props.errors.map(function (error) {
@@ -809,7 +824,7 @@ __webpack_require__.r(__webpack_exports__);
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_headerContent__WEBPACK_IMPORTED_MODULE_2__["default"], {
     landingScrollRef: landingScrollRef
   }));
-}); // <JobSearch/>
+});
 
 /***/ }),
 
@@ -880,7 +895,11 @@ var HeaderContent = function HeaderContent(_ref) {
     searchBoxClass: "home-search-box",
     keyWordsClass: "search-keywords",
     submitButtonClass: "search-submit",
-    currentQuery: ''
+    currentQuery: '',
+    initialState: {
+      'keyword': '',
+      'city': ''
+    }
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_scrollArrow__WEBPACK_IMPORTED_MODULE_3__["default"], {
     landingScrollRef: landingScrollRef
   })) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null)));
@@ -1160,23 +1179,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _userNavigation__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./userNavigation */ "./frontend/components/header/userNavigation.jsx");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_smallScreenNavActions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions/smallScreenNavActions */ "./frontend/actions/smallScreenNavActions.jsx");
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 
 
@@ -1184,61 +1186,41 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-
-var SmallScreenNav =
-/*#__PURE__*/
-function (_React$Component) {
-  _inherits(SmallScreenNav, _React$Component);
-
-  function SmallScreenNav() {
-    _classCallCheck(this, SmallScreenNav);
-
-    return _possibleConstructorReturn(this, _getPrototypeOf(SmallScreenNav).apply(this, arguments));
-  }
-
-  _createClass(SmallScreenNav, [{
-    key: "render",
-    value: function render() {
-      var _this = this;
-
-      var _this$props = this.props,
-          navigateTo = _this$props.navigateTo,
-          currentRoute = _this$props.currentRoute,
-          menuColor = _this$props.menuColor;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "small-screen-nav"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "menu",
-        id: "".concat(menuColor, "-menu"),
-        onClick: function onClick(e) {
-          e.stopPropagation();
-
-          _this.props.showOptions();
-        }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null)), this.props.showNavOptions ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "menu-options-conatiner"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "arrow-up"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "menu-options"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_primaryNavigation__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        navigateTo: navigateTo,
-        arrowColor: "gray",
-        klass: "small-screen-primary"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_createNavigation__WEBPACK_IMPORTED_MODULE_2__["default"], {
-        navigateTo: navigateTo,
-        klass: "small-screen-create"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_userNavigation__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        navigateTo: navigateTo,
-        faColor: "gray",
-        currentRoute: currentRoute,
-        klass: "small-screen-user"
-      }))) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null));
+var SmallScreenNav = function SmallScreenNav(_ref) {
+  var navigateTo = _ref.navigateTo,
+      currentRoute = _ref.currentRoute,
+      menuColor = _ref.menuColor,
+      showOptions = _ref.showOptions,
+      showNavOptions = _ref.showNavOptions;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "small-screen-nav"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "menu",
+    id: "".concat(menuColor, "-menu"),
+    onClick: function onClick(e) {
+      e.stopPropagation();
+      showOptions();
     }
-  }]);
-
-  return SmallScreenNav;
-}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null)), showNavOptions ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "menu-options-conatiner"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "arrow-up"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "menu-options"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_primaryNavigation__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    navigateTo: navigateTo,
+    arrowColor: "gray",
+    klass: "small-screen-primary"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_createNavigation__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    navigateTo: navigateTo,
+    klass: "small-screen-create"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_userNavigation__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    navigateTo: navigateTo,
+    faColor: "gray",
+    currentRoute: currentRoute,
+    klass: "small-screen-user"
+  }))) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null));
+};
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
@@ -1658,38 +1640,42 @@ __webpack_require__.r(__webpack_exports__);
     }));
   };
 
+  var postRow = function postRow(postId) {
+    var post = posts[postId];
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      key: postId,
+      className: "post-row"
+    }, relevantFields.map(function (field, i) {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        key: field,
+        className: "manager-post-field"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, post[field].split('_').join(' ')), i === 0 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "modify-buttons"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        onClick: function onClick() {
+          return del(post.id);
+        },
+        className: "delete-button"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        "class": "fa fa-trash",
+        "aria-hidden": "true"
+      }), " Delete"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        onClick: function onClick() {
+          return updateRoute("".concat(editRoute, "/").concat(post.id));
+        },
+        className: "update-button"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        "class": "fa fa-pencil-square-o",
+        "aria-hidden": "true"
+      }), " Update")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null));
+    }));
+  };
+
   var postRows = function postRows() {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "manager-posts"
     }, postIds.map(function (postId) {
-      var post = posts[postId];
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        key: postId,
-        className: "post-row"
-      }, relevantFields.map(function (field, i) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          key: field,
-          className: "manager-post-field"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, post[field].split('_').join(' ')), i === 0 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "modify-buttons"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          onClick: function onClick() {
-            return del(post.id);
-          },
-          className: "delete-button"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-          "class": "fa fa-trash",
-          "aria-hidden": "true"
-        }), " Delete"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          onClick: function onClick() {
-            return updateRoute("".concat(editRoute, "/").concat(post.id));
-          },
-          className: "update-button"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-          "class": "fa fa-pencil-square-o",
-          "aria-hidden": "true"
-        }), " Update")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null));
-      }));
+      return postRow(postId);
     }));
   };
 
@@ -1822,9 +1808,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -1850,6 +1836,7 @@ function (_React$Component) {
     _this.state = {
       loaded: false
     };
+    _this.totalJobCount = _this.totalJobCount.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -1869,24 +1856,28 @@ function (_React$Component) {
       });
     }
   }, {
+    key: "totalJobCount",
+    value: function totalJobCount() {
+      var jobPosts = this.props.jobPosts;
+      var filterCounts = jobPosts.filterCounts;
+      var firstFilter = filterCounts[Object.keys(filterCounts)[0]];
+      return Object.keys(firstFilter).reduce(function (count, option) {
+        count += firstFilter[option];
+        return count;
+      }, 0);
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this3 = this;
 
       if (this.state.loaded) {
-        var jobPosts = this.props.jobPosts;
-        var filterCounts = jobPosts.filterCounts;
-        var firstFilter = filterCounts[Object.keys(filterCounts)[0]];
-        var totalCount = Object.keys(firstFilter).reduce(function (count, option) {
-          count += firstFilter[option];
-          return count;
-        }, 0);
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "featured-jobs"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_sectionHeader__WEBPACK_IMPORTED_MODULE_1__["default"], {
           id: "black-text",
           title: "Lastest Jobs",
-          subtitle: "".concat(totalCount, " current listings")
+          subtitle: "".concat(this.totalJobCount(), " current listings")
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_search_searchResults__WEBPACK_IMPORTED_MODULE_2__["default"], {
           searchResults: this.props.jobPosts,
           searchResultOptions: {
@@ -1997,7 +1988,7 @@ function (_React$Component) {
     _this.state = {
       loaded: false
     };
-    _this.display = _this.display.bind(_assertThisInitialized(_this));
+    _this.topEightCategories = _this.topEightCategories.bind(_assertThisInitialized(_this));
     _this.totalPositionCount = _this.totalPositionCount.bind(_assertThisInitialized(_this));
     return _this;
   }
@@ -2014,8 +2005,8 @@ function (_React$Component) {
       });
     }
   }, {
-    key: "display",
-    value: function display() {
+    key: "topEightCategories",
+    value: function topEightCategories() {
       var _this3 = this;
 
       var jobCategories = this.props.jobCategories;
@@ -2063,7 +2054,7 @@ function (_React$Component) {
           id: "black-text",
           title: "Popular Categories",
           subtitle: "".concat(this.totalPositionCount(), " jobs live")
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, this.display()));
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, this.topEightCategories()));
       }
 
       return null;
@@ -2087,7 +2078,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(mapStateToProps, mapDispatchToProps)(PopularCategories)); // {imageMap[category.name]}
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(mapStateToProps, mapDispatchToProps)(PopularCategories));
 
 /***/ }),
 
@@ -2317,24 +2308,11 @@ function (_React$Component) {
       document.getElementById('post-description').innerHTML = JSON.parse(this.props.post.description).html;
     }
   }, {
-    key: "description",
-    value: function description() {
-      var _this$props = this.props,
-          postType = _this$props.postType,
-          post = _this$props.post;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-        className: "post-description-container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        id: "post-description",
-        className: "post-description"
-      }));
-    }
-  }, {
     key: "header",
     value: function header() {
-      var _this$props2 = this.props,
-          post = _this$props2.post,
-          additionalInfo = _this$props2.additionalInfo;
+      var _this$props = this.props,
+          post = _this$props.post,
+          additionalInfo = _this$props.additionalInfo;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", {
         className: "post-header"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
@@ -2363,24 +2341,42 @@ function (_React$Component) {
       }), " ", post.linked_in))));
     }
   }, {
+    key: "description",
+    value: function description() {
+      var _this$props2 = this.props,
+          postType = _this$props2.postType,
+          post = _this$props2.post;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+        className: "post-description-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "post-description",
+        className: "post-description"
+      }));
+    }
+  }, {
     key: "relatedPosts",
     value: function relatedPosts() {
       var _this$props3 = this.props,
           relatedPosts = _this$props3.relatedPosts,
           updateRoute = _this$props3.updateRoute;
-      return this.props.relatedPosts ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "related-posts"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Related Jobs"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_search_searchResults__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        searchResults: relatedPosts,
-        searchResultOptions: {
-          stylingId: 'job-post-result',
-          mainTitleKey: 'title',
-          subTitleKey: 'company',
-          buttonContentKey: 'job_type'
-        },
-        updateRoute: updateRoute,
-        routePrefix: '/jobs'
-      })) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
+
+      if (this.props.relatedPosts) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "related-posts"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Related Jobs"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_search_searchResults__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          searchResults: relatedPosts,
+          searchResultOptions: {
+            stylingId: 'job-post-result',
+            mainTitleKey: 'title',
+            subTitleKey: 'company',
+            buttonContentKey: 'job_type'
+          },
+          updateRoute: updateRoute,
+          routePrefix: '/jobs'
+        }));
+      }
+
+      return null;
     }
   }, {
     key: "render",
@@ -2454,7 +2450,7 @@ function (_React$Component) {
     _this.state = {
       contentLoaded: false
     };
-    _this.fetchData = _this.fetchData.bind(_assertThisInitialized(_this));
+    _this.fetchPageContent = _this.fetchPageContent.bind(_assertThisInitialized(_this));
     _this.fetchPost = _this.fetchPost.bind(_assertThisInitialized(_this));
     return _this;
   }
@@ -2462,7 +2458,7 @@ function (_React$Component) {
   _createClass(Post, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.fetchData();
+      this.fetchPageContent();
     }
   }, {
     key: "componentDidUpdate",
@@ -2471,12 +2467,12 @@ function (_React$Component) {
         this.setState({
           contentLoaded: false
         });
-        this.fetchData();
+        this.fetchPageContent();
       }
     }
   }, {
-    key: "fetchData",
-    value: function fetchData() {
+    key: "fetchPageContent",
+    value: function fetchPageContent() {
       var _this2 = this;
 
       if (this.props.relatedPostsQuery) {
@@ -2538,7 +2534,7 @@ function (_React$Component) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_404Page_404Page__WEBPACK_IMPORTED_MODULE_4__["default"], null);
       }
 
-      return [];
+      return null;
     }
   }]);
 
@@ -2663,6 +2659,100 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 /***/ }),
 
+/***/ "./frontend/components/pages/postForm/formField.jsx":
+/*!**********************************************************!*\
+  !*** ./frontend/components/pages/postForm/formField.jsx ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+var textPlaceHolders = {
+  'city': 'e.g New York',
+  'website': 'e.g www.compnaywebsite.com',
+  'linked_in': 'e.g linkedin.com/username',
+  'twitter': 'Enter your Twitter url...',
+  'phone_number': 'xxxxxxxxxx',
+  'tagline': 'e.g We get it done!',
+  'facebook': 'Enter your facebook url...'
+};
+var optionalFields = {
+  'linked_in': true,
+  'twitter': true,
+  'team_size': true,
+  'industry': true,
+  'facebook': true,
+  'salary': true,
+  'career_level': true,
+  'qualification': true,
+  'language': true,
+  'experience': true
+};
+var optionsMap = {
+  'job_type': ['Full Time', 'Part Time', 'Contract', 'Internship'],
+  'salary': ['$20000-$30000', '$30000-$40000', '$40000-$50000', '$50000-$60000', '$60000-$70000', '$70000-$80000', '$80000-$90000', '$90000-$100000', '$100000-$1100000', '$110000-$1200000', '$120000-$1300000', '$130000-$1400000', '$140000-$1500000', '$150000-$1600000', '$160000-$1700000', '$170000-$1800000', '$180000-$1900000', '$190000-$2000000', '$200000+'],
+  'career_level': ['Junior', 'Mid', 'Senior', 'Lead', 'Assistant Manager', 'Manager', 'Department Head', 'Executive'],
+  'industry': ['Ad Tech', 'Agriculture', 'Arts', 'FinTech', 'eCommerce', 'Digital Media', 'Sales', 'Software', 'GreenTech', 'Payments', 'Professional Services', 'Machine Learning'],
+  'qualification': ['Associate Degree', 'Bachelor Degree', 'Master Degree', 'Doctorate Degree'],
+  'experience': ['0-2 Years', '2-3 Years', '3-5 Years', '6-7 Years', '8-9 Years', '9-10 Years', '10+ Years'],
+  'language': ['Arabic', 'English', 'Spanish', 'Mandarin', 'French', 'Portuguese', 'Hindi'],
+  'team_size': ['<10', '10-25', '25-50', '50-100', '100-200', '200-300', '300-500', '500+']
+};
+/* harmony default export */ __webpack_exports__["default"] = (function (_ref) {
+  var fieldName = _ref.fieldName,
+      formState = _ref.formState,
+      update = _ref.update,
+      relatedRecords = _ref.relatedRecords;
+
+  var associatedOptions = function associatedOptions() {
+    return relatedRecords[fieldName].ids.map(function (recordId) {
+      var record = relatedRecords[fieldName].info[recordId];
+      var title = "".concat(record.name ? record.name : record.title);
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        key: record.id,
+        selected: formState[fieldName] === record.id,
+        value: record.id
+      }, title);
+    });
+  };
+
+  var ownOptions = function ownOptions() {
+    return optionsMap[fieldName].map(function (option) {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        key: option,
+        selected: formState[fieldName] === option,
+        value: option
+      }, option);
+    });
+  };
+
+  var options = function options() {
+    return fieldName.split('_').includes('id') ? associatedOptions() : ownOptions();
+  };
+
+  var displayTitle = "".concat(fieldName.split('_id').join('').split('_').join(' '));
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    key: fieldName,
+    className: "non-title-field form-field"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "".concat(displayTitle).concat(optionalFields[fieldName] ? ' (optional)' : '')), Object.keys(textPlaceHolders).includes(fieldName) ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    id: fieldName === 'city' ? 'loc-input' : 'input',
+    placeholder: textPlaceHolders[fieldName],
+    type: "text",
+    value: formState[fieldName],
+    onChange: update(fieldName)
+  }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+    onChange: update(fieldName)
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+    value: ""
+  }, "Choose ".concat(['a', 'e', 'i', 'o', 'u'].includes(displayTitle[0]) ? 'an' : 'a', " ").concat(displayTitle, "...")), options(fieldName)));
+});
+
+/***/ }),
+
 /***/ "./frontend/components/pages/postForm/jobPostFormContainer.js":
 /*!********************************************************************!*\
   !*** ./frontend/components/pages/postForm/jobPostFormContainer.js ***!
@@ -2729,6 +2819,40 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 /***/ }),
 
+/***/ "./frontend/components/pages/postForm/multiFieldRow.jsx":
+/*!**************************************************************!*\
+  !*** ./frontend/components/pages/postForm/multiFieldRow.jsx ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _formField__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./formField */ "./frontend/components/pages/postForm/formField.jsx");
+
+
+/* harmony default export */ __webpack_exports__["default"] = (function (_ref) {
+  var fields = _ref.fields,
+      formState = _ref.formState,
+      update = _ref.update,
+      relatedRecords = _ref.relatedRecords;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "field-row"
+  }, fields.map(function (field) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_formField__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      key: field,
+      fieldName: field,
+      formState: formState,
+      update: update,
+      relatedRecords: relatedRecords
+    });
+  }));
+});
+
+/***/ }),
+
 /***/ "./frontend/components/pages/postForm/postForm.jsx":
 /*!*********************************************************!*\
   !*** ./frontend/components/pages/postForm/postForm.jsx ***!
@@ -2745,8 +2869,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var quill__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(quill__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _header_titleHeader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../header/titleHeader */ "./frontend/components/header/titleHeader.jsx");
 /* harmony import */ var _errors_errors__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../errors/errors */ "./frontend/components/errors/errors.jsx");
-/* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! lodash/merge */ "./node_modules/lodash/merge.js");
-/* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(lodash_merge__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _multiFieldRow__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./multiFieldRow */ "./frontend/components/pages/postForm/multiFieldRow.jsx");
+/* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! lodash/merge */ "./node_modules/lodash/merge.js");
+/* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(lodash_merge__WEBPACK_IMPORTED_MODULE_5__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -2772,25 +2897,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-var textFields = ['city', 'website', 'linked_in', 'twitter', 'phone_number', 'tagline', 'facebook'];
-var textPlaceHolders = {
-  'city': 'e.g New York',
-  'website': 'e.g www.compnaywebsite.com',
-  'linked_in': 'e.g linkedin.com/username',
-  'twitter': 'Enter your Twitter url...',
-  'phone_number': 'xxxxxxxxxx',
-  'tagline': 'e.g We get it done!'
-};
-var fieldMap = {
-  'job_type': ['Full Time', 'Part Time', 'Contract', 'Internship'],
-  'salary': ['$20000-$30000', '$30000-$40000', '$40000-$50000', '$50000-$60000', '$60000-$70000', '$70000-$80000', '$80000-$90000', '$90000-$100000', '$100000-$1100000', '$110000-$1200000', '$120000-$1300000', '$130000-$1400000', '$140000-$1500000', '$150000-$1600000', '$160000-$1700000', '$170000-$1800000', '$180000-$1900000', '$190000-$2000000', '$200000+'],
-  'career_level': ['Junior', 'Mid', 'Senior', 'Lead', 'Assistant Manager', 'Manager', 'Department Head', 'Executive'],
-  'industry': ['Ad Tech', 'Agriculture', 'Arts', 'FinTech', 'eCommerce', 'Digital Media', 'Sales', 'Software', 'GreenTech', 'Payments', 'Professional Services', 'Machine Learning'],
-  'qualification': ['Associate Degree', 'Bachelor Degree', 'Master Degree', 'Doctorate Degree'],
-  'experience': ['0-2 Years', '2-3 Years', '3-5 Years', '6-7 Years', '6-7 Years', '8-9 Years', '9-10 Years', '10+ Years'],
-  'language': ['Arabic', 'English', 'Spanish', 'Mandarin', 'French', 'Portuguese', 'Hindi'],
-  'team_size': ['<10', '10-25', '25-50', '50-100', '100-200', '200-300', '300-500', '500+']
-};
+
 
 var PostForm =
 /*#__PURE__*/
@@ -2804,9 +2911,9 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(PostForm).call(this, props));
     _this.state = _this.props.initialState;
-    _this.constructRow = _this.constructRow.bind(_assertThisInitialized(_this));
-    _this.constructAssociatedFields = _this.constructAssociatedFields.bind(_assertThisInitialized(_this));
-    _this.constructFields = _this.constructFields.bind(_assertThisInitialized(_this));
+    _this.header = _this.header.bind(_assertThisInitialized(_this));
+    _this.formContent = _this.formContent.bind(_assertThisInitialized(_this));
+    _this.fieldRows = _this.fieldRows.bind(_assertThisInitialized(_this));
     _this.update = _this.update.bind(_assertThisInitialized(_this));
     _this.updateFile = _this.updateFile.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
@@ -2863,7 +2970,7 @@ function (_React$Component) {
         html: this.editor.root.innerHTML,
         richText: this.editor.getContents()
       };
-      var post = lodash_merge__WEBPACK_IMPORTED_MODULE_4___default()({}, this.state, {
+      var post = lodash_merge__WEBPACK_IMPORTED_MODULE_5___default()({}, this.state, {
         description: JSON.stringify(description),
         job_category_id: Number(this.state.job_category_id)
       });
@@ -2882,84 +2989,48 @@ function (_React$Component) {
       });
     }
   }, {
-    key: "constructAssociatedFields",
-    value: function constructAssociatedFields(field) {
+    key: "header",
+    value: function header() {
       var _this4 = this;
 
-      return this.props.relatedRecords[field].ids.map(function (recordId) {
-        var record = _this4.props.relatedRecords[field].info[recordId];
-        var title = "".concat(record.name ? record.name : record.title);
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-          selected: _this4.state[field] === record.id,
-          value: record.id
-        }, title);
-      });
-    }
-  }, {
-    key: "constructRow",
-    value: function constructRow(fields) {
-      var _this5 = this;
-
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "field-row"
-      }, fields.map(function (field) {
-        var displayTitle = "".concat(field.split('_id').join('').split('_').join(' '));
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          key: field,
-          className: "non-title-field form-field"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, displayTitle), textFields.includes(field) ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-          id: field === 'city' ? 'loc-input' : 'input',
-          placeholder: textPlaceHolders[field],
-          type: "text",
-          value: _this5.state[field],
-          onChange: _this5.update(field)
-        }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
-          onChange: _this5.update(field)
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-          value: ""
-        }, "Choose ".concat(['a', 'e', 'i', 'o', 'u'].includes(displayTitle[0]) ? 'an' : 'a', " ").concat(displayTitle, "...")), field.split('_').includes('id') ? _this5.constructAssociatedFields(field) : _this5.constructFields(field)));
-      }));
-    }
-  }, {
-    key: "constructFields",
-    value: function constructFields(field) {
-      var _this6 = this;
-
-      return fieldMap[field].map(function (option) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-          selected: _this6.state[field] === option,
-          value: option
-        }, option);
-      });
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this7 = this;
-
       var currentUser = this.props.currentUser;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-        className: "job-post-form"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_titleHeader__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_titleHeader__WEBPACK_IMPORTED_MODULE_2__["default"], {
         message: "Post a ".concat(this.props.formName),
         additionalData: !currentUser ? {
           message: "You must login to post a ".concat(this.props.formName, "."),
           buttonText: 'Login / Register',
           buttonAction: function buttonAction() {
-            return _this7.props.updateRoute('/login');
+            return _this4.props.updateRoute('/login');
           },
           useData: !Boolean(currentUser)
         } : {
           message: "You must post a company to post a job.",
           buttonText: 'Post a Company',
           buttonAction: function buttonAction() {
-            return _this7.props.updateRoute('/post-a-company');
+            return _this4.props.updateRoute('/post-a-company');
           },
           useData: Boolean(this.props.formName === 'Job' && !this.props.relatedRecords.company_id.ids.length)
         }
-      }), currentUser && (this.props.formName === 'Company' || this.props.relatedRecords.company_id.ids.length) ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_errors_errors__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      });
+    }
+  }, {
+    key: "formContent",
+    value: function formContent() {
+      var currentUser = this.props.currentUser;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_errors_errors__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.handleSubmit
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      }, this.fieldRows(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "quill-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Description"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "editor"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "submit-post"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Post"))));
+    }
+  }, {
+    key: "fieldRows",
+    value: function fieldRows() {
+      return currentUser && (this.props.formName === 'Company' || this.props.relatedRecords.company_id.ids.length) ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "field-row"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "title-field form-field"
@@ -2967,20 +3038,36 @@ function (_React$Component) {
         type: "text",
         value: this.state.title,
         onChange: this.update('title')
-      }))), this.constructRow(this.props.formFields.firstRow), this.constructRow(this.props.formFields.secondRow), this.constructRow(this.props.formFields.thirdRow), this.props.includeImageUpload ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_multiFieldRow__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        fields: this.props.formFields.firstRow,
+        update: this.update,
+        formState: this.state,
+        relatedRecords: this.props.relatedRecords
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_multiFieldRow__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        fields: this.props.formFields.secondRow,
+        update: this.update,
+        formState: this.state,
+        relatedRecords: this.props.relatedRecords
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_multiFieldRow__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        fields: this.props.formFields.thirdRow,
+        update: this.update,
+        formState: this.state,
+        relatedRecords: this.props.relatedRecords
+      }), this.props.includeImageUpload ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "field-row"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "file-field"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Logo"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "file",
         onChange: this.updateFile
-      }))) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "quill-container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Description"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        id: "editor"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "submit-post"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Post")))) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null));
+      }))) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), " :") : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+        className: "job-post-form"
+      }, this.header(), this.formContent());
     }
   }]);
 
@@ -3361,8 +3448,8 @@ function (_React$Component) {
         onClick: function onClick() {
           return updateSearch(filterType)(undefined);
         }
-      }, "".concat(currentOptionSelected)) : Object.keys(optionCounts).map(function (option) {
-        var optionTitle = option.split('_').join(' ');
+      }, "".concat(currentOptionSelected.length ? currentOptionSelected : 'Unspecified')) : Object.keys(optionCounts).map(function (option) {
+        var optionTitle = option.length ? option.split('_').join(' ') : 'Unspecified';
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
           key: option,
           className: "filter-option",
@@ -3611,10 +3698,7 @@ function (_React$Component) {
     _classCallCheck(this, SearchForm);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(SearchForm).call(this, props));
-    _this.state = {
-      'keyword': '',
-      'city': ''
-    };
+    _this.state = _this.props.initialState;
     _this.buildQueryAndUpdateRoute = _this.buildQueryAndUpdateRoute.bind(_assertThisInitialized(_this));
     _this.updateQuery = _this.updateQuery.bind(_assertThisInitialized(_this));
     _this.handleKeyPress = _this.handleKeyPress.bind(_assertThisInitialized(_this));
@@ -3770,42 +3854,42 @@ function (_React$Component) {
       contentLoaded: false
     };
     _this.updateSearch = _this.updateSearch.bind(_assertThisInitialized(_this));
+    _this.search = _this.search.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(SearchPage, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      var _this2 = this;
-
       if (this.props.isThisComponentsRoute && this.props.currentQuery) {
-        this.props.search(this.props.searchSpecifications).then(function () {
-          _this2.setState({
-            contentLoaded: true
-          });
-        });
+        this.search();
       }
     }
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
-      var _this3 = this;
-
       if (this.props.currentQuery !== prevProps.currentQuery && this.props.isThisComponentsRoute) {
-        this.props.search(this.props.searchSpecifications).then(function () {
-          _this3.setState({
-            contentLoaded: true
-          });
-        });
+        this.search();
       }
+    }
+  }, {
+    key: "search",
+    value: function search() {
+      var _this2 = this;
+
+      this.props.search(this.props.searchSpecifications).then(function () {
+        _this2.setState({
+          contentLoaded: true
+        });
+      });
     }
   }, {
     key: "updateSearch",
     value: function updateSearch(optionType) {
-      var _this4 = this;
+      var _this3 = this;
 
       return function (e) {
-        var queryOptions = lodash_merge__WEBPACK_IMPORTED_MODULE_8___default()({}, _this4.props.searchSpecifications);
+        var queryOptions = lodash_merge__WEBPACK_IMPORTED_MODULE_8___default()({}, _this3.props.searchSpecifications);
 
         if (e) {
           queryOptions = lodash_merge__WEBPACK_IMPORTED_MODULE_8___default()({}, queryOptions, _defineProperty({}, optionType, typeof e === 'string' ? e : e.target.value));
@@ -3814,9 +3898,9 @@ function (_React$Component) {
         }
 
         if (optionType !== 'offset') queryOptions.offset = 1;
-        var routePrefix = _this4.props.routePrefix;
+        var routePrefix = _this3.props.routePrefix;
 
-        _this4.props.updateRoute("".concat(routePrefix, "/").concat(Object(_util_queryUtil__WEBPACK_IMPORTED_MODULE_7__["buildQuery"])(queryOptions)));
+        _this3.props.updateRoute("".concat(routePrefix, "/").concat(Object(_util_queryUtil__WEBPACK_IMPORTED_MODULE_7__["buildQuery"])(queryOptions)));
       };
     }
   }, {
@@ -3828,6 +3912,8 @@ function (_React$Component) {
           searchSpecifications = _this$props.searchSpecifications,
           searchResults = _this$props.searchResults,
           routePrefix = _this$props.routePrefix;
+      var keyword = searchSpecifications.keyword,
+          city = searchSpecifications.city;
       var filterCounts = searchResults.filterCounts;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "side-bar"
@@ -3836,7 +3922,11 @@ function (_React$Component) {
         searchBoxClass: "side-bar-search-box",
         keyWordsClass: "side-bar-search-keywords",
         submitButtonClass: "side-bar-search-submit",
-        currentQuery: currentQuery
+        currentQuery: currentQuery,
+        initialState: {
+          'keyword': keyword ? keyword : '',
+          'city': city ? city : ''
+        }
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters__WEBPACK_IMPORTED_MODULE_3__["default"], {
         filterCounts: filterCounts,
         filterTypes: filterTypes,
@@ -4252,6 +4342,7 @@ function (_React$Component) {
     _this.state = {
       currentForm: 'Register'
     };
+    _this.header = _this.header.bind(_assertThisInitialized(_this));
     _this.form = _this.form.bind(_assertThisInitialized(_this));
     return _this;
   }
@@ -4266,6 +4357,21 @@ function (_React$Component) {
           currentForm: formType
         });
       };
+    }
+  }, {
+    key: "header",
+    value: function header() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_titleHeader__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        message: 'Register / Login',
+        additionalData: {
+          message: 'You are already logged in.',
+          buttonText: 'Logout',
+          buttonAction: function buttonAction() {
+            return Object(_actions_sessionActions__WEBPACK_IMPORTED_MODULE_5__["logout"])(currentUser);
+          },
+          useData: Boolean(currentUser)
+        }
+      });
     }
   }, {
     key: "form",
@@ -4294,17 +4400,7 @@ function (_React$Component) {
           logout = _this$props.logout;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "session-page"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_titleHeader__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        message: 'Register / Login',
-        additionalData: {
-          message: 'You are already logged in.',
-          buttonText: 'Logout',
-          buttonAction: function buttonAction() {
-            return logout(currentUser);
-          },
-          useData: Boolean(currentUser)
-        }
-      }), currentUser ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null) : this.form());
+      }, this.header(), currentUser ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null) : this.form());
     }
   }]);
 

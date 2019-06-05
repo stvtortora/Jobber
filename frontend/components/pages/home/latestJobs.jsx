@@ -10,6 +10,7 @@ class LatestJobs extends React.Component {
     this.state = {
       loaded: false
     }
+    this.totalJobCount = this.totalJobCount.bind(this)
   }
 
   componentDidMount() {
@@ -24,21 +25,22 @@ class LatestJobs extends React.Component {
     })
   }
 
+  totalJobCount () {
+    const { jobPosts } = this.props
+    const { filterCounts } = jobPosts
+    const firstFilter = filterCounts[Object.keys(filterCounts)[0]]
+
+    return Object.keys(firstFilter).reduce((count, option) => {
+      count += firstFilter[option]
+      return count
+    }, 0)
+  }
+
   render() {
     if (this.state.loaded) {
-      const { jobPosts } = this.props
-      const { filterCounts } = jobPosts
-
-      const firstFilter = filterCounts[Object.keys(filterCounts)[0]]
-
-      const totalCount = Object.keys(firstFilter).reduce((count, option) => {
-        count += firstFilter[option]
-        return count
-      }, 0)
-
       return (
         <div className='featured-jobs'>
-          <SectionHeader id='black-text' title='Lastest Jobs' subtitle={`${totalCount} current listings`}/>
+          <SectionHeader id='black-text' title='Lastest Jobs' subtitle={`${this.totalJobCount()} current listings`}/>
           <SearchResults
           searchResults={this.props.jobPosts}
           searchResultOptions={{

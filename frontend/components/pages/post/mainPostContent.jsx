@@ -14,16 +14,6 @@ export default class MainPostContent extends React.Component {
     document.getElementById('post-description').innerHTML = JSON.parse(this.props.post.description).html
   }
 
-  description() {
-    const { postType, post } = this.props
-    return (
-      <section className='post-description-container'>
-        <div id='post-description' className='post-description'></div>
-      </section>
-    )
-  }
-
-
   header() {
     const { post, additionalInfo } = this.props
     return (
@@ -44,26 +34,38 @@ export default class MainPostContent extends React.Component {
     )
   }
 
+  description() {
+    const { postType, post } = this.props
+    return (
+      <section className='post-description-container'>
+        <div id='post-description' className='post-description'></div>
+      </section>
+    )
+  }
+
   relatedPosts() {
     const { relatedPosts, updateRoute } = this.props
 
-    return this.props.relatedPosts ?
-    <div className='related-posts'>
-      <h3>Related Jobs</h3>
-      <SearchResults
-      searchResults={relatedPosts}
-      searchResultOptions={{
-        stylingId: 'job-post-result',
-        mainTitleKey: 'title',
-        subTitleKey: 'company',
-        buttonContentKey: 'job_type'
-      }}
-      updateRoute={updateRoute}
-      routePrefix={'/jobs'}
-      />
-    </div>
-    :
-    <div/>
+    if (this.props.relatedPosts) {
+      return (
+        <div className='related-posts'>
+          <h3>Related Jobs</h3>
+          <SearchResults
+          searchResults={relatedPosts}
+          searchResultOptions={{
+            stylingId: 'job-post-result',
+            mainTitleKey: 'title',
+            subTitleKey: 'company',
+            buttonContentKey: 'job_type'
+          }}
+          updateRoute={updateRoute}
+          routePrefix={'/jobs'}
+          />
+        </div>
+      )
+    }
+
+    return null
   }
 
   render() {

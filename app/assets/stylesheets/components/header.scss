@@ -401,6 +401,10 @@
               padding-left: 17px;
               padding-right: 17px;
 
+              &:hover {
+                cursor: pointer;
+              }
+
               @media only screen and (max-width: $--breakpoint-lg) {
                 padding: 17px;
               }
@@ -409,6 +413,7 @@
                 font-size: 30px;
               }
             }
+
 
           }
           .search-location {
@@ -472,5 +477,8 @@
 .custom-logo {
   &:hover {
     cursor: pointer;
+  }
+  @media only screen and (max-width: $--breakpoint-xl) {
+    display: none;
   }
 }

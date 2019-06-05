@@ -110,6 +110,11 @@
 
         .side-bar-search-submit {
           display: none;
+          button {
+            &:hover {
+              cursor: pointer;
+            }
+          }
         }
 
         input {

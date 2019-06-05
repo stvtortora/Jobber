@@ -10,22 +10,22 @@ class Post extends React.Component {
     this.state = {
       contentLoaded: false
     }
-    this.fetchData = this.fetchData.bind(this)
+    this.fetchPageContent = this.fetchPageContent.bind(this)
     this.fetchPost = this.fetchPost.bind(this)
   }
 
   componentDidMount() {
-    this.fetchData()
+    this.fetchPageContent()
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.postId !== this.props.postId) {
       this.setState({ contentLoaded: false })
-      this.fetchData()
+      this.fetchPageContent()
     }
   }
 
-  fetchData () {
+  fetchPageContent () {
     if (this.props.relatedPostsQuery) {
       this.props.fetchRelatedPosts(this.props.relatedPostsQuery).then(() => {
         this.fetchPost(this.props.postId)
@@ -47,6 +47,7 @@ class Post extends React.Component {
     const { postType, post, overViewKeys, additionalInfo, buttonContent, updateRoute, relatedPosts } = this.props
 
     if (this.state.contentLoaded) {
+
       if (post && post.description) {
         return (
           <div className='post-page'>
@@ -76,7 +77,7 @@ class Post extends React.Component {
       return <NotFound/>
     }
 
-    return []
+    return null
   }
 }
 

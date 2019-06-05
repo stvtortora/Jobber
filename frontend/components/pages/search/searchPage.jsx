@@ -15,26 +15,27 @@ class SearchPage extends React.Component {
       contentLoaded: false
     }
     this.updateSearch = this.updateSearch.bind(this)
+    this.search = this.search.bind(this)
   }
 
   componentDidMount() {
     if (this.props.isThisComponentsRoute && this.props.currentQuery) {
-      this.props.search(this.props.searchSpecifications).then(() => {
-        this.setState({
-          contentLoaded: true
-        })
-      })
+      this.search()
     }
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.currentQuery !== prevProps.currentQuery && this.props.isThisComponentsRoute) {
-      this.props.search(this.props.searchSpecifications).then(() => {
-        this.setState({
-          contentLoaded: true
-        })
-      })
+      this.search()
     }
+  }
+
+  search() {
+    this.props.search(this.props.searchSpecifications).then(() => {
+      this.setState({
+        contentLoaded: true
+      })
+    })
   }
 
   updateSearch(optionType) {
@@ -62,6 +63,7 @@ class SearchPage extends React.Component {
 
   sideBar() {
     const { currentQuery, filterTypes, searchSpecifications, searchResults, routePrefix } = this.props
+    const { keyword, city } = searchSpecifications
     const { filterCounts } = searchResults
     return (
       <section className='side-bar'>
@@ -70,7 +72,11 @@ class SearchPage extends React.Component {
         searchBoxClass='side-bar-search-box'
         keyWordsClass='side-bar-search-keywords'
         submitButtonClass='side-bar-search-submit'
-        currentQuery={currentQuery}/>
+        currentQuery={currentQuery}
+        initialState={{
+          'keyword': keyword ? keyword : '',
+          'city': city ? city : ''
+        }}/>
         <Filters
         filterCounts={filterCounts}
         filterTypes={filterTypes}

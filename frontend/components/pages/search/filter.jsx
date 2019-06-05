@@ -15,12 +15,12 @@ class Filter extends React.Component {
 
     return currentOptionSelected ?
 
-    <p className='selected-filter-option' onClick={() => updateSearch(filterType)(undefined)}>{`${currentOptionSelected}`}</p>
+    <p className='selected-filter-option' onClick={() => updateSearch(filterType)(undefined)}>{`${currentOptionSelected.length ? currentOptionSelected : 'Unspecified'}`}</p>
 
     :
 
     Object.keys(optionCounts).map(option => {
-      const optionTitle = option.split('_').join(' ')
+      const optionTitle = option.length ? option.split('_').join(' ') : 'Unspecified'
       return (
         <li
         key={option}

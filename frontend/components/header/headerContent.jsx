@@ -63,7 +63,8 @@ const HeaderContent = ({ currentRoute, landingScrollRef }) => {
             searchBoxClass='home-search-box'
             keyWordsClass='search-keywords'
             submitButtonClass='search-submit'
-            currentQuery={''}/>
+            currentQuery={''}
+            initialState={{'keyword': '', 'city': ''}}/>
             <ScrollArrow landingScrollRef={landingScrollRef}/>
           </div>
           :

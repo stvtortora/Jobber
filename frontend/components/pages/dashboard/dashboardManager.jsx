@@ -13,38 +13,42 @@ export default ({ posts, del, title, createRoute, editRoute, updateRoute }) => {
     )
   }
 
+  const postRow = (postId) => {
+    const post = posts[postId]
+    return (
+      <div key={postId} className='post-row'>
+      {
+        relevantFields.map((field, i) => (
+          <div key={field} className='manager-post-field'>
+            <p>{post[field].split('_').join(' ')}</p>
+
+            {
+              i === 0 ?
+              <div className='modify-buttons'>
+                <div onClick={() => del(post.id)} className='delete-button'>
+                  <i class="fa fa-trash" aria-hidden="true"></i> Delete
+                </div>
+                <div onClick={() => updateRoute(`${editRoute}/${post.id}`)} className='update-button'>
+                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Update
+                </div>
+              </div>
+              :
+              <div></div>
+            }
+
+          </div>
+        ))
+      }
+      </div>
+    )
+  }
+
   const postRows = () => {
     return (
       <div className='manager-posts'>
         {
           postIds.map(postId => {
-            const post = posts[postId]
-            return (
-              <div key={postId} className='post-row'>
-              {
-                relevantFields.map((field, i) => {
-                  return (
-                    <div key={field} className='manager-post-field'>
-                      <p>{post[field].split('_').join(' ')}</p>
-                      {
-                        i === 0 ?
-                        <div className='modify-buttons'>
-                          <div onClick={() => del(post.id)} className='delete-button'>
-                            <i class="fa fa-trash" aria-hidden="true"></i> Delete
-                          </div>
-                          <div onClick={() => updateRoute(`${editRoute}/${post.id}`)} className='update-button'>
-                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Update
-                          </div>
-                        </div>
-                        :
-                        <div></div>
-                      }
-                    </div>
-                  )
-                })
-              }
-              </div>
-            )
+            return postRow(postId)
           })
         }
       </div>
