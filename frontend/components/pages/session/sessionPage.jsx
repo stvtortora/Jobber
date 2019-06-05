@@ -22,7 +22,7 @@ class SessionPage extends React.Component {
   }
 
   header() {
-    const { currentUser } = this.props
+    const { currentUser, logout } = this.props
     return (
       <TitleHeader
       message={'Register / Login'}
@@ -73,4 +73,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps)(SessionPage)
+export default connect(mapStateToProps, mapDispatchToProps)(SessionPage)

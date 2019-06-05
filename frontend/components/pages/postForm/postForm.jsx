@@ -20,20 +20,22 @@ export default class PostForm extends React.Component {
   componentDidMount() {
     const { relatedRecords, currentUser } = this.props
 
-    if (relatedRecords) {
-      this.props.fetch(currentUser)
-    }
+    if (currentUser) {
+      if (relatedRecords) {
+        this.props.fetch(currentUser)
+      }
 
-    const options = {
-      placeholder: 'Describe this role',
-      theme: 'snow'
-    };
+      const options = {
+        placeholder: 'Describe this post',
+        theme: 'snow'
+      };
 
-    this.editor = new Quill(document.getElementById('editor'), options)
+      this.editor = new Quill(document.getElementById('editor'), options)
 
-    if (this.state.description) {
-      this.editor.setContents(JSON.parse(this.state.description).richText)
-      this.setState({description: null})
+      if (this.state.description) {
+        this.editor.setContents(JSON.parse(this.state.description).richText)
+        this.setState({description: null})
+      }
     }
   }
 
@@ -104,8 +106,9 @@ export default class PostForm extends React.Component {
 
   formContent () {
     const { currentUser } = this.props
+    const showContent = currentUser && (this.props.formName === 'Company' || this.props.relatedRecords.company_id.ids.length)
     return (
-      <div>
+      <div className={showContent ? 'formContent' : 'hiddenForm'}>
         <Errors/>
         <form onSubmit={this.handleSubmit}>
           {this.fieldRows()}
@@ -120,29 +123,30 @@ export default class PostForm extends React.Component {
   }
 
   fieldRows () {
-    return currentUser && (this.props.formName === 'Company' || this.props.relatedRecords.company_id.ids.length) ?
-    <div>
-      <span className='field-row'>
-        <div className='title-field form-field'>
-          <label>{`${this.props.formName} Title`}</label>
-          <input type="text" value={this.state.title} onChange={this.update('title')}/>
-        </div>
-      </span>
-      {<MultiFieldRow fields={this.props.formFields.firstRow} update={this.update} formState={this.state} relatedRecords={this.props.relatedRecords}/>}
-      {<MultiFieldRow fields={this.props.formFields.secondRow} update={this.update} formState={this.state} relatedRecords={this.props.relatedRecords}/>}
-      {<MultiFieldRow fields={this.props.formFields.thirdRow} update={this.update} formState={this.state} relatedRecords={this.props.relatedRecords}/>}
-      {
-        this.props.includeImageUpload ?
+    return (
+      <div>
         <span className='field-row'>
-          <div className='file-field'>
-            <label>Logo</label>
-            <input type='file' onChange={this.updateFile}/>
+          <div className='title-field form-field'>
+            <label>{`${this.props.formName} Title`}</label>
+            <input type="text" value={this.state.title} onChange={this.update('title')}/>
           </div>
         </span>
-        :
-        <div></div>
-      } :
-    </div> : <div/>
+        {<MultiFieldRow fields={this.props.formFields.firstRow} update={this.update} formState={this.state} relatedRecords={this.props.relatedRecords}/>}
+        {<MultiFieldRow fields={this.props.formFields.secondRow} update={this.update} formState={this.state} relatedRecords={this.props.relatedRecords}/>}
+        {<MultiFieldRow fields={this.props.formFields.thirdRow} update={this.update} formState={this.state} relatedRecords={this.props.relatedRecords}/>}
+        {
+          this.props.includeImageUpload ?
+          <span className='field-row'>
+            <div className='file-field'>
+              <label>Logo</label>
+              <input type='file' onChange={this.updateFile}/>
+            </div>
+          </span>
+          :
+          <div></div>
+        }
+      </div>
+    )
   }
 
   render() {

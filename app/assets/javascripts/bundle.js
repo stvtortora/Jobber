@@ -2927,21 +2927,23 @@ function (_React$Component) {
           relatedRecords = _this$props.relatedRecords,
           currentUser = _this$props.currentUser;
 
-      if (relatedRecords) {
-        this.props.fetch(currentUser);
-      }
+      if (currentUser) {
+        if (relatedRecords) {
+          this.props.fetch(currentUser);
+        }
 
-      var options = {
-        placeholder: 'Describe this role',
-        theme: 'snow'
-      };
-      this.editor = new quill__WEBPACK_IMPORTED_MODULE_1___default.a(document.getElementById('editor'), options);
+        var options = {
+          placeholder: 'Describe this post',
+          theme: 'snow'
+        };
+        this.editor = new quill__WEBPACK_IMPORTED_MODULE_1___default.a(document.getElementById('editor'), options);
 
-      if (this.state.description) {
-        this.editor.setContents(JSON.parse(this.state.description).richText);
-        this.setState({
-          description: null
-        });
+        if (this.state.description) {
+          this.editor.setContents(JSON.parse(this.state.description).richText);
+          this.setState({
+            description: null
+          });
+        }
       }
     }
   }, {
@@ -3017,7 +3019,10 @@ function (_React$Component) {
     key: "formContent",
     value: function formContent() {
       var currentUser = this.props.currentUser;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_errors_errors__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      var showContent = currentUser && (this.props.formName === 'Company' || this.props.relatedRecords.company_id.ids.length);
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: showContent ? 'formContent' : 'hiddenForm'
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_errors_errors__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.handleSubmit
       }, this.fieldRows(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "quill-container"
@@ -3030,7 +3035,7 @@ function (_React$Component) {
   }, {
     key: "fieldRows",
     value: function fieldRows() {
-      return currentUser && (this.props.formName === 'Company' || this.props.relatedRecords.company_id.ids.length) ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "field-row"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "title-field form-field"
@@ -3060,7 +3065,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Logo"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "file",
         onChange: this.updateFile
-      }))) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), " :") : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
+      }))) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null));
     }
   }, {
     key: "render",
@@ -4361,14 +4366,16 @@ function (_React$Component) {
   }, {
     key: "header",
     value: function header() {
-      var currentUser = this.props.currentUser;
+      var _this$props = this.props,
+          currentUser = _this$props.currentUser,
+          logout = _this$props.logout;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_titleHeader__WEBPACK_IMPORTED_MODULE_3__["default"], {
         message: 'Register / Login',
         additionalData: {
           message: 'You are already logged in.',
           buttonText: 'Logout',
           buttonAction: function buttonAction() {
-            return Object(_actions_sessionActions__WEBPACK_IMPORTED_MODULE_5__["logout"])(currentUser);
+            return logout(currentUser);
           },
           useData: Boolean(currentUser)
         }
@@ -4396,9 +4403,9 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this$props = this.props,
-          currentUser = _this$props.currentUser,
-          logout = _this$props.logout;
+      var _this$props2 = this.props,
+          currentUser = _this$props2.currentUser,
+          logout = _this$props2.logout;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "session-page"
       }, this.header(), currentUser ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null) : this.form());
@@ -4422,7 +4429,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_4__["connect"])(mapStateToProps)(SessionPage));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_4__["connect"])(mapStateToProps, mapDispatchToProps)(SessionPage));
 
 /***/ }),
 

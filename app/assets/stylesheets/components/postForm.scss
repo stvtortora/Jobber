@@ -3,7 +3,7 @@
 .job-post-form {
   display: flex;
   flex-direction: column;
-  padding-bottom: 170px; 
+  padding-bottom: 170px;
   form {
     max-width: 1170px;
     width: 100%;
@@ -144,6 +144,9 @@
     }
   }
 
+  .no-show {
+    display: none;
+  }
   .quill-container {
     padding: 0 15px;
 
@@ -177,4 +180,8 @@
       overflow: auto;
     }
   }
+}
+
+.hiddenForm {
+  display: none;
 }
