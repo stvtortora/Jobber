@@ -4361,6 +4361,7 @@ function (_React$Component) {
   }, {
     key: "header",
     value: function header() {
+      var currentUser = this.props.currentUser;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_titleHeader__WEBPACK_IMPORTED_MODULE_3__["default"], {
         message: 'Register / Login',
         additionalData: {

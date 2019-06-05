@@ -22,6 +22,7 @@ class SessionPage extends React.Component {
   }
 
   header() {
+    const { currentUser } = this.props
     return (
       <TitleHeader
       message={'Register / Login'}
