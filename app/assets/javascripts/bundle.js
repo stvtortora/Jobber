@@ -1712,14 +1712,9 @@ __webpack_require__.r(__webpack_exports__);
       deletePost = _ref.deletePost,
       editPost = _ref.editPost,
       updateRoute = _ref.updateRoute;
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    key: postId,
-    className: "post-row"
-  }, fields.map(function (field, i) {
+
+  var modifyButtons = function modifyButtons() {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      key: field,
-      className: "manager-post-field"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, post[field].split('_').join(' ')), i === 0 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "modify-buttons"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       onClick: function onClick() {
@@ -1737,7 +1732,17 @@ __webpack_require__.r(__webpack_exports__);
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
       "class": "fa fa-pencil-square-o",
       "aria-hidden": "true"
-    }), " Update")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null));
+    }), " Update"));
+  };
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    key: postId,
+    className: "post-row"
+  }, fields.map(function (field, i) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      key: field,
+      className: "manager-post-field"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, post[field].split('_').join(' ')), i === 0 ? modifyButtons() : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null));
   }));
 });
 
