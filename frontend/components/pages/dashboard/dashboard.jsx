@@ -1,6 +1,6 @@
 import React from 'react'
 import DashboardNav from './dashBoardNav'
-import DashboardManager from './dashboardManager'
+import PostManager from './postManager'
 import TitleHeader from '../../header/titleHeader'
 import { connect } from 'react-redux'
 import { updateRoute } from '../../../actions/routeActions'
@@ -14,16 +14,16 @@ class Dashboard extends React.Component {
     this.state = {
       title: '',
       posts: {},
-      delete: {}
+      deletePost: {}
     }
-    this.updateManager = this.updateManager.bind(this)
+    this.updatePostManager = this.updatePostManager.bind(this)
   }
 
   componentDidMount() {
-    this.updateManager('jobPost')
+    this.updatePostManager('jobPost')
   }
 
-  updateManager(postType) {
+  updatePostManager(postType) {
     let fetch
 
     if (postType == 'jobPost') {
@@ -36,15 +36,15 @@ class Dashboard extends React.Component {
       const stateMap = {
         'jobPost': {
           title: 'Job Post',
-          delete: this.props.deleteJobPost,
-          createRoute: '/post-a-job',
-          editRoute: '/edit-a-job'
+          deletePost: this.props.deleteJobPost,
+          createPost: '/post-a-job',
+          editPost: '/edit-a-job'
         },
         'company': {
           title: 'Company',
-          delete: this.props.deleteCompany,
-          createRoute: '/post-a-company',
-          editRoute: '/edit-a-company'
+          deletePost: this.props.deleteCompany,
+          createPost: '/post-a-company',
+          editPost: '/edit-a-company'
         }
       }
 
@@ -58,15 +58,15 @@ class Dashboard extends React.Component {
         <TitleHeader message={'User Dashboard'}/>
         <section className='dashboard-contenet'>
           <DashboardNav
-          updateManager={this.updateManager}
+          updatePostManager={this.updatePostManager}
           selected={this.state.title}
           />
-          <DashboardManager
+          <PostManager
           posts={this.state.title === 'Company' ? this.props.companies : this.props.jobPosts}
-          del={this.state.delete}
+          deletePost={this.state.deletePost}
           title={this.state.title}
-          createRoute={this.state.createRoute}
-          editRoute={this.state.editRoute}
+          createPost={this.state.createPost}
+          editPost={this.state.editPost}
           updateRoute={this.props.updateRoute}
           />
         </section>

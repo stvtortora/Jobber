@@ -1409,6 +1409,32 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./frontend/components/pages/dashboard/columnTitles.jsx":
+/*!**************************************************************!*\
+  !*** ./frontend/components/pages/dashboard/columnTitles.jsx ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+/* harmony default export */ __webpack_exports__["default"] = (function (_ref) {
+  var fields = _ref.fields;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "manager-columns"
+  }, fields.map(function (field) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      key: field,
+      className: "manager-column"
+    }, field.split('_').join(' '));
+  }));
+});
+
+/***/ }),
+
 /***/ "./frontend/components/pages/dashboard/dashBoardNav.jsx":
 /*!**************************************************************!*\
   !*** ./frontend/components/pages/dashboard/dashBoardNav.jsx ***!
@@ -1422,13 +1448,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 
 /* harmony default export */ __webpack_exports__["default"] = (function (_ref) {
-  var updateManager = _ref.updateManager,
+  var updatePostManager = _ref.updatePostManager,
       selected = _ref.selected;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "dashboard-nav"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     onClick: function onClick() {
-      return updateManager('jobPost');
+      return updatePostManager('jobPost');
     },
     className: "dashboard-nav-option",
     id: selected === 'Job Post' ? 'selected' : 'unselected'
@@ -1437,7 +1463,7 @@ __webpack_require__.r(__webpack_exports__);
     "aria-hidden": "true"
   }), " Job Posts"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     onClick: function onClick() {
-      return updateManager('company');
+      return updatePostManager('company');
     },
     className: "dashboard-nav-option",
     id: selected === 'Company' ? 'selected' : 'unselected'
@@ -1461,7 +1487,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _dashBoardNav__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./dashBoardNav */ "./frontend/components/pages/dashboard/dashBoardNav.jsx");
-/* harmony import */ var _dashboardManager__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./dashboardManager */ "./frontend/components/pages/dashboard/dashboardManager.jsx");
+/* harmony import */ var _postManager__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./postManager */ "./frontend/components/pages/dashboard/postManager.jsx");
 /* harmony import */ var _header_titleHeader__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../header/titleHeader */ "./frontend/components/header/titleHeader.jsx");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_routeActions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../actions/routeActions */ "./frontend/actions/routeActions.jsx");
@@ -1508,20 +1534,20 @@ function (_React$Component) {
     _this.state = {
       title: '',
       posts: {},
-      "delete": {}
+      deletePost: {}
     };
-    _this.updateManager = _this.updateManager.bind(_assertThisInitialized(_this));
+    _this.updatePostManager = _this.updatePostManager.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(Dashboard, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.updateManager('jobPost');
+      this.updatePostManager('jobPost');
     }
   }, {
-    key: "updateManager",
-    value: function updateManager(postType) {
+    key: "updatePostManager",
+    value: function updatePostManager(postType) {
       var _this2 = this;
 
       var fetch;
@@ -1536,15 +1562,15 @@ function (_React$Component) {
         var stateMap = {
           'jobPost': {
             title: 'Job Post',
-            "delete": _this2.props.deleteJobPost,
-            createRoute: '/post-a-job',
-            editRoute: '/edit-a-job'
+            deletePost: _this2.props.deleteJobPost,
+            createPost: '/post-a-job',
+            editPost: '/edit-a-job'
           },
           'company': {
             title: 'Company',
-            "delete": _this2.props.deleteCompany,
-            createRoute: '/post-a-company',
-            editRoute: '/edit-a-company'
+            deletePost: _this2.props.deleteCompany,
+            createPost: '/post-a-company',
+            editPost: '/edit-a-company'
           }
         };
 
@@ -1561,14 +1587,14 @@ function (_React$Component) {
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "dashboard-contenet"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_dashBoardNav__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        updateManager: this.updateManager,
+        updatePostManager: this.updatePostManager,
         selected: this.state.title
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_dashboardManager__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_postManager__WEBPACK_IMPORTED_MODULE_2__["default"], {
         posts: this.state.title === 'Company' ? this.props.companies : this.props.jobPosts,
-        del: this.state["delete"],
+        deletePost: this.state.deletePost,
         title: this.state.title,
-        createRoute: this.state.createRoute,
-        editRoute: this.state.editRoute,
+        createPost: this.state.createPost,
+        editPost: this.state.editPost,
         updateRoute: this.props.updateRoute
       })));
     }
@@ -1609,10 +1635,10 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 /***/ }),
 
-/***/ "./frontend/components/pages/dashboard/dashboardManager.jsx":
-/*!******************************************************************!*\
-  !*** ./frontend/components/pages/dashboard/dashboardManager.jsx ***!
-  \******************************************************************/
+/***/ "./frontend/components/pages/dashboard/postManager.jsx":
+/*!*************************************************************!*\
+  !*** ./frontend/components/pages/dashboard/postManager.jsx ***!
+  \*************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1620,65 +1646,18 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _columnTitles__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./columnTitles */ "./frontend/components/pages/dashboard/columnTitles.jsx");
+/* harmony import */ var _postRows__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./postRows */ "./frontend/components/pages/dashboard/postRows.jsx");
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = (function (_ref) {
   var posts = _ref.posts,
-      del = _ref.del,
+      deletePost = _ref.deletePost,
       title = _ref.title,
-      createRoute = _ref.createRoute,
-      editRoute = _ref.editRoute,
+      createPost = _ref.createPost,
+      editPost = _ref.editPost,
       updateRoute = _ref.updateRoute;
-
-  var managerColumns = function managerColumns() {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "manager-columns"
-    }, relevantFields.map(function (field) {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        key: field,
-        className: "manager-column"
-      }, field.split('_').join(' '));
-    }));
-  };
-
-  var postRow = function postRow(postId) {
-    var post = posts[postId];
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      key: postId,
-      className: "post-row"
-    }, relevantFields.map(function (field, i) {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        key: field,
-        className: "manager-post-field"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, post[field].split('_').join(' ')), i === 0 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "modify-buttons"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        onClick: function onClick() {
-          return del(post.id);
-        },
-        className: "delete-button"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        "class": "fa fa-trash",
-        "aria-hidden": "true"
-      }), " Delete"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        onClick: function onClick() {
-          return updateRoute("".concat(editRoute, "/").concat(post.id));
-        },
-        className: "update-button"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        "class": "fa fa-pencil-square-o",
-        "aria-hidden": "true"
-      }), " Update")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null));
-    }));
-  };
-
-  var postRows = function postRows() {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "manager-posts"
-    }, postIds.map(function (postId) {
-      return postRow(postId);
-    }));
-  };
-
   var postIds = Object.keys(posts);
   var relevantFields;
 
@@ -1694,13 +1673,109 @@ __webpack_require__.r(__webpack_exports__);
     className: "dashboard-manager-prompt"
   }, "Your post can be modified below."), postIds.length ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "dashboard-table"
-  }, managerColumns(), postRows()) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_columnTitles__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    fields: relevantFields
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_postRows__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    fields: relevantFields,
+    postIds: postIds,
+    posts: posts,
+    deletePost: deletePost,
+    editPost: editPost,
+    updateRoute: updateRoute
+  })) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "dashboard-create-container"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     onClick: function onClick() {
-      return updateRoute(createRoute);
+      return updateRoute(createPost);
     }
   }, "+ Add ".concat(title))));
+});
+
+/***/ }),
+
+/***/ "./frontend/components/pages/dashboard/postRow.jsx":
+/*!*********************************************************!*\
+  !*** ./frontend/components/pages/dashboard/postRow.jsx ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+/* harmony default export */ __webpack_exports__["default"] = (function (_ref) {
+  var postId = _ref.postId,
+      post = _ref.post,
+      fields = _ref.fields,
+      deletePost = _ref.deletePost,
+      editPost = _ref.editPost,
+      updateRoute = _ref.updateRoute;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    key: postId,
+    className: "post-row"
+  }, fields.map(function (field, i) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      key: field,
+      className: "manager-post-field"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, post[field].split('_').join(' ')), i === 0 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "modify-buttons"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      onClick: function onClick() {
+        return deletePost(post.id);
+      },
+      className: "delete-button"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+      "class": "fa fa-trash",
+      "aria-hidden": "true"
+    }), " Delete"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      onClick: function onClick() {
+        return updateRoute("".concat(editPost, "/").concat(post.id));
+      },
+      className: "update-button"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+      "class": "fa fa-pencil-square-o",
+      "aria-hidden": "true"
+    }), " Update")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null));
+  }));
+});
+
+/***/ }),
+
+/***/ "./frontend/components/pages/dashboard/postRows.jsx":
+/*!**********************************************************!*\
+  !*** ./frontend/components/pages/dashboard/postRows.jsx ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _postRow__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./postRow */ "./frontend/components/pages/dashboard/postRow.jsx");
+
+
+/* harmony default export */ __webpack_exports__["default"] = (function (_ref) {
+  var posts = _ref.posts,
+      deletePost = _ref.deletePost,
+      editPost = _ref.editPost,
+      postIds = _ref.postIds,
+      fields = _ref.fields,
+      updateRoute = _ref.updateRoute;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "manager-posts"
+  }, postIds.map(function (postId) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_postRow__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      postId: postId,
+      post: posts[postId],
+      fields: fields,
+      deletePost: deletePost,
+      editPost: editPost,
+      updateRoute: updateRoute
+    });
+  }));
 });
 
 /***/ }),
