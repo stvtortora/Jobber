@@ -47,13 +47,11 @@ class PopularCategories extends React.Component {
       const jobCategory = this.props.jobCategories[id]
       return (
         <li key={id} className='category-box' onClick={() => this.props.updateRoute(`/jobs/?limit=10&offset=1&job_category=${jobCategory.name}`)}>
-        <div className='border'>
-          <i className={`fa fa-${imageMap[jobCategory.name]}`} aria-hidden="true"></i>
-
-          <h4 className='category-name'>{jobCategory.name.split('_').join(' ')}</h4>
-          <p className='category-openings'>{`${jobCategory.openings} open positions`}</p>
-        </div>
-
+          <div className='border'>
+            <i className={`fa fa-${imageMap[jobCategory.name]}`} aria-hidden="true"></i>
+            <h4 className='category-name'>{jobCategory.name.split('_').join(' ')}</h4>
+            <p className='category-openings'>{`${jobCategory.openings} open positions`}</p>
+          </div>
         </li>
       )
     })
