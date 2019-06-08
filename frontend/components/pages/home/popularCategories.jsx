@@ -14,7 +14,7 @@ const imageMap = {
   'Content': 'pencil-alt',
   'Data/Analytics': 'bar-chart',
   'Operations': 'tasks',
-  'Project_Management': 'user',
+  'Project Management': 'user',
   'Content': 'pencil'
 }
 
