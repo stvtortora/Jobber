@@ -1431,6 +1431,43 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./frontend/components/pages/dashboard/PostRows.jsx":
+/*!**********************************************************!*\
+  !*** ./frontend/components/pages/dashboard/PostRows.jsx ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _postRow__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./postRow */ "./frontend/components/pages/dashboard/postRow.jsx");
+
+
+/* harmony default export */ __webpack_exports__["default"] = (function (_ref) {
+  var posts = _ref.posts,
+      deletePost = _ref.deletePost,
+      editPost = _ref.editPost,
+      postIds = _ref.postIds,
+      fields = _ref.fields,
+      updateRoute = _ref.updateRoute;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "manager-posts"
+  }, postIds.map(function (postId) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_postRow__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      postId: postId,
+      post: posts[postId],
+      fields: fields,
+      deletePost: deletePost,
+      editPost: editPost,
+      updateRoute: updateRoute
+    });
+  }));
+});
+
+/***/ }),
+
 /***/ "./frontend/components/pages/dashboard/columnTitles.jsx":
 /*!**************************************************************!*\
   !*** ./frontend/components/pages/dashboard/columnTitles.jsx ***!
@@ -1669,7 +1706,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _columnTitles__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./columnTitles */ "./frontend/components/pages/dashboard/columnTitles.jsx");
-/* harmony import */ var _postRows__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./postRows */ "./frontend/components/pages/dashboard/postRows.jsx");
+/* harmony import */ var _PostRows__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./PostRows */ "./frontend/components/pages/dashboard/PostRows.jsx");
 
 
 
@@ -1697,7 +1734,7 @@ __webpack_require__.r(__webpack_exports__);
     className: "dashboard-table"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_columnTitles__WEBPACK_IMPORTED_MODULE_1__["default"], {
     fields: relevantFields
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_postRows__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PostRows__WEBPACK_IMPORTED_MODULE_2__["default"], {
     fields: relevantFields,
     postIds: postIds,
     posts: posts,
@@ -1765,43 +1802,6 @@ __webpack_require__.r(__webpack_exports__);
       key: field,
       className: "manager-post-field"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, post[field].split('_').join(' ')), i === 0 ? modifyButtons() : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null));
-  }));
-});
-
-/***/ }),
-
-/***/ "./frontend/components/pages/dashboard/postRows.jsx":
-/*!**********************************************************!*\
-  !*** ./frontend/components/pages/dashboard/postRows.jsx ***!
-  \**********************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _postRow__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./postRow */ "./frontend/components/pages/dashboard/postRow.jsx");
-
-
-/* harmony default export */ __webpack_exports__["default"] = (function (_ref) {
-  var posts = _ref.posts,
-      deletePost = _ref.deletePost,
-      editPost = _ref.editPost,
-      postIds = _ref.postIds,
-      fields = _ref.fields,
-      updateRoute = _ref.updateRoute;
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "manager-posts"
-  }, postIds.map(function (postId) {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_postRow__WEBPACK_IMPORTED_MODULE_1__["default"], {
-      postId: postId,
-      post: posts[postId],
-      fields: fields,
-      deletePost: deletePost,
-      editPost: editPost,
-      updateRoute: updateRoute
-    });
   }));
 });
 

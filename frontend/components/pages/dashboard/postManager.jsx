@@ -1,6 +1,6 @@
 import React from 'react'
 import ColumnTitles from './columnTitles'
-import PostRows from './postRows'
+import PostRows from './PostRows'
 
 export default ({ posts, deletePost, title, createPost, editPost, updateRoute }) => {
   const postIds = Object.keys(posts)
