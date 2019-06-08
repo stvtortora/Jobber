@@ -2,6 +2,7 @@ import React from 'react'
 import SideBar from './sideBar'
 import MainPostContent from './mainPostContent'
 import TitleHeader from '../../header/titleHeader'
+import Loader from '../../loader/loader'
 import NotFound from '../404Page/404Page'
 
 class Post extends React.Component {
@@ -77,7 +78,7 @@ class Post extends React.Component {
       return <NotFound/>
     }
 
-    return null
+    return <Loader/>
   }
 }
 

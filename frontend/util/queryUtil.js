@@ -38,10 +38,10 @@ export const buildQuery = (queryOptions) => {
 
 export const parseQuery = query => {
   if (!query.length || query[1] !== '?') return {};
+  
   return query.slice(2).split('&').reduce((parsedQuery, filter) => {
     const filterParts = filter.split('=')
     const filterKey = filterParts[0]
-
     let filterValue;
     if (['limit', 'offset'].includes(filterKey)) {
       filterValue = Number(filterParts[1])

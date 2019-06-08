@@ -4,6 +4,7 @@ import SearchForm from './searchForm'
 import Filters from './filters'
 import SortAndLimitOptions from './sortAndLimitOptions'
 import PaginationButtons from './paginationButtons'
+import Loader from '../../loader/loader'
 import NotFound from '../404Page/404Page'
 import { buildQuery, getLimit, getOffset, getSort } from '../../../util/queryUtil'
 import merge from 'lodash/merge'
@@ -133,7 +134,7 @@ class SearchPage extends React.Component {
           :
           <NotFound/>
           :
-          <div className='loader-container'><div className="loader"><div></div><div></div><div></div></div></div>
+          <Loader/>
         }
       </content>
     )
